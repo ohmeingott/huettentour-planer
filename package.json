@@ -1,7 +1,7 @@
 {
-  "name": "tabea-test",
+  "name": "huettentour-planer",
   "version": "1.0.0",
-  "description": "",
+  "description": "Mehrtages-Hüttentour Planer für die Alpen",
   "main": "index.js",
   "directories": {
     "doc": "docs"
