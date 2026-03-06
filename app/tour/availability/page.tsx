@@ -177,7 +177,7 @@ export default function AvailabilityPage() {
         {availabilityResult && (
           <div className="bg-white rounded-2xl shadow-sm border border-stone-200/80 p-6 animate-fade-in-up">
             <h2 className="text-sm font-semibold text-stone-700 uppercase tracking-wider mb-5">Ergebnis</h2>
-            <AvailabilityCalendar results={availabilityResult.results} />
+            <AvailabilityCalendar results={availabilityResult.results} hutOrder={selectedTour.huts} />
           </div>
         )}
       </div>
