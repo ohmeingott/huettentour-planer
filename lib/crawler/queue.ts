@@ -1,15 +1,12 @@
 import { Queue } from 'bullmq'
-import IORedis from 'ioredis'
 
-let connection: IORedis | null = null
-
-function getConnection() {
-  if (!connection) {
-    connection = new IORedis(process.env.REDIS_URL || 'redis://localhost:6379', {
-      maxRetriesPerRequest: null,
-    })
+function parseRedisUrl(url: string) {
+  const parsed = new URL(url)
+  return {
+    host: parsed.hostname || 'localhost',
+    port: parseInt(parsed.port || '6379', 10),
+    maxRetriesPerRequest: null as null,
   }
-  return connection
 }
 
 let availabilityQueue: Queue | null = null
@@ -17,7 +14,7 @@ let availabilityQueue: Queue | null = null
 export function getAvailabilityQueue() {
   if (!availabilityQueue) {
     availabilityQueue = new Queue('availability', {
-      connection: getConnection(),
+      connection: parseRedisUrl(process.env.REDIS_URL || 'redis://localhost:6379'),
     })
   }
   return availabilityQueue

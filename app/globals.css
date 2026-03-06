@@ -1,1 +1,104 @@
 @import "tailwindcss";
+
+@theme {
+  --font-body: var(--font-body);
+  --font-display: var(--font-display);
+
+  --color-stone-50: #fafaf9;
+  --color-stone-100: #f5f5f4;
+  --color-stone-200: #e7e5e4;
+  --color-stone-300: #d6d3d1;
+  --color-stone-400: #a8a29e;
+  --color-stone-500: #78716c;
+  --color-stone-600: #57534e;
+  --color-stone-700: #44403c;
+  --color-stone-800: #292524;
+  --color-stone-900: #1c1917;
+
+  --color-alpine-50: #f0f7f4;
+  --color-alpine-100: #d9ede2;
+  --color-alpine-200: #b5dcc7;
+  --color-alpine-300: #84c4a5;
+  --color-alpine-400: #56a880;
+  --color-alpine-500: #378c65;
+  --color-alpine-600: #287050;
+  --color-alpine-700: #215a42;
+  --color-alpine-800: #1d4836;
+  --color-alpine-900: #193c2e;
+
+  --color-summit: #c2410c;
+  --color-summit-light: #f97316;
+  --color-glacier: #0c4a6e;
+  --color-glacier-light: #0ea5e9;
+
+  --color-available: #16a34a;
+  --color-unavailable: #dc2626;
+}
+
+/* Mapbox overrides */
+.mapboxgl-popup-content {
+  border-radius: 8px !important;
+  padding: 12px 16px !important;
+  font-family: var(--font-body) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+.mapboxgl-popup-close-button {
+  font-size: 18px !important;
+  padding: 4px 8px !important;
+}
+
+/* Topo pattern background */
+.bg-topo {
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 50 Q 25 20, 50 50 T 90 50' stroke='%23d6d3d1' stroke-width='0.5' fill='none' opacity='0.4'/%3E%3Cpath d='M10 70 Q 30 40, 55 70 T 95 70' stroke='%23d6d3d1' stroke-width='0.5' fill='none' opacity='0.3'/%3E%3Cpath d='M5 30 Q 20 10, 45 30 T 85 30' stroke='%23d6d3d1' stroke-width='0.5' fill='none' opacity='0.3'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* Custom scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--color-stone-300);
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--color-stone-400);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.4s ease-out forwards;
+}

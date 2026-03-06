@@ -1,14 +1,20 @@
 import { Worker, Job } from 'bullmq'
-import IORedis from 'ioredis'
 import { AvailabilityJobData, HutAvailabilityResult } from './types'
 import { getAdapter } from './adapters'
 
 const USE_MOCK = process.env.USE_MOCK_CRAWLER === 'true'
 
+function parseRedisUrl(url: string) {
+  const parsed = new URL(url)
+  return {
+    host: parsed.hostname || 'localhost',
+    port: parseInt(parsed.port || '6379', 10),
+    maxRetriesPerRequest: null as null,
+  }
+}
+
 export function startWorker() {
-  const connection = new IORedis(process.env.REDIS_URL || 'redis://localhost:6379', {
-    maxRetriesPerRequest: null,
-  })
+  const connection = parseRedisUrl(process.env.REDIS_URL || 'redis://localhost:6379')
 
   const worker = new Worker(
     'availability',
