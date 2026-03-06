@@ -1,7 +1,6 @@
 {
-  "_comment": "Verified alpsonline.org booking URLs. Only huts with confirmed hut_ids are listed here.",
-  "_source": "Manually verified via web search against alpsonline.org (March 2026)",
-  "_note": "alpsonline.org is being replaced by hut-reservation.org — URLs may need updating",
+  "_comment": "Booking URLs for alpine huts. Verified via web search (March 2026).",
+  "_note": "alpsonline.org is being replaced by hut-reservation.org — both URL formats kept for compatibility",
   "huts": [
     {
       "name": "Innsbrucker Hütte",
@@ -28,12 +27,87 @@
       "verified": true
     },
     {
+      "name": "Sulzenau Hütte",
+      "region": "stubaier-alpen",
+      "bookingSystem": "alpsonline",
+      "bookingUrl": "https://www.alpsonline.org/reservation/calendar?hut_id=648",
+      "hutId": 648,
+      "verified": true
+    },
+    {
+      "name": "Dresdner Hütte",
+      "region": "stubaier-alpen",
+      "bookingSystem": "alpsonline",
+      "bookingUrl": "https://www.alpsonline.org/reservation/calendar?hut_id=692",
+      "hutReservationUrl": "https://www.hut-reservation.org/reservation/book-hut/692/wizard",
+      "hutId": 692,
+      "verified": true
+    },
+    {
       "name": "Neue Regensburger Hütte",
       "region": "stubaier-alpen",
       "bookingSystem": "alpsonline",
       "bookingUrl": "https://www.alpsonline.org/reservation/calendar?hut_id=275",
       "hutId": 275,
       "verified": true
+    },
+    {
+      "name": "Franz-Senn-Hütte",
+      "region": "stubaier-alpen",
+      "bookingSystem": "custom",
+      "bookingUrl": "https://www.franzsennhuette.at/booking",
+      "verified": true,
+      "_note": "Has own booking system, not on alpsonline"
+    },
+    {
+      "name": "Starkenburger Hütte",
+      "region": "stubaier-alpen",
+      "bookingSystem": "alpsonline",
+      "bookingUrl": "https://www.alpsonline.org/reservation/calendar?hut_id=6",
+      "hutId": 6,
+      "verified": true
+    },
+    {
+      "name": "Elferhütte",
+      "region": "stubaier-alpen",
+      "bookingSystem": "custom",
+      "bookingUrl": "https://www.elferhuette.at/",
+      "verified": true,
+      "_note": "Private hut, not on alpsonline. Book via phone 05226/2818"
+    },
+    {
+      "name": "Mannheimer Hütte (Stubai)",
+      "region": "stubaier-alpen",
+      "bookingSystem": "alpsonline",
+      "bookingUrl": "https://www.alpsonline.org/reservation/calendar?hut_id=654",
+      "hutReservationUrl": "https://www.hut-reservation.org/reservation/book-hut/654/wizard",
+      "hutId": 654,
+      "verified": true
+    },
+    {
+      "name": "Hildesheimer Hütte",
+      "region": "stubaier-alpen",
+      "bookingSystem": "alpsonline",
+      "bookingUrl": "https://www.alpsonline.org/reservation/calendar?hut_id=565",
+      "hutId": 565,
+      "verified": true,
+      "_note": "Alpenverein huette_nr=0565, open mid-June to late September"
+    },
+    {
+      "name": "Siegerlandhütte",
+      "region": "stubaier-alpen",
+      "bookingSystem": "custom",
+      "bookingUrl": "https://www.siegerlandhuette.com/",
+      "verified": true,
+      "_note": "Book via email info@siegerlandhuette.de or phone"
+    },
+    {
+      "name": "Amberger Hütte",
+      "region": "stubaier-alpen",
+      "bookingSystem": "custom",
+      "bookingUrl": "https://www.ambergerhuette.at/",
+      "verified": true,
+      "_note": "Book via email info@ambergerhuette.at, not on alpsonline"
     },
     {
       "name": "Westfalenhaus",
@@ -44,12 +118,13 @@
       "verified": true
     },
     {
-      "name": "Franz-Senn-Hütte",
+      "name": "Pforzheimer Hütte",
       "region": "stubaier-alpen",
-      "bookingSystem": "custom",
-      "bookingUrl": "https://www.franzsennhuette.at/booking",
-      "verified": true,
-      "_note": "Has own booking system, not on alpsonline"
+      "bookingSystem": "alpsonline",
+      "bookingUrl": "https://www.alpsonline.org/reservation/calendar?hut_id=239",
+      "hutReservationUrl": "https://www.hut-reservation.org/reservation/book-hut/239/wizard",
+      "hutId": 239,
+      "verified": true
     },
     {
       "name": "Greizer Hütte",
