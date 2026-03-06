@@ -1,4 +1,4 @@
-import { PrismaClient, BookingSystem, Difficulty, RoomType } from '../app/generated/prisma/client'
+import { PrismaClient, BookingSystem, DataSource, Difficulty, RoomType } from '../app/generated/prisma/client'
 import { PrismaPg } from '@prisma/adapter-pg'
 import * as fs from 'fs'
 import * as path from 'path'
@@ -124,6 +124,22 @@ const ROUTES_BY_REGION: Record<string, RouteDef[]> = {
   ],
 }
 
+interface CalculatedRoute {
+  fromHut: string
+  toHut: string
+  distance: number
+  ascent: number
+  descent: number
+  duration: number
+  difficulty: 'easy' | 'moderate' | 'difficult'
+  source: 'brouter' | 'estimate'
+}
+
+interface RegionRoutes {
+  regionSlug: string
+  routes: CalculatedRoute[]
+}
+
 async function main() {
   // Try to load OSM data from file
   const osmDataPath = path.join(__dirname, '..', 'data', 'huts-osm.json')
@@ -138,6 +154,21 @@ async function main() {
     console.log('Falling back to built-in hut list...\n')
   }
 
+  // Try to load calculated routes
+  const routesDataPath = path.join(__dirname, '..', 'data', 'routes.json')
+  let calculatedRoutes: Record<string, CalculatedRoute[]> = {}
+
+  if (fs.existsSync(routesDataPath)) {
+    console.log(`Loading calculated routes from ${routesDataPath}`)
+    const regionRoutes: RegionRoutes[] = JSON.parse(fs.readFileSync(routesDataPath, 'utf-8'))
+    for (const rr of regionRoutes) {
+      calculatedRoutes[rr.regionSlug] = rr.routes
+    }
+  } else {
+    console.log('No calculated routes found. Using built-in route definitions.')
+    console.log('Run "npx tsx scripts/calculate-routes.ts" for BRouter-verified routes.\n')
+  }
+
   // Clear existing data
   await prisma.route.deleteMany()
   await prisma.roomTypeConfig.deleteMany()
@@ -145,6 +176,7 @@ async function main() {
   await prisma.region.deleteMany()
 
   const regions = osmRegions || FALLBACK_REGIONS
+  const usingOsmData = osmRegions !== null
 
   for (const region of regions) {
     const dbRegion = await prisma.region.create({
@@ -177,6 +209,7 @@ async function main() {
           email: osmHut.email ?? undefined,
           openingHours: osmHut.openingHours ?? undefined,
           description: osmHut.description ?? undefined,
+          dataSource: usingOsmData ? DataSource.osm : DataSource.mock,
           regionId: dbRegion.id,
           bookingSystem: BookingSystem.custom,
           amenities: [],
@@ -195,35 +228,53 @@ async function main() {
       })
     }
 
-    // Create routes (only for huts that exist in this region)
-    const routeDefs = ROUTES_BY_REGION[region.slug] || []
+    // Create routes: prefer calculated routes (from BRouter), fall back to built-in
+    const calcRoutes = calculatedRoutes[region.slug]
+    const routeDefs: Array<{ fromHut: string; toHut: string; distance: number; ascent: number; descent: number; duration: number; difficulty: string }> =
+      calcRoutes && calcRoutes.length > 0
+        ? calcRoutes
+        : (ROUTES_BY_REGION[region.slug] || [])
+
+    const usingCalcRoutes = calcRoutes && calcRoutes.length > 0
+    const routeLabel = usingCalcRoutes ? 'calculated' : 'built-in (mock)'
     let routeCount = 0
     for (const r of routeDefs) {
       const fromId = hutsByName[r.fromHut]
       const toId = hutsByName[r.toHut]
       if (!fromId || !toId) {
-        console.log(`  ⚠ Route skipped: "${r.fromHut}" -> "${r.toHut}" (hut not found in OSM data)`)
+        console.log(`  ⚠ Route skipped: "${r.fromHut}" -> "${r.toHut}" (hut not found)`)
         continue
       }
+      const diff = r.difficulty === 'difficult' ? Difficulty.difficult
+        : r.difficulty === 'easy' ? Difficulty.easy
+        : Difficulty.moderate
+
+      // Determine data source for route
+      const routeDataSource = usingCalcRoutes
+        ? ((r as any).source === 'brouter' ? DataSource.brouter : DataSource.estimate)
+        : DataSource.mock
+
       // Create both directions
       await prisma.route.create({
         data: {
           fromHutId: fromId, toHutId: toId,
           distance: r.distance, ascent: r.ascent, descent: r.descent,
-          estimatedDuration: r.duration, difficulty: r.difficulty,
+          estimatedDuration: r.duration, difficulty: diff,
+          dataSource: routeDataSource,
         },
       })
       await prisma.route.create({
         data: {
           fromHutId: toId, toHutId: fromId,
           distance: r.distance, ascent: r.descent, descent: r.ascent,
-          estimatedDuration: r.duration, difficulty: r.difficulty,
+          estimatedDuration: r.duration, difficulty: diff,
+          dataSource: routeDataSource,
         },
       })
       routeCount += 2
     }
 
-    console.log(`  ✓ ${region.name}: ${region.huts.length} huts, ${routeCount} routes`)
+    console.log(`  ✓ ${region.name}: ${region.huts.length} huts, ${routeCount} routes (${routeLabel})`)
   }
 
   const totalHuts = regions.reduce((s, r) => s + r.huts.length, 0)

@@ -41,6 +41,13 @@ enum AccommodationType {
   dorm
 }
 
+enum DataSource {
+  mock       // Hardcoded placeholder data — needs verification
+  osm        // Imported from OpenStreetMap
+  brouter    // Route calculated via BRouter (real trail)
+  estimate   // Route estimated from coordinates (no verified trail)
+}
+
 model Region {
   id                String @id @default(cuid())
   name              String
@@ -72,6 +79,7 @@ model Hut {
   imageUrl      String?
   description   String?
   amenities     String[]
+  dataSource    DataSource        @default(mock)
   regionId      String
   region        Region            @relation(fields: [regionId], references: [id])
   roomTypes     RoomTypeConfig[]
@@ -102,6 +110,7 @@ model Route {
   descent           Int
   estimatedDuration Float
   difficulty        Difficulty
+  dataSource        DataSource @default(mock)
   gpxTrack          Json?
 
   @@unique([fromHutId, toHutId])

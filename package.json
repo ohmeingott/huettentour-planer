@@ -14,7 +14,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "worker": "USE_MOCK_CRAWLER=true npx tsx scripts/start-worker.ts",
-    "fetch-huts": "npx tsx scripts/fetch-osm-huts.ts"
+    "fetch-huts": "npx tsx scripts/fetch-osm-huts.ts",
+    "calculate-routes": "npx tsx scripts/calculate-routes.ts"
   },
   "keywords": [],
   "author": "",
