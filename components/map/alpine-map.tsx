@@ -1,7 +1,7 @@
 'use client'
 
-import { useRef, useEffect, useState, useCallback } from 'react'
-import mapboxgl from 'mapbox-gl'
+import { useRef, useEffect, useState } from 'react'
+import maplibregl from 'maplibre-gl'
 import { ALPINE_REGIONS, ALPS_CENTER, ALPS_ZOOM, MapRegion } from '@/lib/map/regions'
 
 interface AlpineMapProps {
@@ -11,26 +11,26 @@ interface AlpineMapProps {
   routeLines?: { coordinates: [number, number][] }[]
 }
 
+const FREE_STYLE = 'https://tiles.openfreemap.org/styles/liberty'
+
 export default function AlpineMap({ onRegionSelect, selectedRegionId, huts, routeLines }: AlpineMapProps) {
   const mapContainer = useRef<HTMLDivElement>(null)
-  const map = useRef<mapboxgl.Map | null>(null)
-  const markersRef = useRef<mapboxgl.Marker[]>([])
+  const map = useRef<maplibregl.Map | null>(null)
+  const markersRef = useRef<maplibregl.Marker[]>([])
   const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
     if (!mapContainer.current || map.current) return
 
-    mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || ''
-
-    map.current = new mapboxgl.Map({
+    map.current = new maplibregl.Map({
       container: mapContainer.current,
-      style: 'mapbox://styles/mapbox/outdoors-v12',
-      center: ALPS_CENTER,
+      style: FREE_STYLE,
+      center: ALPS_CENTER as [number, number],
       zoom: ALPS_ZOOM,
       pitch: 30,
     })
 
-    map.current.addControl(new mapboxgl.NavigationControl(), 'top-right')
+    map.current.addControl(new maplibregl.NavigationControl(), 'top-right')
 
     map.current.on('load', () => {
       setLoaded(true)
@@ -77,23 +77,6 @@ export default function AlpineMap({ onRegionSelect, selectedRegionId, huts, rout
           },
         })
 
-        map.current!.addLayer({
-          id: `region-label-${region.id}`,
-          type: 'symbol',
-          source: `region-${region.id}`,
-          layout: {
-            'text-field': region.name,
-            'text-size': 13,
-            'text-font': ['DIN Pro Medium', 'Arial Unicode MS Regular'],
-            'text-letter-spacing': 0.05,
-          },
-          paint: {
-            'text-color': '#1d4836',
-            'text-halo-color': '#ffffff',
-            'text-halo-width': 2,
-          },
-        })
-
         map.current!.on('click', `region-fill-${region.id}`, () => {
           onRegionSelect(region)
         })
@@ -120,7 +103,6 @@ export default function AlpineMap({ onRegionSelect, selectedRegionId, huts, rout
   useEffect(() => {
     if (!map.current || !loaded) return
 
-    // Remove old markers
     markersRef.current.forEach((m) => m.remove())
     markersRef.current = []
 
@@ -140,11 +122,11 @@ export default function AlpineMap({ onRegionSelect, selectedRegionId, huts, rout
       el.addEventListener('mouseenter', () => { el.style.transform = 'scale(1.3)' })
       el.addEventListener('mouseleave', () => { el.style.transform = 'scale(1)' })
 
-      const popup = new mapboxgl.Popup({ offset: 12, closeButton: false }).setHTML(
+      const popup = new maplibregl.Popup({ offset: 12, closeButton: false }).setHTML(
         `<div style="font-size:13px"><strong>${hut.name}</strong><br/><span style="color:#78716c">${hut.altitude} m</span></div>`
       )
 
-      const marker = new mapboxgl.Marker(el)
+      const marker = new maplibregl.Marker({ element: el })
         .setLngLat([hut.lng, hut.lat])
         .setPopup(popup)
         .addTo(map.current!)
@@ -152,9 +134,8 @@ export default function AlpineMap({ onRegionSelect, selectedRegionId, huts, rout
       markersRef.current.push(marker)
     }
 
-    // Fit bounds to huts if we have them
     if (huts.length > 1) {
-      const bounds = new mapboxgl.LngLatBounds()
+      const bounds = new maplibregl.LngLatBounds()
       huts.forEach((h) => bounds.extend([h.lng, h.lat]))
       map.current.fitBounds(bounds, { padding: 80, duration: 1000 })
     }
@@ -164,7 +145,6 @@ export default function AlpineMap({ onRegionSelect, selectedRegionId, huts, rout
   useEffect(() => {
     if (!map.current || !loaded) return
 
-    // Remove old route layers
     const style = map.current.getStyle()
     if (style?.layers) {
       style.layers.forEach((layer) => {
@@ -211,7 +191,7 @@ export default function AlpineMap({ onRegionSelect, selectedRegionId, huts, rout
     if (!map.current || !selectedRegionId) return
     const region = ALPINE_REGIONS.find((r) => r.id === selectedRegionId)
     if (region) {
-      map.current.flyTo({ center: region.center, zoom: region.zoom, duration: 1500 })
+      map.current.flyTo({ center: region.center as [number, number], zoom: region.zoom, duration: 1500 })
     }
   }, [selectedRegionId])
 
