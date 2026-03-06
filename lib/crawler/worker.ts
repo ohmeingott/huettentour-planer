@@ -81,3 +81,4 @@ export function startWorker() {
 
   return worker
 }
+
