@@ -169,6 +169,24 @@ async function main() {
     console.log('Run "npx tsx scripts/calculate-routes.ts" for BRouter-verified routes.\n')
   }
 
+  // Try to load booking configuration
+  const bookingConfigPath = path.join(__dirname, '..', 'data', 'booking-config.json')
+  const bookingByName: Record<string, { bookingSystem: string; bookingUrl: string }> = {}
+
+  if (fs.existsSync(bookingConfigPath)) {
+    console.log(`Loading booking config from ${bookingConfigPath}`)
+    const config = JSON.parse(fs.readFileSync(bookingConfigPath, 'utf-8'))
+    for (const entry of config.huts) {
+      if (entry.verified && entry.bookingUrl) {
+        bookingByName[entry.name] = {
+          bookingSystem: entry.bookingSystem,
+          bookingUrl: entry.bookingUrl,
+        }
+      }
+    }
+    console.log(`  ${Object.keys(bookingByName).length} verified booking URLs loaded`)
+  }
+
   // Clear existing data
   await prisma.route.deleteMany()
   await prisma.roomTypeConfig.deleteMany()
@@ -211,7 +229,10 @@ async function main() {
           description: osmHut.description ?? undefined,
           dataSource: usingOsmData ? DataSource.osm : DataSource.mock,
           regionId: dbRegion.id,
-          bookingSystem: BookingSystem.custom,
+          bookingSystem: bookingByName[h.name]?.bookingSystem === 'alpsonline' ? BookingSystem.alpsonline
+            : bookingByName[h.name]?.bookingSystem === 'sac' ? BookingSystem.sac
+            : BookingSystem.custom,
+          bookingUrl: bookingByName[h.name]?.bookingUrl ?? undefined,
           amenities: [],
         },
       })

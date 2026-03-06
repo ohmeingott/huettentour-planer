@@ -1,0 +1,79 @@
+{
+  "_comment": "Verified alpsonline.org booking URLs. Only huts with confirmed hut_ids are listed here.",
+  "_source": "Manually verified via web search against alpsonline.org (March 2026)",
+  "_note": "alpsonline.org is being replaced by hut-reservation.org — URLs may need updating",
+  "huts": [
+    {
+      "name": "Innsbrucker Hütte",
+      "region": "stubaier-alpen",
+      "bookingSystem": "alpsonline",
+      "bookingUrl": "https://www.alpsonline.org/reservation/calendar?hut_id=320",
+      "hutId": 320,
+      "verified": true
+    },
+    {
+      "name": "Bremer Hütte",
+      "region": "stubaier-alpen",
+      "bookingSystem": "alpsonline",
+      "bookingUrl": "https://www.alpsonline.org/reservation/calendar?hut_id=143",
+      "hutId": 143,
+      "verified": true
+    },
+    {
+      "name": "Nürnberger Hütte",
+      "region": "stubaier-alpen",
+      "bookingSystem": "alpsonline",
+      "bookingUrl": "https://www.alpsonline.org/reservation/calendar?hut_id=124",
+      "hutId": 124,
+      "verified": true
+    },
+    {
+      "name": "Neue Regensburger Hütte",
+      "region": "stubaier-alpen",
+      "bookingSystem": "alpsonline",
+      "bookingUrl": "https://www.alpsonline.org/reservation/calendar?hut_id=275",
+      "hutId": 275,
+      "verified": true
+    },
+    {
+      "name": "Westfalenhaus",
+      "region": "stubaier-alpen",
+      "bookingSystem": "alpsonline",
+      "bookingUrl": "https://www.alpsonline.org/reservation/calendar?hut_id=541",
+      "hutId": 541,
+      "verified": true
+    },
+    {
+      "name": "Franz-Senn-Hütte",
+      "region": "stubaier-alpen",
+      "bookingSystem": "custom",
+      "bookingUrl": "https://www.franzsennhuette.at/booking",
+      "verified": true,
+      "_note": "Has own booking system, not on alpsonline"
+    },
+    {
+      "name": "Greizer Hütte",
+      "region": "zillertal",
+      "bookingSystem": "alpsonline",
+      "bookingUrl": "https://www.alpsonline.org/reservation/calendar?hut_id=122",
+      "hutId": 122,
+      "verified": true
+    },
+    {
+      "name": "Kasseler Hütte",
+      "region": "zillertal",
+      "bookingSystem": "alpsonline",
+      "bookingUrl": "https://www.alpsonline.org/reservation/calendar?hut_id=178",
+      "hutId": 178,
+      "verified": true
+    },
+    {
+      "name": "Braunschweiger Hütte",
+      "region": "oetztal",
+      "bookingSystem": "alpsonline",
+      "bookingUrl": "https://www.alpsonline.org/reservation/calendar?hut_id=366",
+      "hutId": 366,
+      "verified": true
+    }
+  ]
+}
