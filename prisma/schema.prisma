@@ -1,0 +1,144 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../app/generated/prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum BookingSystem {
+  alpsonline
+  hut_wrs
+  sac
+  custom
+}
+
+enum Difficulty {
+  easy
+  moderate
+  difficult
+}
+
+enum RoomType {
+  single
+  double
+  shared_4
+  dorm
+}
+
+enum TourStatus {
+  draft
+  checking
+  available
+  partially_available
+}
+
+enum AccommodationType {
+  any
+  private_room
+  shared_room
+  dorm
+}
+
+model Region {
+  id                String @id @default(cuid())
+  name              String
+  slug              String @unique
+  boundingBoxMinLat Float
+  boundingBoxMinLng Float
+  boundingBoxMaxLat Float
+  boundingBoxMaxLng Float
+  centerLat         Float
+  centerLng         Float
+  huts              Hut[]
+}
+
+model Hut {
+  id            String            @id @default(cuid())
+  name          String
+  altitude      Int
+  lat           Float
+  lng           Float
+  capacity      Int
+  bookingUrl    String?
+  bookingSystem BookingSystem     @default(custom)
+  imageUrl      String?
+  description   String?
+  amenities     String[]
+  regionId      String
+  region        Region            @relation(fields: [regionId], references: [id])
+  roomTypes     RoomTypeConfig[]
+  routesFrom    Route[]           @relation("routeFrom")
+  routesTo      Route[]           @relation("routeTo")
+  availability  AvailabilityCheck[]
+  tourHuts      TourHut[]
+}
+
+model RoomTypeConfig {
+  id    String   @id @default(cuid())
+  hutId String
+  hut   Hut      @relation(fields: [hutId], references: [id])
+  type  RoomType
+  count Int
+
+  @@unique([hutId, type])
+}
+
+model Route {
+  id                String     @id @default(cuid())
+  fromHutId         String
+  toHutId           String
+  fromHut           Hut        @relation("routeFrom", fields: [fromHutId], references: [id])
+  toHut             Hut        @relation("routeTo", fields: [toHutId], references: [id])
+  distance          Float
+  ascent            Int
+  descent           Int
+  estimatedDuration Float
+  difficulty        Difficulty
+  gpxTrack          Json?
+
+  @@unique([fromHutId, toHutId])
+}
+
+model Tour {
+  id                String            @id @default(cuid())
+  name              String?
+  groupSize         Int
+  totalDays         Int
+  restDays          Int               @default(0)
+  accommodationType AccommodationType @default(any)
+  maxBedsPerRoom    Int?
+  minDistancePerDay Float?
+  maxDistancePerDay Float?
+  maxAscentPerDay   Int?
+  dateRangeStart    DateTime?
+  dateRangeEnd      DateTime?
+  status            TourStatus        @default(draft)
+  createdAt         DateTime          @default(now())
+  huts              TourHut[]
+}
+
+model TourHut {
+  id        String @id @default(cuid())
+  tourId    String
+  tour      Tour   @relation(fields: [tourId], references: [id], onDelete: Cascade)
+  hutId     String
+  hut       Hut    @relation(fields: [hutId], references: [id])
+  dayNumber Int
+
+  @@unique([tourId, dayNumber])
+}
+
+model AvailabilityCheck {
+  id        String        @id @default(cuid())
+  hutId     String
+  hut       Hut           @relation(fields: [hutId], references: [id])
+  date      DateTime      @db.Date
+  roomType  RoomType
+  available Int
+  checkedAt DateTime      @default(now())
+  source    BookingSystem
+
+  @@unique([hutId, date, roomType])
+}
