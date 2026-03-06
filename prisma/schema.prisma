@@ -56,11 +56,17 @@ model Region {
 
 model Hut {
   id            String            @id @default(cuid())
+  osmId         BigInt?           @unique
   name          String
   altitude      Int
   lat           Float
   lng           Float
   capacity      Int
+  operator      String?
+  website       String?
+  phone         String?
+  email         String?
+  openingHours  String?
   bookingUrl    String?
   bookingSystem BookingSystem     @default(custom)
   imageUrl      String?
