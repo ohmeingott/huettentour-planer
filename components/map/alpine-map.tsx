@@ -103,41 +103,51 @@ export default function AlpineMap({ onRegionSelect, selectedRegionId, huts, rout
   useEffect(() => {
     if (!map.current || !loaded) return
 
-    markersRef.current.forEach((m) => m.remove())
+    const m = map.current
+
+    markersRef.current.forEach((mk) => mk.remove())
     markersRef.current = []
 
     if (!huts) return
 
-    for (const hut of huts) {
-      const el = document.createElement('div')
-      el.style.cssText = `
-        width: 14px; height: 14px;
-        background: #c2410c;
-        border: 2.5px solid white;
-        border-radius: 50%;
-        cursor: pointer;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-        transition: transform 0.15s ease;
-      `
-      el.addEventListener('mouseenter', () => { el.style.transform = 'scale(1.3)' })
-      el.addEventListener('mouseleave', () => { el.style.transform = 'scale(1)' })
+    function addMarkers() {
+      for (const hut of huts!) {
+        const el = document.createElement('div')
+        el.style.cssText = `
+          width: 14px; height: 14px;
+          background: #c2410c;
+          border: 2.5px solid white;
+          border-radius: 50%;
+          cursor: pointer;
+          box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+          transition: transform 0.15s ease;
+        `
+        el.addEventListener('mouseenter', () => { el.style.transform = 'scale(1.3)' })
+        el.addEventListener('mouseleave', () => { el.style.transform = 'scale(1)' })
 
-      const popup = new maplibregl.Popup({ offset: 12, closeButton: false }).setHTML(
-        `<div style="font-size:13px"><strong>${hut.name}</strong><br/><span style="color:#78716c">${hut.altitude} m</span></div>`
-      )
+        const popup = new maplibregl.Popup({ offset: 12, closeButton: false }).setHTML(
+          `<div style="font-size:13px"><strong>${hut.name}</strong><br/><span style="color:#78716c">${hut.altitude} m</span></div>`
+        )
 
-      const marker = new maplibregl.Marker({ element: el })
-        .setLngLat([hut.lng, hut.lat])
-        .setPopup(popup)
-        .addTo(map.current!)
+        const marker = new maplibregl.Marker({ element: el })
+          .setLngLat([hut.lng, hut.lat])
+          .setPopup(popup)
+          .addTo(m)
 
-      markersRef.current.push(marker)
+        markersRef.current.push(marker)
+      }
+
+      if (huts!.length > 1) {
+        const bounds = new maplibregl.LngLatBounds()
+        huts!.forEach((h) => bounds.extend([h.lng, h.lat]))
+        m.fitBounds(bounds, { padding: 80, duration: 1000 })
+      }
     }
 
-    if (huts.length > 1) {
-      const bounds = new maplibregl.LngLatBounds()
-      huts.forEach((h) => bounds.extend([h.lng, h.lat]))
-      map.current.fitBounds(bounds, { padding: 80, duration: 1000 })
+    if (m.isStyleLoaded()) {
+      addMarkers()
+    } else {
+      m.once('style.load', addMarkers)
     }
   }, [huts, loaded])
 
@@ -145,45 +155,54 @@ export default function AlpineMap({ onRegionSelect, selectedRegionId, huts, rout
   useEffect(() => {
     if (!map.current || !loaded) return
 
-    const style = map.current.getStyle()
-    if (style?.layers) {
-      style.layers.forEach((layer) => {
-        if (layer.id.startsWith('route-line-')) {
-          map.current!.removeLayer(layer.id)
+    const m = map.current
+
+    function drawRoutes() {
+      // Remove old route layers/sources
+      try {
+        const style = m.getStyle()
+        if (style?.layers) {
+          style.layers.forEach((layer) => {
+            if (layer.id.startsWith('route-line-')) m.removeLayer(layer.id)
+          })
         }
+        if (style?.sources) {
+          Object.keys(style.sources).forEach((src) => {
+            if (src.startsWith('route-src-')) m.removeSource(src)
+          })
+        }
+      } catch { /* style not ready yet, sources will be fresh */ }
+
+      if (!routeLines) return
+
+      routeLines.forEach((line, i) => {
+        m.addSource(`route-src-${i}`, {
+          type: 'geojson',
+          data: {
+            type: 'Feature',
+            properties: {},
+            geometry: { type: 'LineString', coordinates: line.coordinates },
+          },
+        })
+
+        m.addLayer({
+          id: `route-line-${i}`,
+          type: 'line',
+          source: `route-src-${i}`,
+          paint: {
+            'line-color': '#c2410c',
+            'line-width': 3,
+            'line-dasharray': [3, 1.5],
+          },
+        })
       })
     }
-    if (style?.sources) {
-      Object.keys(style.sources).forEach((src) => {
-        if (src.startsWith('route-src-')) {
-          map.current!.removeSource(src)
-        }
-      })
+
+    if (m.isStyleLoaded()) {
+      drawRoutes()
+    } else {
+      m.once('style.load', drawRoutes)
     }
-
-    if (!routeLines) return
-
-    routeLines.forEach((line, i) => {
-      map.current!.addSource(`route-src-${i}`, {
-        type: 'geojson',
-        data: {
-          type: 'Feature',
-          properties: {},
-          geometry: { type: 'LineString', coordinates: line.coordinates },
-        },
-      })
-
-      map.current!.addLayer({
-        id: `route-line-${i}`,
-        type: 'line',
-        source: `route-src-${i}`,
-        paint: {
-          'line-color': '#c2410c',
-          'line-width': 3,
-          'line-dasharray': [3, 1.5],
-        },
-      })
-    })
   }, [routeLines, loaded])
 
   // Fly to region
