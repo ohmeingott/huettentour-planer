@@ -43,7 +43,7 @@ export default function ResultsPage() {
   }
 
   return (
-    <main className="h-screen flex">
+    <main className="h-[calc(100vh-4rem)] flex">
       {/* Left panel */}
       <div className="w-[480px] flex-shrink-0 flex flex-col bg-stone-50 border-r border-stone-200">
         <div className="p-6 pb-4 border-b border-stone-100 bg-white">
