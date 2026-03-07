@@ -33,6 +33,8 @@ export interface OsmHut {
   email: string | null
   openingHours: string | null
   description: string | null
+  imageUrl: string | null
+  wikidataId: string | null
 }
 
 export interface OsmRegion {
@@ -73,6 +75,41 @@ const REGIONS = [
 
 const OVERPASS_URL = 'https://overpass-api.de/api/interpreter'
 
+/**
+ * Convert a Wikimedia Commons filename (or tag value) to a direct thumbnail URL.
+ * Uses the MD5-based URL scheme: upload.wikimedia.org/wikipedia/commons/thumb/a/ab/File.jpg/400px-File.jpg
+ */
+function commonsFileToUrl(tag: string | null): string | null {
+  if (!tag) return null
+
+  // If it's already a full URL (e.g. from image= tag), return as-is
+  if (tag.startsWith('http://') || tag.startsWith('https://')) return tag
+
+  // Strip "File:" or "Category:" prefix if present
+  let filename = tag.replace(/^(File:|Image:|Category:)/i, '').trim()
+  if (!filename) return null
+
+  // Replace spaces with underscores (Wikimedia convention)
+  filename = filename.replace(/ /g, '_')
+
+  // Compute MD5 hash for the directory structure
+  const md5 = computeMd5(filename)
+  const a = md5[0]
+  const ab = md5.substring(0, 2)
+
+  const encoded = encodeURIComponent(filename).replace(/%2F/g, '/').replace(/%3A/g, ':')
+  return `https://upload.wikimedia.org/wikipedia/commons/thumb/${a}/${ab}/${encoded}/400px-${encoded}`
+}
+
+/**
+ * Simple MD5 implementation for Wikimedia Commons URL generation.
+ * Only used for computing the 2-char directory prefix.
+ */
+function computeMd5(input: string): string {
+  const crypto = require('crypto')
+  return crypto.createHash('md5').update(input).digest('hex')
+}
+
 function buildOverpassQuery(bounds: { minLat: number; minLng: number; maxLat: number; maxLng: number }): string {
   const bbox = `${bounds.minLat},${bounds.minLng},${bounds.maxLat},${bounds.maxLng}`
   return `[out:json][timeout:30];
@@ -97,6 +134,9 @@ function parseHut(element: OsmElement): OsmHut | null {
   const ele = tags.ele ? parseInt(tags.ele, 10) : 0
   const capacity = tags.capacity ? parseInt(tags.capacity, 10) : null
 
+  // Extract image URL from wikimedia_commons or image tag
+  const imageUrl = commonsFileToUrl(tags.wikimedia_commons || tags.image || null)
+
   return {
     osmId: element.id,
     name,
@@ -110,6 +150,8 @@ function parseHut(element: OsmElement): OsmHut | null {
     email: tags.email || tags['contact:email'] || null,
     openingHours: tags.opening_hours || null,
     description: tags.description || tags['description:de'] || null,
+    imageUrl,
+    wikidataId: tags.wikidata || null,
   }
 }
 
@@ -159,6 +201,9 @@ async function main() {
     await new Promise((r) => setTimeout(r, 2000))
   }
 
+  // Resolve images from Wikidata for huts that have a wikidata ID but no image yet
+  await resolveWikidataImages(regions)
+
   const outDir = path.join(__dirname, '..', 'data')
   if (!fs.existsSync(outDir)) {
     fs.mkdirSync(outDir, { recursive: true })
@@ -179,12 +224,93 @@ async function main() {
     const withWebsite = region.huts.filter((h) => h.website !== null).length
     const withPhone = region.huts.filter((h) => h.phone !== null).length
     const withOpeningHours = region.huts.filter((h) => h.openingHours !== null).length
+    const withImage = region.huts.filter((h) => h.imageUrl !== null).length
     console.log(
       `  ${region.name}: ${region.huts.length} huts | ` +
         `capacity: ${withCapacity} | operator: ${withOperator} | ` +
-        `website: ${withWebsite} | phone: ${withPhone} | hours: ${withOpeningHours}`
+        `website: ${withWebsite} | phone: ${withPhone} | hours: ${withOpeningHours} | images: ${withImage}`
     )
   }
+}
+
+/**
+ * For huts with a Wikidata ID but no imageUrl, query Wikidata SPARQL for P18 (image) property.
+ * Processes in batches to avoid oversized queries.
+ */
+async function resolveWikidataImages(regions: OsmRegion[]): Promise<void> {
+  const hutsNeedingImages: OsmHut[] = []
+  for (const region of regions) {
+    for (const hut of region.huts) {
+      if (!hut.imageUrl && hut.wikidataId) {
+        hutsNeedingImages.push(hut)
+      }
+    }
+  }
+
+  if (hutsNeedingImages.length === 0) {
+    console.log('\nNo huts need Wikidata image lookup.')
+    return
+  }
+
+  console.log(`\nResolving images from Wikidata for ${hutsNeedingImages.length} huts...`)
+
+  // Process in batches of 50
+  const batchSize = 50
+  for (let i = 0; i < hutsNeedingImages.length; i += batchSize) {
+    const batch = hutsNeedingImages.slice(i, i + batchSize)
+    const qids = batch.map((h) => h.wikidataId!).join(' wd:')
+
+    const sparql = `SELECT ?item ?image WHERE {
+  VALUES ?item { wd:${qids} }
+  ?item wdt:P18 ?image .
+}`
+
+    try {
+      const resp = await fetch('https://query.wikidata.org/sparql', {
+        headers: { Accept: 'application/sparql-results+json', 'User-Agent': 'HuettentourPlaner/1.0' },
+        method: 'POST',
+        body: new URLSearchParams({ query: sparql }),
+      })
+
+      if (!resp.ok) {
+        console.log(`  Wikidata SPARQL error: ${resp.status}`)
+        continue
+      }
+
+      const data = await resp.json()
+      const imageByQid: Record<string, string> = {}
+      for (const binding of data.results.bindings) {
+        const qid = binding.item.value.split('/').pop()!
+        const commonsUrl = binding.image.value
+        // Convert commons file URL to thumbnail
+        const filename = decodeURIComponent(commonsUrl.split('/').pop()!)
+        imageByQid[qid] = commonsFileToUrl(filename) || commonsUrl
+      }
+
+      let resolved = 0
+      for (const hut of batch) {
+        const url = imageByQid[hut.wikidataId!]
+        if (url) {
+          hut.imageUrl = url
+          resolved++
+        }
+      }
+      console.log(`  Batch ${Math.floor(i / batchSize) + 1}: ${resolved}/${batch.length} images found`)
+    } catch (err) {
+      console.log(`  Wikidata batch error: ${err}`)
+    }
+
+    // Rate limit
+    if (i + batchSize < hutsNeedingImages.length) {
+      await new Promise((r) => setTimeout(r, 1000))
+    }
+  }
+
+  const totalWithImages = regions.reduce(
+    (s, r) => s + r.huts.filter((h) => h.imageUrl !== null).length, 0
+  )
+  const totalHuts = regions.reduce((s, r) => s + r.huts.length, 0)
+  console.log(`  Total huts with images: ${totalWithImages}/${totalHuts}`)
 }
 
 main().catch((err) => {

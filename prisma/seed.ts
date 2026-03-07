@@ -241,6 +241,7 @@ async function main() {
           email: osmHut.email ?? undefined,
           openingHours: osmHut.openingHours ?? undefined,
           description: osmHut.description ?? undefined,
+          imageUrl: (osmHut as any).imageUrl ?? undefined,
           dataSource: usingOsmData ? DataSource.osm : DataSource.mock,
           regionId: dbRegion.id,
           bookingSystem: bookingByName[h.name]?.bookingSystem === 'alpsonline' ? BookingSystem.alpsonline
