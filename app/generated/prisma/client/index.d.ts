@@ -101,6 +101,16 @@ export const AccommodationType: {
 
 export type AccommodationType = (typeof AccommodationType)[keyof typeof AccommodationType]
 
+
+export const DataSource: {
+  mock: 'mock',
+  osm: 'osm',
+  brouter: 'brouter',
+  estimate: 'estimate'
+};
+
+export type DataSource = (typeof DataSource)[keyof typeof DataSource]
+
 }
 
 export type BookingSystem = $Enums.BookingSystem
@@ -122,6 +132,10 @@ export const TourStatus: typeof $Enums.TourStatus
 export type AccommodationType = $Enums.AccommodationType
 
 export const AccommodationType: typeof $Enums.AccommodationType
+
+export type DataSource = $Enums.DataSource
+
+export const DataSource: typeof $Enums.DataSource
 
 /**
  * ##  Prisma Client ʲˢ
@@ -2803,6 +2817,7 @@ export namespace Prisma {
   }
 
   export type HutAvgAggregateOutputType = {
+    osmId: number | null
     altitude: number | null
     lat: number | null
     lng: number | null
@@ -2810,6 +2825,7 @@ export namespace Prisma {
   }
 
   export type HutSumAggregateOutputType = {
+    osmId: bigint | null
     altitude: number | null
     lat: number | null
     lng: number | null
@@ -2818,50 +2834,72 @@ export namespace Prisma {
 
   export type HutMinAggregateOutputType = {
     id: string | null
+    osmId: bigint | null
     name: string | null
     altitude: number | null
     lat: number | null
     lng: number | null
     capacity: number | null
+    operator: string | null
+    website: string | null
+    phone: string | null
+    email: string | null
+    openingHours: string | null
     bookingUrl: string | null
     bookingSystem: $Enums.BookingSystem | null
     imageUrl: string | null
     description: string | null
+    dataSource: $Enums.DataSource | null
     regionId: string | null
   }
 
   export type HutMaxAggregateOutputType = {
     id: string | null
+    osmId: bigint | null
     name: string | null
     altitude: number | null
     lat: number | null
     lng: number | null
     capacity: number | null
+    operator: string | null
+    website: string | null
+    phone: string | null
+    email: string | null
+    openingHours: string | null
     bookingUrl: string | null
     bookingSystem: $Enums.BookingSystem | null
     imageUrl: string | null
     description: string | null
+    dataSource: $Enums.DataSource | null
     regionId: string | null
   }
 
   export type HutCountAggregateOutputType = {
     id: number
+    osmId: number
     name: number
     altitude: number
     lat: number
     lng: number
     capacity: number
+    operator: number
+    website: number
+    phone: number
+    email: number
+    openingHours: number
     bookingUrl: number
     bookingSystem: number
     imageUrl: number
     description: number
     amenities: number
+    dataSource: number
     regionId: number
     _all: number
   }
 
 
   export type HutAvgAggregateInputType = {
+    osmId?: true
     altitude?: true
     lat?: true
     lng?: true
@@ -2869,6 +2907,7 @@ export namespace Prisma {
   }
 
   export type HutSumAggregateInputType = {
+    osmId?: true
     altitude?: true
     lat?: true
     lng?: true
@@ -2877,44 +2916,65 @@ export namespace Prisma {
 
   export type HutMinAggregateInputType = {
     id?: true
+    osmId?: true
     name?: true
     altitude?: true
     lat?: true
     lng?: true
     capacity?: true
+    operator?: true
+    website?: true
+    phone?: true
+    email?: true
+    openingHours?: true
     bookingUrl?: true
     bookingSystem?: true
     imageUrl?: true
     description?: true
+    dataSource?: true
     regionId?: true
   }
 
   export type HutMaxAggregateInputType = {
     id?: true
+    osmId?: true
     name?: true
     altitude?: true
     lat?: true
     lng?: true
     capacity?: true
+    operator?: true
+    website?: true
+    phone?: true
+    email?: true
+    openingHours?: true
     bookingUrl?: true
     bookingSystem?: true
     imageUrl?: true
     description?: true
+    dataSource?: true
     regionId?: true
   }
 
   export type HutCountAggregateInputType = {
     id?: true
+    osmId?: true
     name?: true
     altitude?: true
     lat?: true
     lng?: true
     capacity?: true
+    operator?: true
+    website?: true
+    phone?: true
+    email?: true
+    openingHours?: true
     bookingUrl?: true
     bookingSystem?: true
     imageUrl?: true
     description?: true
     amenities?: true
+    dataSource?: true
     regionId?: true
     _all?: true
   }
@@ -3007,16 +3067,23 @@ export namespace Prisma {
 
   export type HutGroupByOutputType = {
     id: string
+    osmId: bigint | null
     name: string
     altitude: number
     lat: number
     lng: number
     capacity: number
+    operator: string | null
+    website: string | null
+    phone: string | null
+    email: string | null
+    openingHours: string | null
     bookingUrl: string | null
     bookingSystem: $Enums.BookingSystem
     imageUrl: string | null
     description: string | null
     amenities: string[]
+    dataSource: $Enums.DataSource
     regionId: string
     _count: HutCountAggregateOutputType | null
     _avg: HutAvgAggregateOutputType | null
@@ -3041,16 +3108,23 @@ export namespace Prisma {
 
   export type HutSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    osmId?: boolean
     name?: boolean
     altitude?: boolean
     lat?: boolean
     lng?: boolean
     capacity?: boolean
+    operator?: boolean
+    website?: boolean
+    phone?: boolean
+    email?: boolean
+    openingHours?: boolean
     bookingUrl?: boolean
     bookingSystem?: boolean
     imageUrl?: boolean
     description?: boolean
     amenities?: boolean
+    dataSource?: boolean
     regionId?: boolean
     region?: boolean | RegionDefaultArgs<ExtArgs>
     roomTypes?: boolean | Hut$roomTypesArgs<ExtArgs>
@@ -3063,52 +3137,73 @@ export namespace Prisma {
 
   export type HutSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    osmId?: boolean
     name?: boolean
     altitude?: boolean
     lat?: boolean
     lng?: boolean
     capacity?: boolean
+    operator?: boolean
+    website?: boolean
+    phone?: boolean
+    email?: boolean
+    openingHours?: boolean
     bookingUrl?: boolean
     bookingSystem?: boolean
     imageUrl?: boolean
     description?: boolean
     amenities?: boolean
+    dataSource?: boolean
     regionId?: boolean
     region?: boolean | RegionDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["hut"]>
 
   export type HutSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    osmId?: boolean
     name?: boolean
     altitude?: boolean
     lat?: boolean
     lng?: boolean
     capacity?: boolean
+    operator?: boolean
+    website?: boolean
+    phone?: boolean
+    email?: boolean
+    openingHours?: boolean
     bookingUrl?: boolean
     bookingSystem?: boolean
     imageUrl?: boolean
     description?: boolean
     amenities?: boolean
+    dataSource?: boolean
     regionId?: boolean
     region?: boolean | RegionDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["hut"]>
 
   export type HutSelectScalar = {
     id?: boolean
+    osmId?: boolean
     name?: boolean
     altitude?: boolean
     lat?: boolean
     lng?: boolean
     capacity?: boolean
+    operator?: boolean
+    website?: boolean
+    phone?: boolean
+    email?: boolean
+    openingHours?: boolean
     bookingUrl?: boolean
     bookingSystem?: boolean
     imageUrl?: boolean
     description?: boolean
     amenities?: boolean
+    dataSource?: boolean
     regionId?: boolean
   }
 
-  export type HutOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "altitude" | "lat" | "lng" | "capacity" | "bookingUrl" | "bookingSystem" | "imageUrl" | "description" | "amenities" | "regionId", ExtArgs["result"]["hut"]>
+  export type HutOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "osmId" | "name" | "altitude" | "lat" | "lng" | "capacity" | "operator" | "website" | "phone" | "email" | "openingHours" | "bookingUrl" | "bookingSystem" | "imageUrl" | "description" | "amenities" | "dataSource" | "regionId", ExtArgs["result"]["hut"]>
   export type HutInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     region?: boolean | RegionDefaultArgs<ExtArgs>
     roomTypes?: boolean | Hut$roomTypesArgs<ExtArgs>
@@ -3137,16 +3232,23 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
+      osmId: bigint | null
       name: string
       altitude: number
       lat: number
       lng: number
       capacity: number
+      operator: string | null
+      website: string | null
+      phone: string | null
+      email: string | null
+      openingHours: string | null
       bookingUrl: string | null
       bookingSystem: $Enums.BookingSystem
       imageUrl: string | null
       description: string | null
       amenities: string[]
+      dataSource: $Enums.DataSource
       regionId: string
     }, ExtArgs["result"]["hut"]>
     composites: {}
@@ -3578,16 +3680,23 @@ export namespace Prisma {
    */
   interface HutFieldRefs {
     readonly id: FieldRef<"Hut", 'String'>
+    readonly osmId: FieldRef<"Hut", 'BigInt'>
     readonly name: FieldRef<"Hut", 'String'>
     readonly altitude: FieldRef<"Hut", 'Int'>
     readonly lat: FieldRef<"Hut", 'Float'>
     readonly lng: FieldRef<"Hut", 'Float'>
     readonly capacity: FieldRef<"Hut", 'Int'>
+    readonly operator: FieldRef<"Hut", 'String'>
+    readonly website: FieldRef<"Hut", 'String'>
+    readonly phone: FieldRef<"Hut", 'String'>
+    readonly email: FieldRef<"Hut", 'String'>
+    readonly openingHours: FieldRef<"Hut", 'String'>
     readonly bookingUrl: FieldRef<"Hut", 'String'>
     readonly bookingSystem: FieldRef<"Hut", 'BookingSystem'>
     readonly imageUrl: FieldRef<"Hut", 'String'>
     readonly description: FieldRef<"Hut", 'String'>
     readonly amenities: FieldRef<"Hut", 'String[]'>
+    readonly dataSource: FieldRef<"Hut", 'DataSource'>
     readonly regionId: FieldRef<"Hut", 'String'>
   }
     
@@ -5237,6 +5346,7 @@ export namespace Prisma {
     descent: number | null
     estimatedDuration: number | null
     difficulty: $Enums.Difficulty | null
+    dataSource: $Enums.DataSource | null
   }
 
   export type RouteMaxAggregateOutputType = {
@@ -5248,6 +5358,7 @@ export namespace Prisma {
     descent: number | null
     estimatedDuration: number | null
     difficulty: $Enums.Difficulty | null
+    dataSource: $Enums.DataSource | null
   }
 
   export type RouteCountAggregateOutputType = {
@@ -5259,6 +5370,7 @@ export namespace Prisma {
     descent: number
     estimatedDuration: number
     difficulty: number
+    dataSource: number
     gpxTrack: number
     _all: number
   }
@@ -5287,6 +5399,7 @@ export namespace Prisma {
     descent?: true
     estimatedDuration?: true
     difficulty?: true
+    dataSource?: true
   }
 
   export type RouteMaxAggregateInputType = {
@@ -5298,6 +5411,7 @@ export namespace Prisma {
     descent?: true
     estimatedDuration?: true
     difficulty?: true
+    dataSource?: true
   }
 
   export type RouteCountAggregateInputType = {
@@ -5309,6 +5423,7 @@ export namespace Prisma {
     descent?: true
     estimatedDuration?: true
     difficulty?: true
+    dataSource?: true
     gpxTrack?: true
     _all?: true
   }
@@ -5408,6 +5523,7 @@ export namespace Prisma {
     descent: number
     estimatedDuration: number
     difficulty: $Enums.Difficulty
+    dataSource: $Enums.DataSource
     gpxTrack: JsonValue | null
     _count: RouteCountAggregateOutputType | null
     _avg: RouteAvgAggregateOutputType | null
@@ -5439,6 +5555,7 @@ export namespace Prisma {
     descent?: boolean
     estimatedDuration?: boolean
     difficulty?: boolean
+    dataSource?: boolean
     gpxTrack?: boolean
     fromHut?: boolean | HutDefaultArgs<ExtArgs>
     toHut?: boolean | HutDefaultArgs<ExtArgs>
@@ -5453,6 +5570,7 @@ export namespace Prisma {
     descent?: boolean
     estimatedDuration?: boolean
     difficulty?: boolean
+    dataSource?: boolean
     gpxTrack?: boolean
     fromHut?: boolean | HutDefaultArgs<ExtArgs>
     toHut?: boolean | HutDefaultArgs<ExtArgs>
@@ -5467,6 +5585,7 @@ export namespace Prisma {
     descent?: boolean
     estimatedDuration?: boolean
     difficulty?: boolean
+    dataSource?: boolean
     gpxTrack?: boolean
     fromHut?: boolean | HutDefaultArgs<ExtArgs>
     toHut?: boolean | HutDefaultArgs<ExtArgs>
@@ -5481,10 +5600,11 @@ export namespace Prisma {
     descent?: boolean
     estimatedDuration?: boolean
     difficulty?: boolean
+    dataSource?: boolean
     gpxTrack?: boolean
   }
 
-  export type RouteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fromHutId" | "toHutId" | "distance" | "ascent" | "descent" | "estimatedDuration" | "difficulty" | "gpxTrack", ExtArgs["result"]["route"]>
+  export type RouteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fromHutId" | "toHutId" | "distance" | "ascent" | "descent" | "estimatedDuration" | "difficulty" | "dataSource" | "gpxTrack", ExtArgs["result"]["route"]>
   export type RouteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     fromHut?: boolean | HutDefaultArgs<ExtArgs>
     toHut?: boolean | HutDefaultArgs<ExtArgs>
@@ -5513,6 +5633,7 @@ export namespace Prisma {
       descent: number
       estimatedDuration: number
       difficulty: $Enums.Difficulty
+      dataSource: $Enums.DataSource
       gpxTrack: Prisma.JsonValue | null
     }, ExtArgs["result"]["route"]>
     composites: {}
@@ -5947,6 +6068,7 @@ export namespace Prisma {
     readonly descent: FieldRef<"Route", 'Int'>
     readonly estimatedDuration: FieldRef<"Route", 'Float'>
     readonly difficulty: FieldRef<"Route", 'Difficulty'>
+    readonly dataSource: FieldRef<"Route", 'DataSource'>
     readonly gpxTrack: FieldRef<"Route", 'Json'>
   }
     
@@ -9843,16 +9965,23 @@ export namespace Prisma {
 
   export const HutScalarFieldEnum: {
     id: 'id',
+    osmId: 'osmId',
     name: 'name',
     altitude: 'altitude',
     lat: 'lat',
     lng: 'lng',
     capacity: 'capacity',
+    operator: 'operator',
+    website: 'website',
+    phone: 'phone',
+    email: 'email',
+    openingHours: 'openingHours',
     bookingUrl: 'bookingUrl',
     bookingSystem: 'bookingSystem',
     imageUrl: 'imageUrl',
     description: 'description',
     amenities: 'amenities',
+    dataSource: 'dataSource',
     regionId: 'regionId'
   };
 
@@ -9878,6 +10007,7 @@ export namespace Prisma {
     descent: 'descent',
     estimatedDuration: 'estimatedDuration',
     difficulty: 'difficulty',
+    dataSource: 'dataSource',
     gpxTrack: 'gpxTrack'
   };
 
@@ -10002,6 +10132,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'BigInt'
+   */
+  export type BigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt'>
+    
+
+
+  /**
+   * Reference to a field of type 'BigInt[]'
+   */
+  export type ListBigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -10026,6 +10170,20 @@ export namespace Prisma {
    * Reference to a field of type 'BookingSystem[]'
    */
   export type ListEnumBookingSystemFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BookingSystem[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'DataSource'
+   */
+  export type EnumDataSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DataSource'>
+    
+
+
+  /**
+   * Reference to a field of type 'DataSource[]'
+   */
+  export type ListEnumDataSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DataSource[]'>
     
 
 
@@ -10198,16 +10356,23 @@ export namespace Prisma {
     OR?: HutWhereInput[]
     NOT?: HutWhereInput | HutWhereInput[]
     id?: StringFilter<"Hut"> | string
+    osmId?: BigIntNullableFilter<"Hut"> | bigint | number | null
     name?: StringFilter<"Hut"> | string
     altitude?: IntFilter<"Hut"> | number
     lat?: FloatFilter<"Hut"> | number
     lng?: FloatFilter<"Hut"> | number
     capacity?: IntFilter<"Hut"> | number
+    operator?: StringNullableFilter<"Hut"> | string | null
+    website?: StringNullableFilter<"Hut"> | string | null
+    phone?: StringNullableFilter<"Hut"> | string | null
+    email?: StringNullableFilter<"Hut"> | string | null
+    openingHours?: StringNullableFilter<"Hut"> | string | null
     bookingUrl?: StringNullableFilter<"Hut"> | string | null
     bookingSystem?: EnumBookingSystemFilter<"Hut"> | $Enums.BookingSystem
     imageUrl?: StringNullableFilter<"Hut"> | string | null
     description?: StringNullableFilter<"Hut"> | string | null
     amenities?: StringNullableListFilter<"Hut">
+    dataSource?: EnumDataSourceFilter<"Hut"> | $Enums.DataSource
     regionId?: StringFilter<"Hut"> | string
     region?: XOR<RegionScalarRelationFilter, RegionWhereInput>
     roomTypes?: RoomTypeConfigListRelationFilter
@@ -10219,16 +10384,23 @@ export namespace Prisma {
 
   export type HutOrderByWithRelationInput = {
     id?: SortOrder
+    osmId?: SortOrderInput | SortOrder
     name?: SortOrder
     altitude?: SortOrder
     lat?: SortOrder
     lng?: SortOrder
     capacity?: SortOrder
+    operator?: SortOrderInput | SortOrder
+    website?: SortOrderInput | SortOrder
+    phone?: SortOrderInput | SortOrder
+    email?: SortOrderInput | SortOrder
+    openingHours?: SortOrderInput | SortOrder
     bookingUrl?: SortOrderInput | SortOrder
     bookingSystem?: SortOrder
     imageUrl?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
     amenities?: SortOrder
+    dataSource?: SortOrder
     regionId?: SortOrder
     region?: RegionOrderByWithRelationInput
     roomTypes?: RoomTypeConfigOrderByRelationAggregateInput
@@ -10240,6 +10412,7 @@ export namespace Prisma {
 
   export type HutWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    osmId?: bigint | number
     AND?: HutWhereInput | HutWhereInput[]
     OR?: HutWhereInput[]
     NOT?: HutWhereInput | HutWhereInput[]
@@ -10248,11 +10421,17 @@ export namespace Prisma {
     lat?: FloatFilter<"Hut"> | number
     lng?: FloatFilter<"Hut"> | number
     capacity?: IntFilter<"Hut"> | number
+    operator?: StringNullableFilter<"Hut"> | string | null
+    website?: StringNullableFilter<"Hut"> | string | null
+    phone?: StringNullableFilter<"Hut"> | string | null
+    email?: StringNullableFilter<"Hut"> | string | null
+    openingHours?: StringNullableFilter<"Hut"> | string | null
     bookingUrl?: StringNullableFilter<"Hut"> | string | null
     bookingSystem?: EnumBookingSystemFilter<"Hut"> | $Enums.BookingSystem
     imageUrl?: StringNullableFilter<"Hut"> | string | null
     description?: StringNullableFilter<"Hut"> | string | null
     amenities?: StringNullableListFilter<"Hut">
+    dataSource?: EnumDataSourceFilter<"Hut"> | $Enums.DataSource
     regionId?: StringFilter<"Hut"> | string
     region?: XOR<RegionScalarRelationFilter, RegionWhereInput>
     roomTypes?: RoomTypeConfigListRelationFilter
@@ -10260,20 +10439,27 @@ export namespace Prisma {
     routesTo?: RouteListRelationFilter
     availability?: AvailabilityCheckListRelationFilter
     tourHuts?: TourHutListRelationFilter
-  }, "id">
+  }, "id" | "osmId">
 
   export type HutOrderByWithAggregationInput = {
     id?: SortOrder
+    osmId?: SortOrderInput | SortOrder
     name?: SortOrder
     altitude?: SortOrder
     lat?: SortOrder
     lng?: SortOrder
     capacity?: SortOrder
+    operator?: SortOrderInput | SortOrder
+    website?: SortOrderInput | SortOrder
+    phone?: SortOrderInput | SortOrder
+    email?: SortOrderInput | SortOrder
+    openingHours?: SortOrderInput | SortOrder
     bookingUrl?: SortOrderInput | SortOrder
     bookingSystem?: SortOrder
     imageUrl?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
     amenities?: SortOrder
+    dataSource?: SortOrder
     regionId?: SortOrder
     _count?: HutCountOrderByAggregateInput
     _avg?: HutAvgOrderByAggregateInput
@@ -10287,16 +10473,23 @@ export namespace Prisma {
     OR?: HutScalarWhereWithAggregatesInput[]
     NOT?: HutScalarWhereWithAggregatesInput | HutScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Hut"> | string
+    osmId?: BigIntNullableWithAggregatesFilter<"Hut"> | bigint | number | null
     name?: StringWithAggregatesFilter<"Hut"> | string
     altitude?: IntWithAggregatesFilter<"Hut"> | number
     lat?: FloatWithAggregatesFilter<"Hut"> | number
     lng?: FloatWithAggregatesFilter<"Hut"> | number
     capacity?: IntWithAggregatesFilter<"Hut"> | number
+    operator?: StringNullableWithAggregatesFilter<"Hut"> | string | null
+    website?: StringNullableWithAggregatesFilter<"Hut"> | string | null
+    phone?: StringNullableWithAggregatesFilter<"Hut"> | string | null
+    email?: StringNullableWithAggregatesFilter<"Hut"> | string | null
+    openingHours?: StringNullableWithAggregatesFilter<"Hut"> | string | null
     bookingUrl?: StringNullableWithAggregatesFilter<"Hut"> | string | null
     bookingSystem?: EnumBookingSystemWithAggregatesFilter<"Hut"> | $Enums.BookingSystem
     imageUrl?: StringNullableWithAggregatesFilter<"Hut"> | string | null
     description?: StringNullableWithAggregatesFilter<"Hut"> | string | null
     amenities?: StringNullableListFilter<"Hut">
+    dataSource?: EnumDataSourceWithAggregatesFilter<"Hut"> | $Enums.DataSource
     regionId?: StringWithAggregatesFilter<"Hut"> | string
   }
 
@@ -10365,6 +10558,7 @@ export namespace Prisma {
     descent?: IntFilter<"Route"> | number
     estimatedDuration?: FloatFilter<"Route"> | number
     difficulty?: EnumDifficultyFilter<"Route"> | $Enums.Difficulty
+    dataSource?: EnumDataSourceFilter<"Route"> | $Enums.DataSource
     gpxTrack?: JsonNullableFilter<"Route">
     fromHut?: XOR<HutScalarRelationFilter, HutWhereInput>
     toHut?: XOR<HutScalarRelationFilter, HutWhereInput>
@@ -10379,6 +10573,7 @@ export namespace Prisma {
     descent?: SortOrder
     estimatedDuration?: SortOrder
     difficulty?: SortOrder
+    dataSource?: SortOrder
     gpxTrack?: SortOrderInput | SortOrder
     fromHut?: HutOrderByWithRelationInput
     toHut?: HutOrderByWithRelationInput
@@ -10397,6 +10592,7 @@ export namespace Prisma {
     descent?: IntFilter<"Route"> | number
     estimatedDuration?: FloatFilter<"Route"> | number
     difficulty?: EnumDifficultyFilter<"Route"> | $Enums.Difficulty
+    dataSource?: EnumDataSourceFilter<"Route"> | $Enums.DataSource
     gpxTrack?: JsonNullableFilter<"Route">
     fromHut?: XOR<HutScalarRelationFilter, HutWhereInput>
     toHut?: XOR<HutScalarRelationFilter, HutWhereInput>
@@ -10411,6 +10607,7 @@ export namespace Prisma {
     descent?: SortOrder
     estimatedDuration?: SortOrder
     difficulty?: SortOrder
+    dataSource?: SortOrder
     gpxTrack?: SortOrderInput | SortOrder
     _count?: RouteCountOrderByAggregateInput
     _avg?: RouteAvgOrderByAggregateInput
@@ -10431,6 +10628,7 @@ export namespace Prisma {
     descent?: IntWithAggregatesFilter<"Route"> | number
     estimatedDuration?: FloatWithAggregatesFilter<"Route"> | number
     difficulty?: EnumDifficultyWithAggregatesFilter<"Route"> | $Enums.Difficulty
+    dataSource?: EnumDataSourceWithAggregatesFilter<"Route"> | $Enums.DataSource
     gpxTrack?: JsonNullableWithAggregatesFilter<"Route">
   }
 
@@ -10750,16 +10948,23 @@ export namespace Prisma {
 
   export type HutCreateInput = {
     id?: string
+    osmId?: bigint | number | null
     name: string
     altitude: number
     lat: number
     lng: number
     capacity: number
+    operator?: string | null
+    website?: string | null
+    phone?: string | null
+    email?: string | null
+    openingHours?: string | null
     bookingUrl?: string | null
     bookingSystem?: $Enums.BookingSystem
     imageUrl?: string | null
     description?: string | null
     amenities?: HutCreateamenitiesInput | string[]
+    dataSource?: $Enums.DataSource
     region: RegionCreateNestedOneWithoutHutsInput
     roomTypes?: RoomTypeConfigCreateNestedManyWithoutHutInput
     routesFrom?: RouteCreateNestedManyWithoutFromHutInput
@@ -10770,16 +10975,23 @@ export namespace Prisma {
 
   export type HutUncheckedCreateInput = {
     id?: string
+    osmId?: bigint | number | null
     name: string
     altitude: number
     lat: number
     lng: number
     capacity: number
+    operator?: string | null
+    website?: string | null
+    phone?: string | null
+    email?: string | null
+    openingHours?: string | null
     bookingUrl?: string | null
     bookingSystem?: $Enums.BookingSystem
     imageUrl?: string | null
     description?: string | null
     amenities?: HutCreateamenitiesInput | string[]
+    dataSource?: $Enums.DataSource
     regionId: string
     roomTypes?: RoomTypeConfigUncheckedCreateNestedManyWithoutHutInput
     routesFrom?: RouteUncheckedCreateNestedManyWithoutFromHutInput
@@ -10790,16 +11002,23 @@ export namespace Prisma {
 
   export type HutUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    osmId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     name?: StringFieldUpdateOperationsInput | string
     altitude?: IntFieldUpdateOperationsInput | number
     lat?: FloatFieldUpdateOperationsInput | number
     lng?: FloatFieldUpdateOperationsInput | number
     capacity?: IntFieldUpdateOperationsInput | number
+    operator?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    openingHours?: NullableStringFieldUpdateOperationsInput | string | null
     bookingUrl?: NullableStringFieldUpdateOperationsInput | string | null
     bookingSystem?: EnumBookingSystemFieldUpdateOperationsInput | $Enums.BookingSystem
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     amenities?: HutUpdateamenitiesInput | string[]
+    dataSource?: EnumDataSourceFieldUpdateOperationsInput | $Enums.DataSource
     region?: RegionUpdateOneRequiredWithoutHutsNestedInput
     roomTypes?: RoomTypeConfigUpdateManyWithoutHutNestedInput
     routesFrom?: RouteUpdateManyWithoutFromHutNestedInput
@@ -10810,16 +11029,23 @@ export namespace Prisma {
 
   export type HutUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    osmId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     name?: StringFieldUpdateOperationsInput | string
     altitude?: IntFieldUpdateOperationsInput | number
     lat?: FloatFieldUpdateOperationsInput | number
     lng?: FloatFieldUpdateOperationsInput | number
     capacity?: IntFieldUpdateOperationsInput | number
+    operator?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    openingHours?: NullableStringFieldUpdateOperationsInput | string | null
     bookingUrl?: NullableStringFieldUpdateOperationsInput | string | null
     bookingSystem?: EnumBookingSystemFieldUpdateOperationsInput | $Enums.BookingSystem
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     amenities?: HutUpdateamenitiesInput | string[]
+    dataSource?: EnumDataSourceFieldUpdateOperationsInput | $Enums.DataSource
     regionId?: StringFieldUpdateOperationsInput | string
     roomTypes?: RoomTypeConfigUncheckedUpdateManyWithoutHutNestedInput
     routesFrom?: RouteUncheckedUpdateManyWithoutFromHutNestedInput
@@ -10830,45 +11056,66 @@ export namespace Prisma {
 
   export type HutCreateManyInput = {
     id?: string
+    osmId?: bigint | number | null
     name: string
     altitude: number
     lat: number
     lng: number
     capacity: number
+    operator?: string | null
+    website?: string | null
+    phone?: string | null
+    email?: string | null
+    openingHours?: string | null
     bookingUrl?: string | null
     bookingSystem?: $Enums.BookingSystem
     imageUrl?: string | null
     description?: string | null
     amenities?: HutCreateamenitiesInput | string[]
+    dataSource?: $Enums.DataSource
     regionId: string
   }
 
   export type HutUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    osmId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     name?: StringFieldUpdateOperationsInput | string
     altitude?: IntFieldUpdateOperationsInput | number
     lat?: FloatFieldUpdateOperationsInput | number
     lng?: FloatFieldUpdateOperationsInput | number
     capacity?: IntFieldUpdateOperationsInput | number
+    operator?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    openingHours?: NullableStringFieldUpdateOperationsInput | string | null
     bookingUrl?: NullableStringFieldUpdateOperationsInput | string | null
     bookingSystem?: EnumBookingSystemFieldUpdateOperationsInput | $Enums.BookingSystem
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     amenities?: HutUpdateamenitiesInput | string[]
+    dataSource?: EnumDataSourceFieldUpdateOperationsInput | $Enums.DataSource
   }
 
   export type HutUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    osmId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     name?: StringFieldUpdateOperationsInput | string
     altitude?: IntFieldUpdateOperationsInput | number
     lat?: FloatFieldUpdateOperationsInput | number
     lng?: FloatFieldUpdateOperationsInput | number
     capacity?: IntFieldUpdateOperationsInput | number
+    operator?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    openingHours?: NullableStringFieldUpdateOperationsInput | string | null
     bookingUrl?: NullableStringFieldUpdateOperationsInput | string | null
     bookingSystem?: EnumBookingSystemFieldUpdateOperationsInput | $Enums.BookingSystem
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     amenities?: HutUpdateamenitiesInput | string[]
+    dataSource?: EnumDataSourceFieldUpdateOperationsInput | $Enums.DataSource
     regionId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -10927,6 +11174,7 @@ export namespace Prisma {
     descent: number
     estimatedDuration: number
     difficulty: $Enums.Difficulty
+    dataSource?: $Enums.DataSource
     gpxTrack?: NullableJsonNullValueInput | InputJsonValue
     fromHut: HutCreateNestedOneWithoutRoutesFromInput
     toHut: HutCreateNestedOneWithoutRoutesToInput
@@ -10941,6 +11189,7 @@ export namespace Prisma {
     descent: number
     estimatedDuration: number
     difficulty: $Enums.Difficulty
+    dataSource?: $Enums.DataSource
     gpxTrack?: NullableJsonNullValueInput | InputJsonValue
   }
 
@@ -10951,6 +11200,7 @@ export namespace Prisma {
     descent?: IntFieldUpdateOperationsInput | number
     estimatedDuration?: FloatFieldUpdateOperationsInput | number
     difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    dataSource?: EnumDataSourceFieldUpdateOperationsInput | $Enums.DataSource
     gpxTrack?: NullableJsonNullValueInput | InputJsonValue
     fromHut?: HutUpdateOneRequiredWithoutRoutesFromNestedInput
     toHut?: HutUpdateOneRequiredWithoutRoutesToNestedInput
@@ -10965,6 +11215,7 @@ export namespace Prisma {
     descent?: IntFieldUpdateOperationsInput | number
     estimatedDuration?: FloatFieldUpdateOperationsInput | number
     difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    dataSource?: EnumDataSourceFieldUpdateOperationsInput | $Enums.DataSource
     gpxTrack?: NullableJsonNullValueInput | InputJsonValue
   }
 
@@ -10977,6 +11228,7 @@ export namespace Prisma {
     descent: number
     estimatedDuration: number
     difficulty: $Enums.Difficulty
+    dataSource?: $Enums.DataSource
     gpxTrack?: NullableJsonNullValueInput | InputJsonValue
   }
 
@@ -10987,6 +11239,7 @@ export namespace Prisma {
     descent?: IntFieldUpdateOperationsInput | number
     estimatedDuration?: FloatFieldUpdateOperationsInput | number
     difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    dataSource?: EnumDataSourceFieldUpdateOperationsInput | $Enums.DataSource
     gpxTrack?: NullableJsonNullValueInput | InputJsonValue
   }
 
@@ -10999,6 +11252,7 @@ export namespace Prisma {
     descent?: IntFieldUpdateOperationsInput | number
     estimatedDuration?: FloatFieldUpdateOperationsInput | number
     difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    dataSource?: EnumDataSourceFieldUpdateOperationsInput | $Enums.DataSource
     gpxTrack?: NullableJsonNullValueInput | InputJsonValue
   }
 
@@ -11365,6 +11619,17 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
+  export type BigIntNullableFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
+    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
+    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntNullableFilter<$PrismaModel> | bigint | number | null
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -11404,6 +11669,13 @@ export namespace Prisma {
     hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
     hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
     isEmpty?: boolean
+  }
+
+  export type EnumDataSourceFilter<$PrismaModel = never> = {
+    equals?: $Enums.DataSource | EnumDataSourceFieldRefInput<$PrismaModel>
+    in?: $Enums.DataSource[] | ListEnumDataSourceFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DataSource[] | ListEnumDataSourceFieldRefInput<$PrismaModel>
+    not?: NestedEnumDataSourceFilter<$PrismaModel> | $Enums.DataSource
   }
 
   export type RegionScalarRelationFilter = {
@@ -11458,20 +11730,28 @@ export namespace Prisma {
 
   export type HutCountOrderByAggregateInput = {
     id?: SortOrder
+    osmId?: SortOrder
     name?: SortOrder
     altitude?: SortOrder
     lat?: SortOrder
     lng?: SortOrder
     capacity?: SortOrder
+    operator?: SortOrder
+    website?: SortOrder
+    phone?: SortOrder
+    email?: SortOrder
+    openingHours?: SortOrder
     bookingUrl?: SortOrder
     bookingSystem?: SortOrder
     imageUrl?: SortOrder
     description?: SortOrder
     amenities?: SortOrder
+    dataSource?: SortOrder
     regionId?: SortOrder
   }
 
   export type HutAvgOrderByAggregateInput = {
+    osmId?: SortOrder
     altitude?: SortOrder
     lat?: SortOrder
     lng?: SortOrder
@@ -11480,37 +11760,68 @@ export namespace Prisma {
 
   export type HutMaxOrderByAggregateInput = {
     id?: SortOrder
+    osmId?: SortOrder
     name?: SortOrder
     altitude?: SortOrder
     lat?: SortOrder
     lng?: SortOrder
     capacity?: SortOrder
+    operator?: SortOrder
+    website?: SortOrder
+    phone?: SortOrder
+    email?: SortOrder
+    openingHours?: SortOrder
     bookingUrl?: SortOrder
     bookingSystem?: SortOrder
     imageUrl?: SortOrder
     description?: SortOrder
+    dataSource?: SortOrder
     regionId?: SortOrder
   }
 
   export type HutMinOrderByAggregateInput = {
     id?: SortOrder
+    osmId?: SortOrder
     name?: SortOrder
     altitude?: SortOrder
     lat?: SortOrder
     lng?: SortOrder
     capacity?: SortOrder
+    operator?: SortOrder
+    website?: SortOrder
+    phone?: SortOrder
+    email?: SortOrder
+    openingHours?: SortOrder
     bookingUrl?: SortOrder
     bookingSystem?: SortOrder
     imageUrl?: SortOrder
     description?: SortOrder
+    dataSource?: SortOrder
     regionId?: SortOrder
   }
 
   export type HutSumOrderByAggregateInput = {
+    osmId?: SortOrder
     altitude?: SortOrder
     lat?: SortOrder
     lng?: SortOrder
     capacity?: SortOrder
+  }
+
+  export type BigIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
+    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
+    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntNullableWithAggregatesFilter<$PrismaModel> | bigint | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedBigIntNullableFilter<$PrismaModel>
+    _min?: NestedBigIntNullableFilter<$PrismaModel>
+    _max?: NestedBigIntNullableFilter<$PrismaModel>
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -11555,6 +11866,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumBookingSystemFilter<$PrismaModel>
     _max?: NestedEnumBookingSystemFilter<$PrismaModel>
+  }
+
+  export type EnumDataSourceWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.DataSource | EnumDataSourceFieldRefInput<$PrismaModel>
+    in?: $Enums.DataSource[] | ListEnumDataSourceFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DataSource[] | ListEnumDataSourceFieldRefInput<$PrismaModel>
+    not?: NestedEnumDataSourceWithAggregatesFilter<$PrismaModel> | $Enums.DataSource
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumDataSourceFilter<$PrismaModel>
+    _max?: NestedEnumDataSourceFilter<$PrismaModel>
   }
 
   export type EnumRoomTypeFilter<$PrismaModel = never> = {
@@ -11657,6 +11978,7 @@ export namespace Prisma {
     descent?: SortOrder
     estimatedDuration?: SortOrder
     difficulty?: SortOrder
+    dataSource?: SortOrder
     gpxTrack?: SortOrder
   }
 
@@ -11676,6 +11998,7 @@ export namespace Prisma {
     descent?: SortOrder
     estimatedDuration?: SortOrder
     difficulty?: SortOrder
+    dataSource?: SortOrder
   }
 
   export type RouteMinOrderByAggregateInput = {
@@ -11687,6 +12010,7 @@ export namespace Prisma {
     descent?: SortOrder
     estimatedDuration?: SortOrder
     difficulty?: SortOrder
+    dataSource?: SortOrder
   }
 
   export type RouteSumOrderByAggregateInput = {
@@ -12158,6 +12482,14 @@ export namespace Prisma {
     connect?: TourHutWhereUniqueInput | TourHutWhereUniqueInput[]
   }
 
+  export type NullableBigIntFieldUpdateOperationsInput = {
+    set?: bigint | number | null
+    increment?: bigint | number
+    decrement?: bigint | number
+    multiply?: bigint | number
+    divide?: bigint | number
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -12177,6 +12509,10 @@ export namespace Prisma {
   export type HutUpdateamenitiesInput = {
     set?: string[]
     push?: string | string[]
+  }
+
+  export type EnumDataSourceFieldUpdateOperationsInput = {
+    set?: $Enums.DataSource
   }
 
   export type RegionUpdateOneRequiredWithoutHutsNestedInput = {
@@ -12562,6 +12898,17 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
+  export type NestedBigIntNullableFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
+    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
+    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntNullableFilter<$PrismaModel> | bigint | number | null
+  }
+
   export type NestedStringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -12581,6 +12928,51 @@ export namespace Prisma {
     in?: $Enums.BookingSystem[] | ListEnumBookingSystemFieldRefInput<$PrismaModel>
     notIn?: $Enums.BookingSystem[] | ListEnumBookingSystemFieldRefInput<$PrismaModel>
     not?: NestedEnumBookingSystemFilter<$PrismaModel> | $Enums.BookingSystem
+  }
+
+  export type NestedEnumDataSourceFilter<$PrismaModel = never> = {
+    equals?: $Enums.DataSource | EnumDataSourceFieldRefInput<$PrismaModel>
+    in?: $Enums.DataSource[] | ListEnumDataSourceFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DataSource[] | ListEnumDataSourceFieldRefInput<$PrismaModel>
+    not?: NestedEnumDataSourceFilter<$PrismaModel> | $Enums.DataSource
+  }
+
+  export type NestedBigIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
+    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
+    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntNullableWithAggregatesFilter<$PrismaModel> | bigint | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedBigIntNullableFilter<$PrismaModel>
+    _min?: NestedBigIntNullableFilter<$PrismaModel>
+    _max?: NestedBigIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -12616,17 +13008,6 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
   export type NestedEnumBookingSystemWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.BookingSystem | EnumBookingSystemFieldRefInput<$PrismaModel>
     in?: $Enums.BookingSystem[] | ListEnumBookingSystemFieldRefInput<$PrismaModel>
@@ -12635,6 +13016,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumBookingSystemFilter<$PrismaModel>
     _max?: NestedEnumBookingSystemFilter<$PrismaModel>
+  }
+
+  export type NestedEnumDataSourceWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.DataSource | EnumDataSourceFieldRefInput<$PrismaModel>
+    in?: $Enums.DataSource[] | ListEnumDataSourceFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DataSource[] | ListEnumDataSourceFieldRefInput<$PrismaModel>
+    not?: NestedEnumDataSourceWithAggregatesFilter<$PrismaModel> | $Enums.DataSource
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumDataSourceFilter<$PrismaModel>
+    _max?: NestedEnumDataSourceFilter<$PrismaModel>
   }
 
   export type NestedEnumRoomTypeFilter<$PrismaModel = never> = {
@@ -12699,17 +13090,6 @@ export namespace Prisma {
     in?: $Enums.AccommodationType[] | ListEnumAccommodationTypeFieldRefInput<$PrismaModel>
     notIn?: $Enums.AccommodationType[] | ListEnumAccommodationTypeFieldRefInput<$PrismaModel>
     not?: NestedEnumAccommodationTypeFilter<$PrismaModel> | $Enums.AccommodationType
-  }
-
-  export type NestedFloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
@@ -12823,16 +13203,23 @@ export namespace Prisma {
 
   export type HutCreateWithoutRegionInput = {
     id?: string
+    osmId?: bigint | number | null
     name: string
     altitude: number
     lat: number
     lng: number
     capacity: number
+    operator?: string | null
+    website?: string | null
+    phone?: string | null
+    email?: string | null
+    openingHours?: string | null
     bookingUrl?: string | null
     bookingSystem?: $Enums.BookingSystem
     imageUrl?: string | null
     description?: string | null
     amenities?: HutCreateamenitiesInput | string[]
+    dataSource?: $Enums.DataSource
     roomTypes?: RoomTypeConfigCreateNestedManyWithoutHutInput
     routesFrom?: RouteCreateNestedManyWithoutFromHutInput
     routesTo?: RouteCreateNestedManyWithoutToHutInput
@@ -12842,16 +13229,23 @@ export namespace Prisma {
 
   export type HutUncheckedCreateWithoutRegionInput = {
     id?: string
+    osmId?: bigint | number | null
     name: string
     altitude: number
     lat: number
     lng: number
     capacity: number
+    operator?: string | null
+    website?: string | null
+    phone?: string | null
+    email?: string | null
+    openingHours?: string | null
     bookingUrl?: string | null
     bookingSystem?: $Enums.BookingSystem
     imageUrl?: string | null
     description?: string | null
     amenities?: HutCreateamenitiesInput | string[]
+    dataSource?: $Enums.DataSource
     roomTypes?: RoomTypeConfigUncheckedCreateNestedManyWithoutHutInput
     routesFrom?: RouteUncheckedCreateNestedManyWithoutFromHutInput
     routesTo?: RouteUncheckedCreateNestedManyWithoutToHutInput
@@ -12890,16 +13284,23 @@ export namespace Prisma {
     OR?: HutScalarWhereInput[]
     NOT?: HutScalarWhereInput | HutScalarWhereInput[]
     id?: StringFilter<"Hut"> | string
+    osmId?: BigIntNullableFilter<"Hut"> | bigint | number | null
     name?: StringFilter<"Hut"> | string
     altitude?: IntFilter<"Hut"> | number
     lat?: FloatFilter<"Hut"> | number
     lng?: FloatFilter<"Hut"> | number
     capacity?: IntFilter<"Hut"> | number
+    operator?: StringNullableFilter<"Hut"> | string | null
+    website?: StringNullableFilter<"Hut"> | string | null
+    phone?: StringNullableFilter<"Hut"> | string | null
+    email?: StringNullableFilter<"Hut"> | string | null
+    openingHours?: StringNullableFilter<"Hut"> | string | null
     bookingUrl?: StringNullableFilter<"Hut"> | string | null
     bookingSystem?: EnumBookingSystemFilter<"Hut"> | $Enums.BookingSystem
     imageUrl?: StringNullableFilter<"Hut"> | string | null
     description?: StringNullableFilter<"Hut"> | string | null
     amenities?: StringNullableListFilter<"Hut">
+    dataSource?: EnumDataSourceFilter<"Hut"> | $Enums.DataSource
     regionId?: StringFilter<"Hut"> | string
   }
 
@@ -12961,6 +13362,7 @@ export namespace Prisma {
     descent: number
     estimatedDuration: number
     difficulty: $Enums.Difficulty
+    dataSource?: $Enums.DataSource
     gpxTrack?: NullableJsonNullValueInput | InputJsonValue
     toHut: HutCreateNestedOneWithoutRoutesToInput
   }
@@ -12973,6 +13375,7 @@ export namespace Prisma {
     descent: number
     estimatedDuration: number
     difficulty: $Enums.Difficulty
+    dataSource?: $Enums.DataSource
     gpxTrack?: NullableJsonNullValueInput | InputJsonValue
   }
 
@@ -12993,6 +13396,7 @@ export namespace Prisma {
     descent: number
     estimatedDuration: number
     difficulty: $Enums.Difficulty
+    dataSource?: $Enums.DataSource
     gpxTrack?: NullableJsonNullValueInput | InputJsonValue
     fromHut: HutCreateNestedOneWithoutRoutesFromInput
   }
@@ -13005,6 +13409,7 @@ export namespace Prisma {
     descent: number
     estimatedDuration: number
     difficulty: $Enums.Difficulty
+    dataSource?: $Enums.DataSource
     gpxTrack?: NullableJsonNullValueInput | InputJsonValue
   }
 
@@ -13157,6 +13562,7 @@ export namespace Prisma {
     descent?: IntFilter<"Route"> | number
     estimatedDuration?: FloatFilter<"Route"> | number
     difficulty?: EnumDifficultyFilter<"Route"> | $Enums.Difficulty
+    dataSource?: EnumDataSourceFilter<"Route"> | $Enums.DataSource
     gpxTrack?: JsonNullableFilter<"Route">
   }
 
@@ -13233,16 +13639,23 @@ export namespace Prisma {
 
   export type HutCreateWithoutRoomTypesInput = {
     id?: string
+    osmId?: bigint | number | null
     name: string
     altitude: number
     lat: number
     lng: number
     capacity: number
+    operator?: string | null
+    website?: string | null
+    phone?: string | null
+    email?: string | null
+    openingHours?: string | null
     bookingUrl?: string | null
     bookingSystem?: $Enums.BookingSystem
     imageUrl?: string | null
     description?: string | null
     amenities?: HutCreateamenitiesInput | string[]
+    dataSource?: $Enums.DataSource
     region: RegionCreateNestedOneWithoutHutsInput
     routesFrom?: RouteCreateNestedManyWithoutFromHutInput
     routesTo?: RouteCreateNestedManyWithoutToHutInput
@@ -13252,16 +13665,23 @@ export namespace Prisma {
 
   export type HutUncheckedCreateWithoutRoomTypesInput = {
     id?: string
+    osmId?: bigint | number | null
     name: string
     altitude: number
     lat: number
     lng: number
     capacity: number
+    operator?: string | null
+    website?: string | null
+    phone?: string | null
+    email?: string | null
+    openingHours?: string | null
     bookingUrl?: string | null
     bookingSystem?: $Enums.BookingSystem
     imageUrl?: string | null
     description?: string | null
     amenities?: HutCreateamenitiesInput | string[]
+    dataSource?: $Enums.DataSource
     regionId: string
     routesFrom?: RouteUncheckedCreateNestedManyWithoutFromHutInput
     routesTo?: RouteUncheckedCreateNestedManyWithoutToHutInput
@@ -13287,16 +13707,23 @@ export namespace Prisma {
 
   export type HutUpdateWithoutRoomTypesInput = {
     id?: StringFieldUpdateOperationsInput | string
+    osmId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     name?: StringFieldUpdateOperationsInput | string
     altitude?: IntFieldUpdateOperationsInput | number
     lat?: FloatFieldUpdateOperationsInput | number
     lng?: FloatFieldUpdateOperationsInput | number
     capacity?: IntFieldUpdateOperationsInput | number
+    operator?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    openingHours?: NullableStringFieldUpdateOperationsInput | string | null
     bookingUrl?: NullableStringFieldUpdateOperationsInput | string | null
     bookingSystem?: EnumBookingSystemFieldUpdateOperationsInput | $Enums.BookingSystem
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     amenities?: HutUpdateamenitiesInput | string[]
+    dataSource?: EnumDataSourceFieldUpdateOperationsInput | $Enums.DataSource
     region?: RegionUpdateOneRequiredWithoutHutsNestedInput
     routesFrom?: RouteUpdateManyWithoutFromHutNestedInput
     routesTo?: RouteUpdateManyWithoutToHutNestedInput
@@ -13306,16 +13733,23 @@ export namespace Prisma {
 
   export type HutUncheckedUpdateWithoutRoomTypesInput = {
     id?: StringFieldUpdateOperationsInput | string
+    osmId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     name?: StringFieldUpdateOperationsInput | string
     altitude?: IntFieldUpdateOperationsInput | number
     lat?: FloatFieldUpdateOperationsInput | number
     lng?: FloatFieldUpdateOperationsInput | number
     capacity?: IntFieldUpdateOperationsInput | number
+    operator?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    openingHours?: NullableStringFieldUpdateOperationsInput | string | null
     bookingUrl?: NullableStringFieldUpdateOperationsInput | string | null
     bookingSystem?: EnumBookingSystemFieldUpdateOperationsInput | $Enums.BookingSystem
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     amenities?: HutUpdateamenitiesInput | string[]
+    dataSource?: EnumDataSourceFieldUpdateOperationsInput | $Enums.DataSource
     regionId?: StringFieldUpdateOperationsInput | string
     routesFrom?: RouteUncheckedUpdateManyWithoutFromHutNestedInput
     routesTo?: RouteUncheckedUpdateManyWithoutToHutNestedInput
@@ -13325,16 +13759,23 @@ export namespace Prisma {
 
   export type HutCreateWithoutRoutesFromInput = {
     id?: string
+    osmId?: bigint | number | null
     name: string
     altitude: number
     lat: number
     lng: number
     capacity: number
+    operator?: string | null
+    website?: string | null
+    phone?: string | null
+    email?: string | null
+    openingHours?: string | null
     bookingUrl?: string | null
     bookingSystem?: $Enums.BookingSystem
     imageUrl?: string | null
     description?: string | null
     amenities?: HutCreateamenitiesInput | string[]
+    dataSource?: $Enums.DataSource
     region: RegionCreateNestedOneWithoutHutsInput
     roomTypes?: RoomTypeConfigCreateNestedManyWithoutHutInput
     routesTo?: RouteCreateNestedManyWithoutToHutInput
@@ -13344,16 +13785,23 @@ export namespace Prisma {
 
   export type HutUncheckedCreateWithoutRoutesFromInput = {
     id?: string
+    osmId?: bigint | number | null
     name: string
     altitude: number
     lat: number
     lng: number
     capacity: number
+    operator?: string | null
+    website?: string | null
+    phone?: string | null
+    email?: string | null
+    openingHours?: string | null
     bookingUrl?: string | null
     bookingSystem?: $Enums.BookingSystem
     imageUrl?: string | null
     description?: string | null
     amenities?: HutCreateamenitiesInput | string[]
+    dataSource?: $Enums.DataSource
     regionId: string
     roomTypes?: RoomTypeConfigUncheckedCreateNestedManyWithoutHutInput
     routesTo?: RouteUncheckedCreateNestedManyWithoutToHutInput
@@ -13368,16 +13816,23 @@ export namespace Prisma {
 
   export type HutCreateWithoutRoutesToInput = {
     id?: string
+    osmId?: bigint | number | null
     name: string
     altitude: number
     lat: number
     lng: number
     capacity: number
+    operator?: string | null
+    website?: string | null
+    phone?: string | null
+    email?: string | null
+    openingHours?: string | null
     bookingUrl?: string | null
     bookingSystem?: $Enums.BookingSystem
     imageUrl?: string | null
     description?: string | null
     amenities?: HutCreateamenitiesInput | string[]
+    dataSource?: $Enums.DataSource
     region: RegionCreateNestedOneWithoutHutsInput
     roomTypes?: RoomTypeConfigCreateNestedManyWithoutHutInput
     routesFrom?: RouteCreateNestedManyWithoutFromHutInput
@@ -13387,16 +13842,23 @@ export namespace Prisma {
 
   export type HutUncheckedCreateWithoutRoutesToInput = {
     id?: string
+    osmId?: bigint | number | null
     name: string
     altitude: number
     lat: number
     lng: number
     capacity: number
+    operator?: string | null
+    website?: string | null
+    phone?: string | null
+    email?: string | null
+    openingHours?: string | null
     bookingUrl?: string | null
     bookingSystem?: $Enums.BookingSystem
     imageUrl?: string | null
     description?: string | null
     amenities?: HutCreateamenitiesInput | string[]
+    dataSource?: $Enums.DataSource
     regionId: string
     roomTypes?: RoomTypeConfigUncheckedCreateNestedManyWithoutHutInput
     routesFrom?: RouteUncheckedCreateNestedManyWithoutFromHutInput
@@ -13422,16 +13884,23 @@ export namespace Prisma {
 
   export type HutUpdateWithoutRoutesFromInput = {
     id?: StringFieldUpdateOperationsInput | string
+    osmId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     name?: StringFieldUpdateOperationsInput | string
     altitude?: IntFieldUpdateOperationsInput | number
     lat?: FloatFieldUpdateOperationsInput | number
     lng?: FloatFieldUpdateOperationsInput | number
     capacity?: IntFieldUpdateOperationsInput | number
+    operator?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    openingHours?: NullableStringFieldUpdateOperationsInput | string | null
     bookingUrl?: NullableStringFieldUpdateOperationsInput | string | null
     bookingSystem?: EnumBookingSystemFieldUpdateOperationsInput | $Enums.BookingSystem
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     amenities?: HutUpdateamenitiesInput | string[]
+    dataSource?: EnumDataSourceFieldUpdateOperationsInput | $Enums.DataSource
     region?: RegionUpdateOneRequiredWithoutHutsNestedInput
     roomTypes?: RoomTypeConfigUpdateManyWithoutHutNestedInput
     routesTo?: RouteUpdateManyWithoutToHutNestedInput
@@ -13441,16 +13910,23 @@ export namespace Prisma {
 
   export type HutUncheckedUpdateWithoutRoutesFromInput = {
     id?: StringFieldUpdateOperationsInput | string
+    osmId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     name?: StringFieldUpdateOperationsInput | string
     altitude?: IntFieldUpdateOperationsInput | number
     lat?: FloatFieldUpdateOperationsInput | number
     lng?: FloatFieldUpdateOperationsInput | number
     capacity?: IntFieldUpdateOperationsInput | number
+    operator?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    openingHours?: NullableStringFieldUpdateOperationsInput | string | null
     bookingUrl?: NullableStringFieldUpdateOperationsInput | string | null
     bookingSystem?: EnumBookingSystemFieldUpdateOperationsInput | $Enums.BookingSystem
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     amenities?: HutUpdateamenitiesInput | string[]
+    dataSource?: EnumDataSourceFieldUpdateOperationsInput | $Enums.DataSource
     regionId?: StringFieldUpdateOperationsInput | string
     roomTypes?: RoomTypeConfigUncheckedUpdateManyWithoutHutNestedInput
     routesTo?: RouteUncheckedUpdateManyWithoutToHutNestedInput
@@ -13471,16 +13947,23 @@ export namespace Prisma {
 
   export type HutUpdateWithoutRoutesToInput = {
     id?: StringFieldUpdateOperationsInput | string
+    osmId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     name?: StringFieldUpdateOperationsInput | string
     altitude?: IntFieldUpdateOperationsInput | number
     lat?: FloatFieldUpdateOperationsInput | number
     lng?: FloatFieldUpdateOperationsInput | number
     capacity?: IntFieldUpdateOperationsInput | number
+    operator?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    openingHours?: NullableStringFieldUpdateOperationsInput | string | null
     bookingUrl?: NullableStringFieldUpdateOperationsInput | string | null
     bookingSystem?: EnumBookingSystemFieldUpdateOperationsInput | $Enums.BookingSystem
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     amenities?: HutUpdateamenitiesInput | string[]
+    dataSource?: EnumDataSourceFieldUpdateOperationsInput | $Enums.DataSource
     region?: RegionUpdateOneRequiredWithoutHutsNestedInput
     roomTypes?: RoomTypeConfigUpdateManyWithoutHutNestedInput
     routesFrom?: RouteUpdateManyWithoutFromHutNestedInput
@@ -13490,16 +13973,23 @@ export namespace Prisma {
 
   export type HutUncheckedUpdateWithoutRoutesToInput = {
     id?: StringFieldUpdateOperationsInput | string
+    osmId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     name?: StringFieldUpdateOperationsInput | string
     altitude?: IntFieldUpdateOperationsInput | number
     lat?: FloatFieldUpdateOperationsInput | number
     lng?: FloatFieldUpdateOperationsInput | number
     capacity?: IntFieldUpdateOperationsInput | number
+    operator?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    openingHours?: NullableStringFieldUpdateOperationsInput | string | null
     bookingUrl?: NullableStringFieldUpdateOperationsInput | string | null
     bookingSystem?: EnumBookingSystemFieldUpdateOperationsInput | $Enums.BookingSystem
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     amenities?: HutUpdateamenitiesInput | string[]
+    dataSource?: EnumDataSourceFieldUpdateOperationsInput | $Enums.DataSource
     regionId?: StringFieldUpdateOperationsInput | string
     roomTypes?: RoomTypeConfigUncheckedUpdateManyWithoutHutNestedInput
     routesFrom?: RouteUncheckedUpdateManyWithoutFromHutNestedInput
@@ -13586,16 +14076,23 @@ export namespace Prisma {
 
   export type HutCreateWithoutTourHutsInput = {
     id?: string
+    osmId?: bigint | number | null
     name: string
     altitude: number
     lat: number
     lng: number
     capacity: number
+    operator?: string | null
+    website?: string | null
+    phone?: string | null
+    email?: string | null
+    openingHours?: string | null
     bookingUrl?: string | null
     bookingSystem?: $Enums.BookingSystem
     imageUrl?: string | null
     description?: string | null
     amenities?: HutCreateamenitiesInput | string[]
+    dataSource?: $Enums.DataSource
     region: RegionCreateNestedOneWithoutHutsInput
     roomTypes?: RoomTypeConfigCreateNestedManyWithoutHutInput
     routesFrom?: RouteCreateNestedManyWithoutFromHutInput
@@ -13605,16 +14102,23 @@ export namespace Prisma {
 
   export type HutUncheckedCreateWithoutTourHutsInput = {
     id?: string
+    osmId?: bigint | number | null
     name: string
     altitude: number
     lat: number
     lng: number
     capacity: number
+    operator?: string | null
+    website?: string | null
+    phone?: string | null
+    email?: string | null
+    openingHours?: string | null
     bookingUrl?: string | null
     bookingSystem?: $Enums.BookingSystem
     imageUrl?: string | null
     description?: string | null
     amenities?: HutCreateamenitiesInput | string[]
+    dataSource?: $Enums.DataSource
     regionId: string
     roomTypes?: RoomTypeConfigUncheckedCreateNestedManyWithoutHutInput
     routesFrom?: RouteUncheckedCreateNestedManyWithoutFromHutInput
@@ -13685,16 +14189,23 @@ export namespace Prisma {
 
   export type HutUpdateWithoutTourHutsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    osmId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     name?: StringFieldUpdateOperationsInput | string
     altitude?: IntFieldUpdateOperationsInput | number
     lat?: FloatFieldUpdateOperationsInput | number
     lng?: FloatFieldUpdateOperationsInput | number
     capacity?: IntFieldUpdateOperationsInput | number
+    operator?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    openingHours?: NullableStringFieldUpdateOperationsInput | string | null
     bookingUrl?: NullableStringFieldUpdateOperationsInput | string | null
     bookingSystem?: EnumBookingSystemFieldUpdateOperationsInput | $Enums.BookingSystem
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     amenities?: HutUpdateamenitiesInput | string[]
+    dataSource?: EnumDataSourceFieldUpdateOperationsInput | $Enums.DataSource
     region?: RegionUpdateOneRequiredWithoutHutsNestedInput
     roomTypes?: RoomTypeConfigUpdateManyWithoutHutNestedInput
     routesFrom?: RouteUpdateManyWithoutFromHutNestedInput
@@ -13704,16 +14215,23 @@ export namespace Prisma {
 
   export type HutUncheckedUpdateWithoutTourHutsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    osmId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     name?: StringFieldUpdateOperationsInput | string
     altitude?: IntFieldUpdateOperationsInput | number
     lat?: FloatFieldUpdateOperationsInput | number
     lng?: FloatFieldUpdateOperationsInput | number
     capacity?: IntFieldUpdateOperationsInput | number
+    operator?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    openingHours?: NullableStringFieldUpdateOperationsInput | string | null
     bookingUrl?: NullableStringFieldUpdateOperationsInput | string | null
     bookingSystem?: EnumBookingSystemFieldUpdateOperationsInput | $Enums.BookingSystem
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     amenities?: HutUpdateamenitiesInput | string[]
+    dataSource?: EnumDataSourceFieldUpdateOperationsInput | $Enums.DataSource
     regionId?: StringFieldUpdateOperationsInput | string
     roomTypes?: RoomTypeConfigUncheckedUpdateManyWithoutHutNestedInput
     routesFrom?: RouteUncheckedUpdateManyWithoutFromHutNestedInput
@@ -13723,16 +14241,23 @@ export namespace Prisma {
 
   export type HutCreateWithoutAvailabilityInput = {
     id?: string
+    osmId?: bigint | number | null
     name: string
     altitude: number
     lat: number
     lng: number
     capacity: number
+    operator?: string | null
+    website?: string | null
+    phone?: string | null
+    email?: string | null
+    openingHours?: string | null
     bookingUrl?: string | null
     bookingSystem?: $Enums.BookingSystem
     imageUrl?: string | null
     description?: string | null
     amenities?: HutCreateamenitiesInput | string[]
+    dataSource?: $Enums.DataSource
     region: RegionCreateNestedOneWithoutHutsInput
     roomTypes?: RoomTypeConfigCreateNestedManyWithoutHutInput
     routesFrom?: RouteCreateNestedManyWithoutFromHutInput
@@ -13742,16 +14267,23 @@ export namespace Prisma {
 
   export type HutUncheckedCreateWithoutAvailabilityInput = {
     id?: string
+    osmId?: bigint | number | null
     name: string
     altitude: number
     lat: number
     lng: number
     capacity: number
+    operator?: string | null
+    website?: string | null
+    phone?: string | null
+    email?: string | null
+    openingHours?: string | null
     bookingUrl?: string | null
     bookingSystem?: $Enums.BookingSystem
     imageUrl?: string | null
     description?: string | null
     amenities?: HutCreateamenitiesInput | string[]
+    dataSource?: $Enums.DataSource
     regionId: string
     roomTypes?: RoomTypeConfigUncheckedCreateNestedManyWithoutHutInput
     routesFrom?: RouteUncheckedCreateNestedManyWithoutFromHutInput
@@ -13777,16 +14309,23 @@ export namespace Prisma {
 
   export type HutUpdateWithoutAvailabilityInput = {
     id?: StringFieldUpdateOperationsInput | string
+    osmId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     name?: StringFieldUpdateOperationsInput | string
     altitude?: IntFieldUpdateOperationsInput | number
     lat?: FloatFieldUpdateOperationsInput | number
     lng?: FloatFieldUpdateOperationsInput | number
     capacity?: IntFieldUpdateOperationsInput | number
+    operator?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    openingHours?: NullableStringFieldUpdateOperationsInput | string | null
     bookingUrl?: NullableStringFieldUpdateOperationsInput | string | null
     bookingSystem?: EnumBookingSystemFieldUpdateOperationsInput | $Enums.BookingSystem
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     amenities?: HutUpdateamenitiesInput | string[]
+    dataSource?: EnumDataSourceFieldUpdateOperationsInput | $Enums.DataSource
     region?: RegionUpdateOneRequiredWithoutHutsNestedInput
     roomTypes?: RoomTypeConfigUpdateManyWithoutHutNestedInput
     routesFrom?: RouteUpdateManyWithoutFromHutNestedInput
@@ -13796,16 +14335,23 @@ export namespace Prisma {
 
   export type HutUncheckedUpdateWithoutAvailabilityInput = {
     id?: StringFieldUpdateOperationsInput | string
+    osmId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     name?: StringFieldUpdateOperationsInput | string
     altitude?: IntFieldUpdateOperationsInput | number
     lat?: FloatFieldUpdateOperationsInput | number
     lng?: FloatFieldUpdateOperationsInput | number
     capacity?: IntFieldUpdateOperationsInput | number
+    operator?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    openingHours?: NullableStringFieldUpdateOperationsInput | string | null
     bookingUrl?: NullableStringFieldUpdateOperationsInput | string | null
     bookingSystem?: EnumBookingSystemFieldUpdateOperationsInput | $Enums.BookingSystem
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     amenities?: HutUpdateamenitiesInput | string[]
+    dataSource?: EnumDataSourceFieldUpdateOperationsInput | $Enums.DataSource
     regionId?: StringFieldUpdateOperationsInput | string
     roomTypes?: RoomTypeConfigUncheckedUpdateManyWithoutHutNestedInput
     routesFrom?: RouteUncheckedUpdateManyWithoutFromHutNestedInput
@@ -13815,30 +14361,44 @@ export namespace Prisma {
 
   export type HutCreateManyRegionInput = {
     id?: string
+    osmId?: bigint | number | null
     name: string
     altitude: number
     lat: number
     lng: number
     capacity: number
+    operator?: string | null
+    website?: string | null
+    phone?: string | null
+    email?: string | null
+    openingHours?: string | null
     bookingUrl?: string | null
     bookingSystem?: $Enums.BookingSystem
     imageUrl?: string | null
     description?: string | null
     amenities?: HutCreateamenitiesInput | string[]
+    dataSource?: $Enums.DataSource
   }
 
   export type HutUpdateWithoutRegionInput = {
     id?: StringFieldUpdateOperationsInput | string
+    osmId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     name?: StringFieldUpdateOperationsInput | string
     altitude?: IntFieldUpdateOperationsInput | number
     lat?: FloatFieldUpdateOperationsInput | number
     lng?: FloatFieldUpdateOperationsInput | number
     capacity?: IntFieldUpdateOperationsInput | number
+    operator?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    openingHours?: NullableStringFieldUpdateOperationsInput | string | null
     bookingUrl?: NullableStringFieldUpdateOperationsInput | string | null
     bookingSystem?: EnumBookingSystemFieldUpdateOperationsInput | $Enums.BookingSystem
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     amenities?: HutUpdateamenitiesInput | string[]
+    dataSource?: EnumDataSourceFieldUpdateOperationsInput | $Enums.DataSource
     roomTypes?: RoomTypeConfigUpdateManyWithoutHutNestedInput
     routesFrom?: RouteUpdateManyWithoutFromHutNestedInput
     routesTo?: RouteUpdateManyWithoutToHutNestedInput
@@ -13848,16 +14408,23 @@ export namespace Prisma {
 
   export type HutUncheckedUpdateWithoutRegionInput = {
     id?: StringFieldUpdateOperationsInput | string
+    osmId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     name?: StringFieldUpdateOperationsInput | string
     altitude?: IntFieldUpdateOperationsInput | number
     lat?: FloatFieldUpdateOperationsInput | number
     lng?: FloatFieldUpdateOperationsInput | number
     capacity?: IntFieldUpdateOperationsInput | number
+    operator?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    openingHours?: NullableStringFieldUpdateOperationsInput | string | null
     bookingUrl?: NullableStringFieldUpdateOperationsInput | string | null
     bookingSystem?: EnumBookingSystemFieldUpdateOperationsInput | $Enums.BookingSystem
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     amenities?: HutUpdateamenitiesInput | string[]
+    dataSource?: EnumDataSourceFieldUpdateOperationsInput | $Enums.DataSource
     roomTypes?: RoomTypeConfigUncheckedUpdateManyWithoutHutNestedInput
     routesFrom?: RouteUncheckedUpdateManyWithoutFromHutNestedInput
     routesTo?: RouteUncheckedUpdateManyWithoutToHutNestedInput
@@ -13867,16 +14434,23 @@ export namespace Prisma {
 
   export type HutUncheckedUpdateManyWithoutRegionInput = {
     id?: StringFieldUpdateOperationsInput | string
+    osmId?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
     name?: StringFieldUpdateOperationsInput | string
     altitude?: IntFieldUpdateOperationsInput | number
     lat?: FloatFieldUpdateOperationsInput | number
     lng?: FloatFieldUpdateOperationsInput | number
     capacity?: IntFieldUpdateOperationsInput | number
+    operator?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    openingHours?: NullableStringFieldUpdateOperationsInput | string | null
     bookingUrl?: NullableStringFieldUpdateOperationsInput | string | null
     bookingSystem?: EnumBookingSystemFieldUpdateOperationsInput | $Enums.BookingSystem
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     amenities?: HutUpdateamenitiesInput | string[]
+    dataSource?: EnumDataSourceFieldUpdateOperationsInput | $Enums.DataSource
   }
 
   export type RoomTypeConfigCreateManyHutInput = {
@@ -13893,6 +14467,7 @@ export namespace Prisma {
     descent: number
     estimatedDuration: number
     difficulty: $Enums.Difficulty
+    dataSource?: $Enums.DataSource
     gpxTrack?: NullableJsonNullValueInput | InputJsonValue
   }
 
@@ -13904,6 +14479,7 @@ export namespace Prisma {
     descent: number
     estimatedDuration: number
     difficulty: $Enums.Difficulty
+    dataSource?: $Enums.DataSource
     gpxTrack?: NullableJsonNullValueInput | InputJsonValue
   }
 
@@ -13947,6 +14523,7 @@ export namespace Prisma {
     descent?: IntFieldUpdateOperationsInput | number
     estimatedDuration?: FloatFieldUpdateOperationsInput | number
     difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    dataSource?: EnumDataSourceFieldUpdateOperationsInput | $Enums.DataSource
     gpxTrack?: NullableJsonNullValueInput | InputJsonValue
     toHut?: HutUpdateOneRequiredWithoutRoutesToNestedInput
   }
@@ -13959,6 +14536,7 @@ export namespace Prisma {
     descent?: IntFieldUpdateOperationsInput | number
     estimatedDuration?: FloatFieldUpdateOperationsInput | number
     difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    dataSource?: EnumDataSourceFieldUpdateOperationsInput | $Enums.DataSource
     gpxTrack?: NullableJsonNullValueInput | InputJsonValue
   }
 
@@ -13970,6 +14548,7 @@ export namespace Prisma {
     descent?: IntFieldUpdateOperationsInput | number
     estimatedDuration?: FloatFieldUpdateOperationsInput | number
     difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    dataSource?: EnumDataSourceFieldUpdateOperationsInput | $Enums.DataSource
     gpxTrack?: NullableJsonNullValueInput | InputJsonValue
   }
 
@@ -13980,6 +14559,7 @@ export namespace Prisma {
     descent?: IntFieldUpdateOperationsInput | number
     estimatedDuration?: FloatFieldUpdateOperationsInput | number
     difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    dataSource?: EnumDataSourceFieldUpdateOperationsInput | $Enums.DataSource
     gpxTrack?: NullableJsonNullValueInput | InputJsonValue
     fromHut?: HutUpdateOneRequiredWithoutRoutesFromNestedInput
   }
@@ -13992,6 +14572,7 @@ export namespace Prisma {
     descent?: IntFieldUpdateOperationsInput | number
     estimatedDuration?: FloatFieldUpdateOperationsInput | number
     difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    dataSource?: EnumDataSourceFieldUpdateOperationsInput | $Enums.DataSource
     gpxTrack?: NullableJsonNullValueInput | InputJsonValue
   }
 
@@ -14003,6 +14584,7 @@ export namespace Prisma {
     descent?: IntFieldUpdateOperationsInput | number
     estimatedDuration?: FloatFieldUpdateOperationsInput | number
     difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    dataSource?: EnumDataSourceFieldUpdateOperationsInput | $Enums.DataSource
     gpxTrack?: NullableJsonNullValueInput | InputJsonValue
   }
 

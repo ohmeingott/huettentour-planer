@@ -45,6 +45,9 @@ export function startWorker() {
             hutName: check.hutName,
             status: allAvailable ? 'available' : 'unavailable',
             dates: availability,
+            phone: check.phone,
+            email: check.email,
+            website: check.website,
           })
         } catch (error) {
           results.push({

@@ -12,6 +12,8 @@ export interface DayAvailability {
   date: string
   available: boolean
   roomTypes: RoomAvailability[]
+  /** How confident the scraper is about this result. 'low' = could not reliably parse. */
+  confidence?: 'high' | 'low'
 }
 
 export interface BookingAdapter {

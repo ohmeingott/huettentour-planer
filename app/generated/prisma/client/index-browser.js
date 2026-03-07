@@ -134,16 +134,23 @@ exports.Prisma.RegionScalarFieldEnum = {
 
 exports.Prisma.HutScalarFieldEnum = {
   id: 'id',
+  osmId: 'osmId',
   name: 'name',
   altitude: 'altitude',
   lat: 'lat',
   lng: 'lng',
   capacity: 'capacity',
+  operator: 'operator',
+  website: 'website',
+  phone: 'phone',
+  email: 'email',
+  openingHours: 'openingHours',
   bookingUrl: 'bookingUrl',
   bookingSystem: 'bookingSystem',
   imageUrl: 'imageUrl',
   description: 'description',
   amenities: 'amenities',
+  dataSource: 'dataSource',
   regionId: 'regionId'
 };
 
@@ -163,6 +170,7 @@ exports.Prisma.RouteScalarFieldEnum = {
   descent: 'descent',
   estimatedDuration: 'estimatedDuration',
   difficulty: 'difficulty',
+  dataSource: 'dataSource',
   gpxTrack: 'gpxTrack'
 };
 
@@ -230,6 +238,13 @@ exports.BookingSystem = exports.$Enums.BookingSystem = {
   hut_wrs: 'hut_wrs',
   sac: 'sac',
   custom: 'custom'
+};
+
+exports.DataSource = exports.$Enums.DataSource = {
+  mock: 'mock',
+  osm: 'osm',
+  brouter: 'brouter',
+  estimate: 'estimate'
 };
 
 exports.RoomType = exports.$Enums.RoomType = {

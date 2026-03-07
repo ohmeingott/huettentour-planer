@@ -31,6 +31,9 @@ export async function POST(request: NextRequest) {
       dates,
       groupSize,
       roomPreference: roomPreference || 'any',
+      phone: hut.phone,
+      email: hut.email,
+      website: hut.website,
     })),
   }
 

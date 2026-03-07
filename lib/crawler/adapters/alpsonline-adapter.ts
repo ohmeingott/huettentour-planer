@@ -33,18 +33,24 @@ export class AlpsonlineAdapter implements BookingAdapter {
             const classes = (await dayCell.getAttribute('class')) || ''
             const available = !classes.includes('occupied') && !classes.includes('closed')
 
+            // If we can't find clear occupied/closed signals, confidence is low
+            const hasKnownClass = classes.includes('occupied') || classes.includes('closed') || classes.includes('free') || classes.includes('available')
+
             results.push({
               date: dateStr,
               available,
               roomTypes: [
                 { type: 'dorm', available: available ? groupSize : 0 },
               ],
+              confidence: hasKnownClass ? 'high' : 'low',
             })
           } else {
-            results.push({ date: dateStr, available: false, roomTypes: [] })
+            // No cell found — we don't know, mark as uncertain
+            results.push({ date: dateStr, available: false, roomTypes: [], confidence: 'low' })
           }
         } catch {
-          results.push({ date: dateStr, available: false, roomTypes: [] })
+          // Scraping error — uncertain
+          results.push({ date: dateStr, available: false, roomTypes: [], confidence: 'low' })
         }
       }
     } finally {

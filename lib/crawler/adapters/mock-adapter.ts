@@ -17,6 +17,9 @@ export class MockAdapter implements BookingAdapter {
       const isWeekend = dayOfWeek === 0 || dayOfWeek === 6
       const available = Math.random() > (isWeekend ? 0.5 : 0.3)
 
+      // ~15% of days get low confidence to simulate uncertain scraping
+      const confidence = Math.random() > 0.15 ? 'high' as const : 'low' as const
+
       return {
         date: format(day, 'yyyy-MM-dd'),
         available,
@@ -25,6 +28,7 @@ export class MockAdapter implements BookingAdapter {
           { type: 'shared_4', available: available ? Math.floor(Math.random() * 3) + 1 : 0 },
           { type: 'dorm', available: available ? Math.floor(Math.random() * 15) + 5 : 0 },
         ],
+        confidence,
       }
     })
   }

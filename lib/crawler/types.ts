@@ -9,6 +9,9 @@ export interface AvailabilityJobData {
     dates: string[]
     groupSize: number
     roomPreference: string
+    phone?: string | null
+    email?: string | null
+    website?: string | null
   }[]
 }
 
@@ -26,6 +29,11 @@ export interface HutAvailabilityResult {
     date: string
     available: boolean
     roomTypes: { type: string; available: number }[]
+    confidence?: 'high' | 'low'
   }[]
+  /** Contact info for the hut — shown when confidence is low */
+  phone?: string | null
+  email?: string | null
+  website?: string | null
   error?: string
 }
