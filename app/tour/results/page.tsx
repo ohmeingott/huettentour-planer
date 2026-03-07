@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation'
 import dynamic from 'next/dynamic'
 import { useAppStore, TourResult } from '@/lib/store'
 import TourCard from '@/components/tour/tour-card'
+import ElevationProfile from '@/components/tour/elevation-profile'
 import { useState } from 'react'
 
 const AlpineMap = dynamic(() => import('@/components/map/alpine-map'), { ssr: false })
@@ -98,11 +99,11 @@ export default function ResultsPage() {
           }
         />
 
-        {/* Floating tour summary */}
+        {/* Floating tour summary + elevation profile */}
         {displayTour && (
-          <div className="absolute top-4 right-4 bg-white/92 backdrop-blur-md rounded-xl shadow-lg border border-stone-200/60 p-4 z-10 min-w-[200px]">
+          <div className="absolute top-4 right-4 bg-white/92 backdrop-blur-md rounded-xl shadow-lg border border-stone-200/60 p-4 z-10 w-[320px]">
             <div className="text-xs text-stone-400 uppercase tracking-wider mb-2">Aktuelle Tour</div>
-            <div className="grid grid-cols-3 gap-3 text-center">
+            <div className="grid grid-cols-3 gap-3 text-center mb-3">
               <div>
                 <div className="text-sm font-semibold text-stone-900">{displayTour.totalDistance.toFixed(1)}</div>
                 <div className="text-[10px] text-stone-400">km</div>
@@ -115,6 +116,14 @@ export default function ResultsPage() {
                 <div className="text-sm font-semibold text-stone-900">{displayTour.totalDuration.toFixed(1)}</div>
                 <div className="text-[10px] text-stone-400">Std</div>
               </div>
+            </div>
+            <div className="border-t border-stone-200/60 pt-2">
+              <div className="text-[10px] text-stone-400 uppercase tracking-wider mb-1">Höhenprofil</div>
+              <ElevationProfile
+                hutDetails={displayTour.hutDetails}
+                legs={displayTour.legs}
+                height={130}
+              />
             </div>
           </div>
         )}

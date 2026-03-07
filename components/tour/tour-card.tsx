@@ -1,4 +1,5 @@
 import { TourResult } from '@/lib/store'
+import ElevationProfile from './elevation-profile'
 
 interface TourCardProps {
   tour: TourResult
@@ -79,6 +80,15 @@ export default function TourCard({ tour, index, onSelect, isHovered }: TourCardP
             <div className="font-semibold text-stone-900 text-sm">{tour.totalDuration.toFixed(1)} h</div>
             <div className="text-[10px] text-stone-400 uppercase tracking-wider mt-0.5">Gehzeit</div>
           </div>
+        </div>
+
+        {/* Elevation profile */}
+        <div className="border-t border-stone-100 pt-3 mb-3">
+          <ElevationProfile
+            hutDetails={tour.hutDetails}
+            legs={tour.legs}
+            height={100}
+          />
         </div>
 
         <div className="space-y-1.5 border-t border-stone-100 pt-3">
