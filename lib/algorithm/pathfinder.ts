@@ -4,6 +4,7 @@ export interface TourSearchParams {
   stages: number
   groupSize: number
   roomPreference: RoomTypeKey
+  isRoundTrip?: boolean
   minDistance?: number
   maxDistance?: number
   maxAscent?: number
@@ -46,19 +47,58 @@ function dfs(
   legs: TourLeg[],
   results: TourResult[],
 ): void {
+  // For round trips: we need `stages` legs (not stages+1 huts) before closing the loop
+  // For point-to-point: we need stages+1 huts (= stages legs)
   if (path.length === params.stages + 1) {
-    const totalDistance = legs.reduce((s, l) => s + l.distance, 0)
-    const totalAscent = legs.reduce((s, l) => s + l.ascent, 0)
-    const totalDescent = legs.reduce((s, l) => s + l.descent, 0)
-    const totalDuration = legs.reduce((s, l) => s + l.estimatedDuration, 0)
-    results.push({
-      huts: [...path],
-      legs: [...legs],
-      totalDistance,
-      totalAscent,
-      totalDescent,
-      totalDuration,
-    })
+    if (params.isRoundTrip) {
+      // Try to close the loop back to start
+      const lastHut = path[path.length - 1]
+      const startHut = path[0]
+      const returnRoute = graph.getRoute(lastHut, startHut)
+      if (!returnRoute) return // can't close the loop
+
+      // Check return leg against filters
+      if (params.minDistance !== undefined && returnRoute.distance < params.minDistance) return
+      if (params.maxDistance !== undefined && returnRoute.distance > params.maxDistance) return
+      if (params.maxAscent !== undefined && returnRoute.ascent > params.maxAscent) return
+
+      const returnLeg: TourLeg = {
+        fromHutId: lastHut,
+        toHutId: startHut,
+        distance: returnRoute.distance,
+        ascent: returnRoute.ascent,
+        descent: returnRoute.descent,
+        estimatedDuration: returnRoute.estimatedDuration,
+      }
+
+      const allLegs = [...legs, returnLeg]
+      const totalDistance = allLegs.reduce((s, l) => s + l.distance, 0)
+      const totalAscent = allLegs.reduce((s, l) => s + l.ascent, 0)
+      const totalDescent = allLegs.reduce((s, l) => s + l.descent, 0)
+      const totalDuration = allLegs.reduce((s, l) => s + l.estimatedDuration, 0)
+
+      results.push({
+        huts: [...path, startHut],
+        legs: allLegs,
+        totalDistance,
+        totalAscent,
+        totalDescent,
+        totalDuration,
+      })
+    } else {
+      const totalDistance = legs.reduce((s, l) => s + l.distance, 0)
+      const totalAscent = legs.reduce((s, l) => s + l.ascent, 0)
+      const totalDescent = legs.reduce((s, l) => s + l.descent, 0)
+      const totalDuration = legs.reduce((s, l) => s + l.estimatedDuration, 0)
+      results.push({
+        huts: [...path],
+        legs: [...legs],
+        totalDistance,
+        totalAscent,
+        totalDescent,
+        totalDuration,
+      })
+    }
     return
   }
 

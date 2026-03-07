@@ -35,6 +35,7 @@ export interface TourParams {
   groupSize: number
   totalDays: number
   restDays: number
+  isRoundTrip: boolean
   minDistance: number | undefined
   maxDistance: number | undefined
   maxAscent: number | undefined
@@ -76,6 +77,7 @@ export const useAppStore = create<AppState>((set) => ({
     groupSize: 2,
     totalDays: 4,
     restDays: 0,
+    isRoundTrip: false,
     minDistance: undefined,
     maxDistance: undefined,
     maxAscent: undefined,

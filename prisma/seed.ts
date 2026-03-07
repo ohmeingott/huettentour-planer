@@ -43,6 +43,7 @@ interface RouteDef {
 // Distances and durations are estimates; refine with real trail data as needed.
 const ROUTES_BY_REGION: Record<string, RouteDef[]> = {
   'stubaier-alpen': [
+    // Stubaier Höhenweg (Hauptkette)
     { fromHut: 'Innsbrucker Hütte', toHut: 'Bremer Hütte', distance: 5.2, ascent: 450, descent: 400, duration: 3.5, difficulty: Difficulty.moderate },
     { fromHut: 'Bremer Hütte', toHut: 'Nürnberger Hütte', distance: 6.8, ascent: 380, descent: 510, duration: 4.0, difficulty: Difficulty.moderate },
     { fromHut: 'Nürnberger Hütte', toHut: 'Sulzenau Hütte', distance: 4.5, ascent: 320, descent: 410, duration: 3.0, difficulty: Difficulty.easy },
@@ -50,17 +51,30 @@ const ROUTES_BY_REGION: Record<string, RouteDef[]> = {
     { fromHut: 'Neue Regensburger Hütte', toHut: 'Franz-Senn-Hütte', distance: 7.2, ascent: 350, descent: 490, duration: 4.5, difficulty: Difficulty.moderate },
     { fromHut: 'Franz-Senn-Hütte', toHut: 'Starkenburger Hütte', distance: 3.8, ascent: 290, descent: 200, duration: 2.5, difficulty: Difficulty.easy },
     { fromHut: 'Starkenburger Hütte', toHut: 'Elferhütte', distance: 2.5, ascent: 150, descent: 310, duration: 1.5, difficulty: Difficulty.easy },
-    { fromHut: 'Franz-Senn-Hütte', toHut: 'Mannheimer Hütte (Stubai)', distance: 6.0, ascent: 420, descent: 560, duration: 4.0, difficulty: Difficulty.moderate },
+    { fromHut: 'Elferhütte', toHut: 'Franz-Senn-Hütte', distance: 2.5, ascent: 310, descent: 150, duration: 2.0, difficulty: Difficulty.easy },
+    // Südliche Schleife (Dresdner — Hildesheimer — Siegerlandhütte)
     { fromHut: 'Sulzenau Hütte', toHut: 'Dresdner Hütte', distance: 5.5, ascent: 520, descent: 400, duration: 4.0, difficulty: Difficulty.moderate },
     { fromHut: 'Dresdner Hütte', toHut: 'Hildesheimer Hütte', distance: 4.2, ascent: 680, descent: 90, duration: 3.5, difficulty: Difficulty.difficult },
     { fromHut: 'Hildesheimer Hütte', toHut: 'Siegerlandhütte', distance: 3.5, ascent: 200, descent: 390, duration: 2.5, difficulty: Difficulty.moderate },
     { fromHut: 'Siegerlandhütte', toHut: 'Nürnberger Hütte', distance: 6.0, ascent: 350, descent: 780, duration: 4.5, difficulty: Difficulty.moderate },
+    // Westliche Schleife (Mannheimer — Amberger — Westfalenhaus — Pforzheimer)
+    { fromHut: 'Franz-Senn-Hütte', toHut: 'Mannheimer Hütte (Stubai)', distance: 6.0, ascent: 420, descent: 560, duration: 4.0, difficulty: Difficulty.moderate },
     { fromHut: 'Mannheimer Hütte (Stubai)', toHut: 'Amberger Hütte', distance: 5.8, ascent: 380, descent: 250, duration: 3.5, difficulty: Difficulty.moderate },
     { fromHut: 'Amberger Hütte', toHut: 'Westfalenhaus', distance: 4.0, ascent: 340, descent: 200, duration: 3.0, difficulty: Difficulty.moderate },
     { fromHut: 'Westfalenhaus', toHut: 'Pforzheimer Hütte', distance: 3.5, ascent: 280, descent: 250, duration: 2.5, difficulty: Difficulty.easy },
     { fromHut: 'Pforzheimer Hütte', toHut: 'Neue Regensburger Hütte', distance: 4.8, ascent: 350, descent: 370, duration: 3.0, difficulty: Difficulty.moderate },
+    // Querverbindungen (für Rundtouren)
     { fromHut: 'Innsbrucker Hütte', toHut: 'Neue Regensburger Hütte', distance: 7.0, ascent: 520, descent: 600, duration: 5.0, difficulty: Difficulty.moderate },
-    { fromHut: 'Elferhütte', toHut: 'Franz-Senn-Hütte', distance: 2.5, ascent: 310, descent: 150, duration: 2.0, difficulty: Difficulty.easy },
+    { fromHut: 'Bremer Hütte', toHut: 'Sulzenau Hütte', distance: 5.8, ascent: 310, descent: 530, duration: 3.5, difficulty: Difficulty.moderate },
+    { fromHut: 'Dresdner Hütte', toHut: 'Neue Regensburger Hütte', distance: 6.5, ascent: 420, descent: 440, duration: 4.5, difficulty: Difficulty.moderate },
+    { fromHut: 'Nürnberger Hütte', toHut: 'Dresdner Hütte', distance: 5.8, ascent: 480, descent: 450, duration: 4.0, difficulty: Difficulty.moderate },
+    { fromHut: 'Pforzheimer Hütte', toHut: 'Franz-Senn-Hütte', distance: 5.5, ascent: 290, descent: 450, duration: 3.5, difficulty: Difficulty.moderate },
+    { fromHut: 'Starkenburger Hütte', toHut: 'Neue Regensburger Hütte', distance: 6.2, ascent: 380, descent: 330, duration: 4.0, difficulty: Difficulty.moderate },
+    { fromHut: 'Mannheimer Hütte (Stubai)', toHut: 'Pforzheimer Hütte', distance: 4.5, ascent: 500, descent: 200, duration: 3.5, difficulty: Difficulty.moderate },
+    { fromHut: 'Amberger Hütte', toHut: 'Sulzenau Hütte', distance: 7.2, ascent: 420, descent: 360, duration: 5.0, difficulty: Difficulty.moderate },
+    { fromHut: 'Westfalenhaus', toHut: 'Neue Regensburger Hütte', distance: 5.5, ascent: 310, descent: 300, duration: 3.5, difficulty: Difficulty.moderate },
+    { fromHut: 'Innsbrucker Hütte', toHut: 'Sulzenau Hütte', distance: 8.5, ascent: 550, descent: 730, duration: 5.5, difficulty: Difficulty.moderate },
+    { fromHut: 'Elferhütte', toHut: 'Neue Regensburger Hütte', distance: 5.8, ascent: 510, descent: 300, duration: 4.0, difficulty: Difficulty.moderate },
   ],
   'zillertal': [
     { fromHut: 'Olperer Hütte', toHut: 'Friesenberghaus', distance: 3.2, ascent: 280, descent: 170, duration: 2.0, difficulty: Difficulty.moderate },

@@ -92,6 +92,29 @@ function ConfigureForm() {
                 />
               </div>
             </div>
+
+            <div className="mt-5 pt-5 border-t border-stone-100">
+              <label className="flex items-center gap-3 cursor-pointer group">
+                <button
+                  type="button"
+                  role="switch"
+                  aria-checked={tourParams.isRoundTrip}
+                  onClick={() => setTourParams({ isRoundTrip: !tourParams.isRoundTrip })}
+                  className={`relative inline-flex h-6 w-11 shrink-0 rounded-full transition-colors duration-200 ${tourParams.isRoundTrip ? 'bg-alpine-600' : 'bg-stone-200'}`}
+                >
+                  <span className={`pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow-sm ring-0 transition-transform duration-200 translate-y-0.5 ${tourParams.isRoundTrip ? 'translate-x-[22px]' : 'translate-x-0.5'}`} />
+                </button>
+                <div>
+                  <span className="text-sm font-medium text-stone-800">Rundtour</span>
+                  <p className="text-xs text-stone-400">Start und Ziel am selben Ort</p>
+                </div>
+                {tourParams.isRoundTrip && (
+                  <svg className="ml-auto w-5 h-5 text-alpine-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M17 2l4 4-4 4" /><path d="M3 11v-1a4 4 0 014-4h14" /><path d="M7 22l-4-4 4-4" /><path d="M21 13v1a4 4 0 01-4 4H3" />
+                  </svg>
+                )}
+              </label>
+            </div>
           </div>
 
           <div className="bg-white rounded-2xl shadow-sm border border-stone-200/80 p-7 mb-6">

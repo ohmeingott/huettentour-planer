@@ -6,7 +6,7 @@ import { rankTours } from '@/lib/algorithm/scoring'
 
 export async function POST(request: NextRequest) {
   const body = await request.json()
-  const { regionId, groupSize, totalDays, restDays, minDistance, maxDistance, maxAscent, roomPreference } = body
+  const { regionId, groupSize, totalDays, restDays, isRoundTrip, minDistance, maxDistance, maxAscent, roomPreference } = body
 
   // Resolve slug to region ID
   let resolvedRegionId = regionId
@@ -52,6 +52,7 @@ export async function POST(request: NextRequest) {
     stages,
     groupSize,
     roomPreference: roomPreference || 'any',
+    isRoundTrip: isRoundTrip || false,
     minDistance,
     maxDistance,
     maxAscent,
