@@ -2,8 +2,12 @@
 
 import { useRouter } from 'next/navigation'
 import dynamic from 'next/dynamic'
+import Image from 'next/image'
 import { useAppStore } from '@/lib/store'
 import { MapRegion } from '@/lib/map/regions'
+import HowItWorksSection from '@/components/landing/how-it-works-section'
+import FaqSection from '@/components/landing/faq-section'
+import Footer from '@/components/layout/footer'
 
 const AlpineMap = dynamic(() => import('@/components/map/alpine-map'), { ssr: false })
 
@@ -17,53 +21,103 @@ export default function Home() {
   }
 
   return (
-    <main className="relative h-screen w-screen overflow-hidden">
-      <div className="absolute inset-0">
-        <AlpineMap onRegionSelect={handleRegionSelect} selectedRegionId={selectedRegionId} />
-      </div>
+    <main>
+      {/* ─── Hero Section ─── */}
+      <section className="relative min-h-[85vh] flex items-center justify-center bg-topo bg-stone-50 overflow-hidden">
+        {/* Subtle gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-transparent to-stone-50" />
 
-      {/* Hero card */}
-      <div className="absolute top-8 left-8 z-10 animate-fade-in-up">
-        <div className="bg-white/92 backdrop-blur-md rounded-2xl shadow-xl border border-stone-200/60 p-7 max-w-sm">
-          <div className="flex items-center gap-2.5 mb-3">
-            <div className="w-8 h-8 rounded-lg bg-alpine-600 flex items-center justify-center">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="m8 3 4 8 5-5 2 15H2L8 3z"/>
-              </svg>
-            </div>
-            <h1 className="font-display text-2xl text-stone-900 tracking-tight">Hütten-Tour Planner</h1>
+        {/* Decorative mountain silhouette at bottom */}
+        <svg
+          className="absolute bottom-0 left-0 w-full text-white opacity-60"
+          viewBox="0 0 1440 120"
+          preserveAspectRatio="none"
+          fill="currentColor"
+        >
+          <path d="M0,120 L0,80 Q180,20 360,60 T720,40 T1080,70 T1440,30 L1440,120 Z" />
+        </svg>
+
+        <div className="relative z-10 max-w-2xl mx-auto px-6 text-center animate-fade-in-up">
+          {/* Logo */}
+          <div className="flex justify-center mb-8">
+            <Image
+              src="/logo.png"
+              alt="Hüttentour Planer"
+              width={200}
+              height={100}
+              className="h-24 w-auto opacity-90"
+              priority
+            />
           </div>
-          <p className="text-stone-500 text-sm leading-relaxed mb-5">
-            Plane deine Mehrtages-Hüttentour in den Alpen. Wähle eine Region auf der Karte um zu starten.
+
+          {/* Headline */}
+          <h1 className="font-display text-5xl sm:text-6xl text-stone-900 tracking-tight leading-[1.1] mb-6">
+            Plane deine Mehrtages-Hüttentour in den Alpen
+          </h1>
+
+          {/* Subtext */}
+          <p className="text-lg text-stone-500 leading-relaxed max-w-lg mx-auto mb-10">
+            Finde die perfekte Route, konfiguriere deine Tour und prüfe die Verfügbarkeit aller Hütten — alles an einem Ort.
           </p>
-          <div className="flex items-center gap-2 text-xs text-stone-400">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="12" cy="12" r="10"/><path d="m12 8-4 4h8"/>
-            </svg>
-            <span>Klicke auf eine Region</span>
-          </div>
-        </div>
-      </div>
 
-      {/* Bottom stats bar */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 animate-fade-in-up" style={{ animationDelay: '0.2s', opacity: 0 }}>
-        <div className="bg-stone-900/85 backdrop-blur-md text-white rounded-full px-6 py-3 flex items-center gap-6 text-sm shadow-2xl">
-          <div className="flex items-center gap-2">
-            <span className="text-alpine-400 font-semibold">5</span>
-            <span className="text-stone-300">Regionen</span>
-          </div>
-          <div className="w-px h-4 bg-stone-600" />
-          <div className="flex items-center gap-2">
-            <span className="text-summit-light font-semibold">100+</span>
-            <span className="text-stone-300">Hütten</span>
-          </div>
-          <div className="w-px h-4 bg-stone-600" />
-          <div className="flex items-center gap-2">
-            <span className="text-glacier-light font-semibold">Live</span>
-            <span className="text-stone-300">Verfügbarkeit</span>
+          {/* CTA */}
+          <a
+            href="#map"
+            className="inline-flex items-center gap-2 bg-alpine-600 text-white rounded-xl px-7 py-3.5 text-base font-medium hover:bg-alpine-700 transition-all hover:shadow-lg hover:shadow-alpine-600/20 active:scale-[0.98]"
+          >
+            Jetzt Tour planen
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
+          </a>
+
+          {/* Stats */}
+          <div className="mt-14 flex items-center justify-center gap-8 text-sm">
+            <div className="flex items-center gap-2">
+              <span className="font-semibold text-alpine-600">5</span>
+              <span className="text-stone-400">Regionen</span>
+            </div>
+            <div className="w-px h-4 bg-stone-300" />
+            <div className="flex items-center gap-2">
+              <span className="font-semibold text-summit-light">100+</span>
+              <span className="text-stone-400">Hütten</span>
+            </div>
+            <div className="w-px h-4 bg-stone-300" />
+            <div className="flex items-center gap-2">
+              <span className="font-semibold text-glacier-light">Live</span>
+              <span className="text-stone-400">Verfügbarkeit</span>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
+
+      {/* ─── How It Works ─── */}
+      <HowItWorksSection />
+
+      {/* ─── Map Section ─── */}
+      <section id="map" className="bg-stone-50 py-20 px-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-10">
+            <h2 className="font-display text-3xl text-stone-900 mb-3">
+              Wähle deine Region
+            </h2>
+            <p className="text-stone-500 text-base">
+              Klicke auf eine Region um deine Hüttentour zu planen
+            </p>
+          </div>
+
+          <div className="relative rounded-2xl overflow-hidden shadow-xl border border-stone-200/60" style={{ height: '70vh' }}>
+            <AlpineMap onRegionSelect={handleRegionSelect} selectedRegionId={selectedRegionId} />
+          </div>
+        </div>
+      </section>
+
+      {/* ─── FAQ ─── */}
+      <FaqSection />
+
+      {/* ─── Footer ─── */}
+      <Footer />
     </main>
   )
 }
