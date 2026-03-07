@@ -1,0 +1,297 @@
+[
+  {
+    "name": "Innsbrucker Hütte",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e8/Innsbrucker_Huette.jpg",
+    "source": "wikipedia-de"
+  },
+  {
+    "name": "Bremer Hütte",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Terrasse_der_Bremer_H%C3%BCtte.jpg/1280px-Terrasse_der_Bremer_H%C3%BCtte.jpg",
+    "source": "commons"
+  },
+  {
+    "name": "Nürnberger Hütte",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/d/dd/N%C3%BCrnberger_H%C3%BCtte_2017.jpg",
+    "source": "wikipedia-de"
+  },
+  {
+    "name": "Sulzenau Hütte",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/14.Sulzenau-Ost.jpg/1280px-14.Sulzenau-Ost.jpg",
+    "source": "commons"
+  },
+  {
+    "name": "Dresdner Hütte",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Dresdner_H%C3%BCtte1.JPG",
+    "source": "wikipedia-de"
+  },
+  {
+    "name": "Neue Regensburger Hütte",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/12/Neue_Regensburger_Huette_%28Terassenansicht%29.jpg",
+    "source": "wikipedia-de"
+  },
+  {
+    "name": "Franz-Senn-Hütte",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/0/07/FranzSennHuette.jpg",
+    "source": "wikipedia-de"
+  },
+  {
+    "name": "Starkenburger Hütte",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/8/89/StarkenburgerHuette.jpg",
+    "source": "wikipedia-de"
+  },
+  {
+    "name": "Elferhütte",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/8/83/ElferH-SW.jpg",
+    "source": "wikipedia-de"
+  },
+  {
+    "name": "Mannheimer Hütte (Stubai)",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/0/03/A-V_-_Mannheimer_H%C3%BCtte.jpg",
+    "source": "wikipedia-de"
+  },
+  {
+    "name": "Hildesheimer Hütte",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7a/Hildesheimer_H%C3%BCtte_%284858307114%29.jpg",
+    "source": "wikipedia-de"
+  },
+  {
+    "name": "Siegerlandhütte",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/2/20/Siegerlandh%C3%BCtte.jpg",
+    "source": "wikipedia-de"
+  },
+  {
+    "name": "Amberger Hütte",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/6/68/Exkursion_zur_Amberger_H%C3%BCtte_14.jpg",
+    "source": "wikipedia-de"
+  },
+  {
+    "name": "Westfalenhaus",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/7/77/WestfalenhausSommer.jpg",
+    "source": "wikipedia-de"
+  },
+  {
+    "name": "Pforzheimer Hütte",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/2/23/Pforzheimer_H%C3%BCtte.jpg",
+    "source": "wikipedia-de"
+  },
+  {
+    "name": "Olperer Hütte",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Olperer_H%C3%BCtte_%26_Schlegeisspeicher_Panorama.jpg/1280px-Olperer_H%C3%BCtte_%26_Schlegeisspeicher_Panorama.jpg",
+    "source": "commons"
+  },
+  {
+    "name": "Friesenberghaus",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b2/Friesenberghaus_2023.jpg",
+    "source": "wikipedia-de"
+  },
+  {
+    "name": "Furtschaglhaus",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/5/53/Furtschaglhaus_gesamtansicht.jpg",
+    "source": "wikipedia-de"
+  },
+  {
+    "name": "Berliner Hütte",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/8/84/Berliner_H%C3%BCtte_%28DSC00513%29.jpg",
+    "source": "wikipedia-de"
+  },
+  {
+    "name": "Greizer Hütte",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/8/84/Greizerh%C3%BCtte.jpg",
+    "source": "wikipedia-de"
+  },
+  {
+    "name": "Kasseler Hütte",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Kasseler_H%C3%BCtte.jpg/1280px-Kasseler_H%C3%BCtte.jpg",
+    "source": "commons"
+  },
+  {
+    "name": "Edelhütte",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Karl-von-Edel-Huette.jpg/1280px-Karl-von-Edel-Huette.jpg",
+    "source": "commons"
+  },
+  {
+    "name": "Karl-von-Edel-Hütte",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Karl-von-Edel-Huette.jpg/1280px-Karl-von-Edel-Huette.jpg",
+    "source": "commons"
+  },
+  {
+    "name": "Plauener Hütte",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/5/51/Plauenerhuette_2020.jpg",
+    "source": "wikipedia-de"
+  },
+  {
+    "name": "Gamshütte",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Hoher_riffler_friesenbergscharte_friesenberghaus_normalweg_wesendlkar_petersk%C3%B6pfel.jpg/1280px-Hoher_riffler_friesenbergscharte_friesenberghaus_normalweg_wesendlkar_petersk%C3%B6pfel.jpg",
+    "source": "commons"
+  },
+  {
+    "name": "Dominikushütte",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/AUT_%E2%80%94_Tirol_%E2%80%94_Bezirk_Schwaz_%E2%80%94_Gemeinde_Finkenberg_%E2%80%94_Dornauberg_104_%28Alpengasthaus_Dominikush%C3%BCtte%29_2023-08-14_Mattes.jpg/1280px-AUT_%E2%80%94_Tirol_%E2%80%94_Bezirk_Schwaz_%E2%80%94_Gemeinde_Finkenberg_%E2%80%94_Dornauberg_104_%28Alpengasthaus_Dominikush%C3%BCtte%29_2023-08-14_Mattes.jpg",
+    "source": "commons"
+  },
+  {
+    "name": "Pfitscherjoch-Haus",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/6/60/Pfitscher-Joch-H.jpg",
+    "source": "wikipedia-de"
+  },
+  {
+    "name": "Vernagthütte",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f1/Vernagt_H%C3%BCtte.JPG",
+    "source": "wikipedia-de"
+  },
+  {
+    "name": "Hochjoch-Hospiz",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/7/72/Hochjochhospiz_2018.jpg",
+    "source": "wikipedia-de"
+  },
+  {
+    "name": "Brandenburger Haus",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f8/Brandenburger_Haus_HQ.jpg",
+    "source": "wikipedia-de"
+  },
+  {
+    "name": "Martin-Busch-Hütte",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a0/Martin-Busch-H%C3%BCtte_2020.jpg",
+    "source": "wikipedia-de"
+  },
+  {
+    "name": "Similaunhütte",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/f/ff/Die_Similaun_Schutzh%C3%BCtte.jpg",
+    "source": "wikipedia-de"
+  },
+  {
+    "name": "Schöne Aussicht",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Sch%C3%B6ne_Aussicht_H%C3%BCtte_H%C3%BCttenschild.jpg/1280px-Sch%C3%B6ne_Aussicht_H%C3%BCtte_H%C3%BCttenschild.jpg",
+    "source": "commons"
+  },
+  {
+    "name": "Bella Vista",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Sch%C3%B6ne_Aussicht_H%C3%BCtte_H%C3%BCttenschild.jpg/1280px-Sch%C3%B6ne_Aussicht_H%C3%BCtte_H%C3%BCttenschild.jpg",
+    "source": "commons"
+  },
+  {
+    "name": "Langtalereck Hütte",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/LangtalereckH-Schild.jpg/1280px-LangtalereckH-Schild.jpg",
+    "source": "commons"
+  },
+  {
+    "name": "Ramolhaus",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/9/94/Ramolhaus.JPG",
+    "source": "wikipedia-de"
+  },
+  {
+    "name": "Erlanger Hütte",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/6/6f/Erlanger_H%C3%BCtte.jpg",
+    "source": "wikipedia-de"
+  },
+  {
+    "name": "Braunschweiger Hütte",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1c/BraunschweigerH.jpg",
+    "source": "wikipedia-de"
+  },
+  {
+    "name": "Schlernhaus",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/47/Tramonto_al_rifugio_Bolzano_%28cropped%29.jpg",
+    "source": "wikipedia-de"
+  },
+  {
+    "name": "Tierser-Alpl-Hütte",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/7/73/Tierser-Alpl-H%C3%BCtte%2C_2444_m%2C_2018-10-19.jpg",
+    "source": "wikipedia-de"
+  },
+  {
+    "name": "Grasleitenpasshütte",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f1/140626_Grasleitenpassh%C3%BCtte.jpg",
+    "source": "wikipedia-de"
+  },
+  {
+    "name": "Rotwandhütte",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/2/28/Rotwandh%C3%BCtte_in_July_2015_01.jpg",
+    "source": "wikipedia-de"
+  },
+  {
+    "name": "Vajolet-Hütte",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1d/140625_Rifugio_Vajolet.jpg",
+    "source": "wikipedia-de"
+  },
+  {
+    "name": "Preuss-Hütte",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b0/Rifugio_Preuss_02.jpg",
+    "source": "wikipedia-de"
+  },
+  {
+    "name": "Paolinahütte",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/b/bf/Paolina-H%C3%BCtte_Vorderansicht.JPG",
+    "source": "wikipedia-de"
+  },
+  {
+    "name": "Rif. Antermoia",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/9/9a/Antermoia_refuge_2.jpg",
+    "source": "wikipedia-de"
+  },
+  {
+    "name": "Rif. Passo Principe",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f1/140626_Grasleitenpassh%C3%BCtte.jpg",
+    "source": "wikipedia-de"
+  },
+  {
+    "name": "Kölner Hütte",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b7/K%C3%B6lner_H%C3%BCtte_vor_Rosengarten.jpg",
+    "source": "wikipedia-de"
+  },
+  {
+    "name": "Rif. Alpe di Tires",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/7/73/Tierser-Alpl-H%C3%BCtte%2C_2444_m%2C_2018-10-19.jpg",
+    "source": "wikipedia-de"
+  },
+  {
+    "name": "Grindelwaldblick",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Grindelwaldblick_on_Kleine_Scheidegg.jpg/1280px-Grindelwaldblick_on_Kleine_Scheidegg.jpg",
+    "source": "commons"
+  },
+  {
+    "name": "Glecksteinhütte",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Glecksteinh%C3%BCtte.jpg",
+    "source": "wikipedia-de"
+  },
+  {
+    "name": "Schreckhornhütte",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/17/Schreckhornh%C3%BCtte.jpg",
+    "source": "wikipedia-de"
+  },
+  {
+    "name": "Lauteraarenhütte",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/9/92/Lauteraarh%C3%BCtte.jpg",
+    "source": "wikipedia-de"
+  },
+  {
+    "name": "Dossenhütte",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/f/fd/Dossenhuette.jpg",
+    "source": "wikipedia-de"
+  },
+  {
+    "name": "Gaulihütte",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5f/Gaulih%C3%BCtte.jpg",
+    "source": "wikipedia-de"
+  },
+  {
+    "name": "Bächlitalhütte",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2a/B%C3%A4chlitalh%C3%BCtte.jpg",
+    "source": "wikipedia-de"
+  },
+  {
+    "name": "Oberaarjochhütte",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Oberaarjochh%C3%BCtte.jpg",
+    "source": "wikipedia-de"
+  },
+  {
+    "name": "Finsteraarhornhütte",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/6/67/Finsteraarhornh%C3%BCtte.jpg",
+    "source": "wikipedia-de"
+  },
+  {
+    "name": "Konkordiahütte",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/34/Konkordiah%C3%BCtte.jpg",
+    "source": "wikipedia-de"
+  }
+]

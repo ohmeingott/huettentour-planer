@@ -66,7 +66,11 @@ export async function POST(request: NextRequest) {
     ...tour,
     hutDetails: tour.huts.map((id) => {
       const h = hutMap.get(id)!
-      return { id: h.id, name: h.name, altitude: h.altitude, lat: h.lat, lng: h.lng, imageUrl: h.imageUrl }
+      return {
+        id: h.id, name: h.name, altitude: h.altitude, lat: h.lat, lng: h.lng,
+        imageUrl: h.imageUrl, capacity: h.capacity, amenities: h.amenities,
+        roomTypes: h.roomTypes.map((rt) => ({ type: rt.type, count: rt.count })),
+      }
     }),
   }))
 

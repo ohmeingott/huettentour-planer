@@ -9,6 +9,7 @@ export interface HutDetail {
   imageUrl: string | null
   capacity?: number
   roomTypes?: { type: string; count: number }[]
+  amenities?: string[]
 }
 
 export interface TourLeg {
