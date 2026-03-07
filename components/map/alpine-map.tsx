@@ -14,6 +14,15 @@ interface HutMarkerData {
   capacity?: number
 }
 
+interface AccessPointMarkerData {
+  id: string
+  name: string
+  type: string
+  altitude: number
+  lat: number
+  lng: number
+}
+
 interface RouteLine {
   coordinates: [number, number][]
   difficulty?: string
@@ -23,8 +32,12 @@ interface AlpineMapProps {
   onRegionSelect: (region: MapRegion) => void
   selectedRegionId?: string | null
   huts?: HutMarkerData[]
+  accessPoints?: AccessPointMarkerData[]
   routeLines?: RouteLine[]
   animateMarkers?: boolean
+  showRegions?: boolean
+  initialCenter?: [number, number]
+  initialZoom?: number
 }
 
 const MAPBOX_STYLE = 'mapbox://styles/mapbox/outdoors-v12'
@@ -33,8 +46,78 @@ const DIFFICULTY_COLORS: Record<string, { line: string; glow: string }> = {
   easy: { line: '#16a34a', glow: '#22c55e' },       // green
   moderate: { line: '#d97706', glow: '#f59e0b' },    // amber
   difficult: { line: '#dc2626', glow: '#ef4444' },   // red
+  access: { line: '#2563eb', glow: '#3b82f6' },      // blue (access routes)
 }
 const DEFAULT_ROUTE_COLOR = { line: '#b45309', glow: '#c2410c' }
+
+function createAccessPointIcon(type: string): HTMLDivElement {
+  const el = document.createElement('div')
+  el.style.cssText = `
+    width: 36px; height: 40px; cursor: pointer;
+    transition: transform 0.15s ease;
+    filter: drop-shadow(0 3px 5px rgba(0,0,0,0.3));
+  `
+
+  if (type === 'cable_car') {
+    // 3D gondola icon
+    el.innerHTML = `<svg width="36" height="40" viewBox="0 0 36 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="18" cy="38" rx="10" ry="2" fill="rgba(0,0,0,0.1)"/>
+      <line x1="2" y1="4" x2="34" y2="8" stroke="#475569" stroke-width="2" stroke-linecap="round"/>
+      <line x1="18" y1="6" x2="18" y2="13" stroke="#64748b" stroke-width="1.5"/>
+      <path d="M10 14 L10 28 Q10 30 12 30 L24 30 Q26 30 26 28 L26 14 Z" fill="#2563eb"/>
+      <path d="M26 14 L30 11 L30 27 Q30 29 28 29 L26 30 L26 14 Z" fill="#1d4ed8"/>
+      <path d="M9 14.5 L18 10 L27 14.5 Z" fill="#334155"/>
+      <path d="M27 14.5 L31 11.5 L22 7 L18 10 Z" fill="#1e293b"/>
+      <rect x="12" y="17" width="5" height="6" rx="1" fill="#bfdbfe" opacity="0.9"/>
+      <rect x="19" y="17" width="5" height="6" rx="1" fill="#bfdbfe" opacity="0.9"/>
+      <line x1="14.5" y1="17" x2="14.5" y2="23" stroke="#1e40af" stroke-width="0.4"/>
+      <line x1="21.5" y1="17" x2="21.5" y2="23" stroke="#1e40af" stroke-width="0.4"/>
+      <rect x="12.5" y="17.5" width="1.5" height="3" rx="0.3" fill="white" opacity="0.3"/>
+      <rect x="19.5" y="17.5" width="1.5" height="3" rx="0.3" fill="white" opacity="0.3"/>
+      <line x1="18" y1="25" x2="18" y2="30" stroke="#1e40af" stroke-width="0.5"/>
+    </svg>`
+  } else if (type === 'parking') {
+    // 3D parking sign icon
+    el.innerHTML = `<svg width="36" height="40" viewBox="0 0 36 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="18" cy="38" rx="8" ry="2" fill="rgba(0,0,0,0.1)"/>
+      <rect x="16" y="22" width="4" height="16" rx="1" fill="#78716c"/>
+      <rect x="16" y="22" width="1.5" height="16" rx="0.5" fill="#8a8580" opacity="0.5"/>
+      <rect x="6" y="4" width="22" height="20" rx="3" fill="#2563eb"/>
+      <path d="M28 4 Q28 2 26 2 L31 0 Q33 0 33 2 L33 22 Q33 24 31 24 L28 24 Z" fill="#1d4ed8"/>
+      <path d="M6 4 Q6 2 8 2 L29 0 Q31 0 31 2 L28 4 Q28 2 26 2 L8 2 Q6 2 6 4 Z" fill="#1e40af"/>
+      <rect x="8" y="6" width="18" height="16" rx="1.5" fill="none" stroke="white" stroke-width="1.5"/>
+      <text x="17" y="20" text-anchor="middle" font-size="14" font-weight="bold" fill="white" font-family="system-ui,sans-serif">P</text>
+    </svg>`
+  } else {
+    // 3D village with church icon
+    el.innerHTML = `<svg width="36" height="40" viewBox="0 0 36 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="18" cy="38" rx="12" ry="2" fill="rgba(0,0,0,0.1)"/>
+      <rect x="20" y="16" width="10" height="20" fill="#94a3b8"/>
+      <path d="M30 16 L33 14 L33 34 L30 36 Z" fill="#64748b"/>
+      <rect x="22" y="19" width="3" height="3" rx="0.3" fill="#e2e8f0"/>
+      <rect x="22" y="25" width="3" height="3" rx="0.3" fill="#e2e8f0"/>
+      <rect x="4" y="18" width="18" height="18" fill="#f8fafc"/>
+      <path d="M22 18 L26 15 L26 33 L22 36 Z" fill="#cbd5e1"/>
+      <path d="M2 19 L13 8 L24 19 Z" fill="#dc2626"/>
+      <path d="M24 19 L28 16 L17 5 L13 8 Z" fill="#991b1b"/>
+      <rect x="11" y="2" width="4" height="8" fill="#94a3b8"/>
+      <path d="M10 10 L13 4 L16 10 Z" fill="#64748b"/>
+      <line x1="13" y1="2" x2="13" y2="0" stroke="#78716c" stroke-width="1"/>
+      <line x1="12" y1="1" x2="14" y2="1" stroke="#78716c" stroke-width="0.8"/>
+      <path d="M10 30 Q13 27 16 30 L16 36 L10 36 Z" fill="#7c2d12"/>
+      <rect x="6" y="22" width="3.5" height="3.5" rx="0.3" fill="#fde68a"/>
+      <line x1="7.75" y1="22" x2="7.75" y2="25.5" stroke="#92400e" stroke-width="0.3"/>
+      <line x1="6" y1="23.75" x2="9.5" y2="23.75" stroke="#92400e" stroke-width="0.3"/>
+      <rect x="17" y="22" width="3.5" height="3.5" rx="0.3" fill="#fde68a"/>
+      <line x1="18.75" y1="22" x2="18.75" y2="25.5" stroke="#92400e" stroke-width="0.3"/>
+      <line x1="17" y1="23.75" x2="20.5" y2="23.75" stroke="#92400e" stroke-width="0.3"/>
+    </svg>`
+  }
+
+  el.addEventListener('mouseenter', () => { el.style.transform = 'scale(1.25) translateY(-2px)' })
+  el.addEventListener('mouseleave', () => { el.style.transform = 'scale(1)' })
+  return el
+}
 
 function createHutIcon(animate?: boolean, index?: number): HTMLDivElement {
   const el = document.createElement('div')
@@ -93,6 +176,13 @@ function createHutIcon(animate?: boolean, index?: number): HTMLDivElement {
   </svg>`
   el.addEventListener('mouseenter', () => { el.style.transform = 'scale(1.25) translateY(-3px)' })
   el.addEventListener('mouseleave', () => { el.style.transform = 'scale(1)' })
+  if (animate) {
+    el.addEventListener('animationend', () => {
+      el.style.animation = 'none'
+      el.style.opacity = '1'
+      el.style.transform = 'scale(1)'
+    }, { once: true })
+  }
   return el
 }
 
@@ -115,7 +205,25 @@ function createHutPopupHTML(hut: HutMarkerData): string {
   </div>`
 }
 
-export default function AlpineMap({ onRegionSelect, selectedRegionId, huts, routeLines, animateMarkers }: AlpineMapProps) {
+const AP_TYPE_LABELS: Record<string, string> = {
+  parking: 'Parkplatz',
+  village: 'Ort',
+  cable_car: 'Seilbahn',
+}
+
+function createAccessPointPopupHTML(ap: AccessPointMarkerData): string {
+  const typeLabel = AP_TYPE_LABELS[ap.type] || ap.type
+  const typeColor = ap.type === 'cable_car' ? '#2563eb' : ap.type === 'parking' ? '#2563eb' : '#64748b'
+  return `<div style="min-width:180px;font-family:system-ui,sans-serif;">
+    <div style="padding:10px 12px 12px;">
+      <div style="display:inline-block;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:${typeColor};background:${typeColor}15;padding:2px 6px;border-radius:4px;margin-bottom:6px;">${typeLabel}</div>
+      <div style="font-weight:600;font-size:14px;color:#1c1917;margin-bottom:4px;">${ap.name}</div>
+      <div style="font-size:12px;color:#78716c;">${ap.altitude} m</div>
+    </div>
+  </div>`
+}
+
+export default function AlpineMap({ onRegionSelect, selectedRegionId, huts, accessPoints, routeLines, animateMarkers, showRegions = true, initialCenter, initialZoom }: AlpineMapProps) {
   const mapContainer = useRef<HTMLDivElement>(null)
   const map = useRef<mapboxgl.Map | null>(null)
   const markersRef = useRef<mapboxgl.Marker[]>([])
@@ -132,8 +240,8 @@ export default function AlpineMap({ onRegionSelect, selectedRegionId, huts, rout
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: MAPBOX_STYLE,
-      center: ALPS_CENTER as [number, number],
-      zoom: ALPS_ZOOM,
+      center: initialCenter || (ALPS_CENTER as [number, number]),
+      zoom: initialZoom ?? ALPS_ZOOM,
       pitch: 50,
       bearing: -5,
     })
@@ -163,125 +271,127 @@ export default function AlpineMap({ onRegionSelect, selectedRegionId, huts, rout
         },
       })
 
-      // Region polygons
-      const allFeatures = ALPINE_REGIONS.map((region, i) => ({
-        type: 'Feature' as const,
-        id: i,
-        properties: { id: region.id, name: region.name },
-        geometry: {
-          type: 'Polygon' as const,
-          coordinates: [region.polygon],
-        },
-      }))
+      // Region polygons (only on region-selection views)
+      if (showRegions) {
+        const allFeatures = ALPINE_REGIONS.map((region, i) => ({
+          type: 'Feature' as const,
+          id: i,
+          properties: { id: region.id, name: region.name },
+          geometry: {
+            type: 'Polygon' as const,
+            coordinates: [region.polygon],
+          },
+        }))
 
-      m.addSource('regions', {
-        type: 'geojson',
-        data: { type: 'FeatureCollection', features: allFeatures },
-      })
+        m.addSource('regions', {
+          type: 'geojson',
+          data: { type: 'FeatureCollection', features: allFeatures },
+        })
 
-      m.addLayer({
-        id: 'region-glow',
-        type: 'line',
-        source: 'regions',
-        paint: {
-          'line-color': '#56a880',
-          'line-width': 8,
-          'line-opacity': 0.15,
-          'line-blur': 4,
-        },
-      })
+        m.addLayer({
+          id: 'region-glow',
+          type: 'line',
+          source: 'regions',
+          paint: {
+            'line-color': '#56a880',
+            'line-width': 8,
+            'line-opacity': 0.15,
+            'line-blur': 4,
+          },
+        })
 
-      m.addLayer({
-        id: 'region-fill',
-        type: 'fill',
-        source: 'regions',
-        paint: {
-          'fill-color': '#378c65',
-          'fill-opacity': [
-            'case',
-            ['boolean', ['feature-state', 'hover'], false],
-            0.22,
-            0.10,
-          ],
-        },
-      })
+        m.addLayer({
+          id: 'region-fill',
+          type: 'fill',
+          source: 'regions',
+          paint: {
+            'fill-color': '#378c65',
+            'fill-opacity': [
+              'case',
+              ['boolean', ['feature-state', 'hover'], false],
+              0.22,
+              0.10,
+            ],
+          },
+        })
 
-      m.addLayer({
-        id: 'region-border',
-        type: 'line',
-        source: 'regions',
-        paint: {
-          'line-color': '#287050',
-          'line-width': 2.5,
-          'line-opacity': 0.7,
-        },
-      })
+        m.addLayer({
+          id: 'region-border',
+          type: 'line',
+          source: 'regions',
+          paint: {
+            'line-color': '#287050',
+            'line-width': 2.5,
+            'line-opacity': 0.7,
+          },
+        })
 
-      // Region labels
-      const labelFeatures = ALPINE_REGIONS.map((region) => ({
-        type: 'Feature' as const,
-        properties: { name: region.name },
-        geometry: {
-          type: 'Point' as const,
-          coordinates: region.center,
-        },
-      }))
+        // Region labels
+        const labelFeatures = ALPINE_REGIONS.map((region) => ({
+          type: 'Feature' as const,
+          properties: { name: region.name },
+          geometry: {
+            type: 'Point' as const,
+            coordinates: region.center,
+          },
+        }))
 
-      m.addSource('region-labels', {
-        type: 'geojson',
-        data: { type: 'FeatureCollection', features: labelFeatures },
-      })
+        m.addSource('region-labels', {
+          type: 'geojson',
+          data: { type: 'FeatureCollection', features: labelFeatures },
+        })
 
-      m.addLayer({
-        id: 'region-label',
-        type: 'symbol',
-        source: 'region-labels',
-        layout: {
-          'text-field': ['get', 'name'],
-          'text-font': ['DIN Pro Medium', 'Arial Unicode MS Regular'],
-          'text-size': 14,
-          'text-letter-spacing': 0.08,
-          'text-transform': 'uppercase',
-          'text-allow-overlap': true,
-        },
-        paint: {
-          'text-color': '#1d4836',
-          'text-halo-color': 'rgba(255,255,255,0.85)',
-          'text-halo-width': 2,
-        },
-      })
+        m.addLayer({
+          id: 'region-label',
+          type: 'symbol',
+          source: 'region-labels',
+          layout: {
+            'text-field': ['get', 'name'],
+            'text-font': ['DIN Pro Medium', 'Arial Unicode MS Regular'],
+            'text-size': 14,
+            'text-letter-spacing': 0.08,
+            'text-transform': 'uppercase',
+            'text-allow-overlap': true,
+          },
+          paint: {
+            'text-color': '#1d4836',
+            'text-halo-color': 'rgba(255,255,255,0.85)',
+            'text-halo-width': 2,
+          },
+        })
 
-      // Hover interactions
-      let hoveredId: number | null = null
+        // Hover interactions
+        let hoveredId: number | null = null
 
-      m.on('mousemove', 'region-fill', (e) => {
-        m.getCanvas().style.cursor = 'pointer'
-        if (e.features && e.features.length > 0) {
+        m.on('mousemove', 'region-fill', (e) => {
+          m.getCanvas().style.cursor = 'pointer'
+          if (e.features && e.features.length > 0) {
+            if (hoveredId !== null) {
+              m.setFeatureState({ source: 'regions', id: hoveredId }, { hover: false })
+            }
+            hoveredId = e.features[0].id as number
+            m.setFeatureState({ source: 'regions', id: hoveredId }, { hover: true })
+          }
+        })
+
+        m.on('mouseleave', 'region-fill', () => {
+          m.getCanvas().style.cursor = ''
           if (hoveredId !== null) {
             m.setFeatureState({ source: 'regions', id: hoveredId }, { hover: false })
+            hoveredId = null
           }
-          hoveredId = e.features[0].id as number
-          m.setFeatureState({ source: 'regions', id: hoveredId }, { hover: true })
-        }
-      })
+        })
 
-      m.on('mouseleave', 'region-fill', () => {
-        m.getCanvas().style.cursor = ''
-        if (hoveredId !== null) {
-          m.setFeatureState({ source: 'regions', id: hoveredId }, { hover: false })
-          hoveredId = null
-        }
-      })
-
-      m.on('click', 'region-fill', (e) => {
-        // Skip if a hut popup is open — prevents re-fetch that kills markers
-        if (popupOpenRef.current) return
-        if (e.features && e.features.length > 0) {
-          const regionId = e.features[0].properties?.id
-          const region = ALPINE_REGIONS.find((r) => r.id === regionId)
-          if (region) onRegionSelectRef.current(region)
-        }
-      })
+        m.on('click', 'region-fill', (e) => {
+          // Skip if a hut popup is open — prevents re-fetch that kills markers
+          if (popupOpenRef.current) return
+          if (e.features && e.features.length > 0) {
+            const regionId = e.features[0].properties?.id
+            const region = ALPINE_REGIONS.find((r) => r.id === regionId)
+            if (region) onRegionSelectRef.current(region)
+          }
+        })
+      }
 
       setLoaded(true)
     })
@@ -328,10 +438,35 @@ export default function AlpineMap({ onRegionSelect, selectedRegionId, huts, rout
         markersRef.current.push(marker)
       }
 
-      if (huts!.length > 1) {
-        const bounds = new mapboxgl.LngLatBounds()
-        huts!.forEach((h) => bounds.extend([h.lng, h.lat]))
-        m.fitBounds(bounds, { padding: 80, duration: 400, pitch: 50, bearing: -5 })
+      // Access point markers
+      if (accessPoints) {
+        for (const ap of accessPoints) {
+          const el = createAccessPointIcon(ap.type)
+
+          const popup = new mapboxgl.Popup({
+            offset: 14,
+            closeButton: true,
+            closeOnClick: false,
+            maxWidth: '200px',
+            className: 'hut-popup',
+          }).setHTML(createAccessPointPopupHTML(ap))
+
+          const marker = new mapboxgl.Marker({ element: el, anchor: 'center' })
+            .setLngLat([ap.lng, ap.lat])
+            .setPopup(popup)
+            .addTo(m)
+
+          markersRef.current.push(marker)
+        }
+      }
+
+      const bounds = new mapboxgl.LngLatBounds()
+      huts!.forEach((h) => bounds.extend([h.lng, h.lat]))
+      if (accessPoints) {
+        accessPoints.forEach((ap) => bounds.extend([ap.lng, ap.lat]))
+      }
+      if (!bounds.isEmpty()) {
+        m.fitBounds(bounds, { padding: 80, maxZoom: 13, duration: 400, pitch: 50, bearing: -5 })
       }
     }
 
@@ -340,7 +475,7 @@ export default function AlpineMap({ onRegionSelect, selectedRegionId, huts, rout
     } else {
       m.once('style.load', addMarkers)
     }
-  }, [huts, loaded, animateMarkers])
+  }, [huts, accessPoints, loaded, animateMarkers])
 
   // Route lines
   useEffect(() => {
