@@ -11,6 +11,7 @@ export interface RoomAvailability {
 export interface DayAvailability {
   date: string
   available: boolean
+  uncertain?: boolean
   roomTypes: RoomAvailability[]
 }
 

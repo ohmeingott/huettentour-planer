@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation'
 import dynamic from 'next/dynamic'
 import { useAppStore, TourResult } from '@/lib/store'
 import TourCard from '@/components/tour/tour-card'
-import { useState } from 'react'
+import { useState, useRef, useCallback, useEffect } from 'react'
 
 const AlpineMap = dynamic(() => import('@/components/map/alpine-map'), { ssr: false })
 
@@ -12,12 +12,42 @@ export default function ResultsPage() {
   const router = useRouter()
   const { tourResults, totalFound, setSelectedTour } = useAppStore()
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+  const [mapTransitioning, setMapTransitioning] = useState(false)
+  const debounceRef = useRef<ReturnType<typeof setTimeout>>(null)
+  const prevTourIdRef = useRef<string | null>(null)
+
+  const handleHover = useCallback((index: number | null) => {
+    if (debounceRef.current) clearTimeout(debounceRef.current)
+    debounceRef.current = setTimeout(() => {
+      setHoveredIndex(index)
+    }, 80)
+  }, [])
 
   const displayTour = hoveredIndex !== null ? tourResults[hoveredIndex] : tourResults[0]
 
+  // Compute initial map center from the first tour so the map starts near the tour area
+  const firstTour = tourResults[0]
+  const mapInitialCenter: [number, number] | undefined = firstTour?.hutDetails?.length
+    ? [
+        firstTour.hutDetails.reduce((sum, h) => sum + h.lng, 0) / firstTour.hutDetails.length,
+        firstTour.hutDetails.reduce((sum, h) => sum + h.lat, 0) / firstTour.hutDetails.length,
+      ]
+    : undefined
+
+  // Show transition overlay when the displayed tour changes
+  const currentTourId = displayTour?.huts.join(',') ?? null
+  useEffect(() => {
+    if (prevTourIdRef.current !== null && currentTourId !== prevTourIdRef.current) {
+      setMapTransitioning(true)
+      const t = setTimeout(() => setMapTransitioning(false), 350)
+      return () => clearTimeout(t)
+    }
+    prevTourIdRef.current = currentTourId
+  }, [currentTourId])
+
   const handleSelect = (tour: TourResult) => {
     setSelectedTour(tour)
-    router.push('/tour/availability')
+    router.push('/tour/overview')
   }
 
   if (tourResults.length === 0) {
@@ -66,8 +96,8 @@ export default function ResultsPage() {
           {tourResults.map((tour, i) => (
             <div
               key={i}
-              onMouseEnter={() => setHoveredIndex(i)}
-              onMouseLeave={() => setHoveredIndex(null)}
+              onMouseEnter={() => handleHover(i)}
+              onMouseLeave={() => handleHover(null)}
               className="animate-fade-in-up"
               style={{ animationDelay: `${i * 0.05}s`, opacity: 0 }}
             >
@@ -86,17 +116,61 @@ export default function ResultsPage() {
       <div className="flex-1 relative">
         <AlpineMap
           onRegionSelect={() => {}}
+          showRegions={false}
+          initialCenter={mapInitialCenter}
+          initialZoom={11}
           huts={displayTour?.hutDetails}
+          accessPoints={
+            displayTour
+              ? [displayTour.startAccessPoint, displayTour.endAccessPoint]
+                  .filter((ap): ap is NonNullable<typeof ap> => !!ap)
+              : undefined
+          }
           routeLines={
             displayTour
-              ? displayTour.legs.map((leg) => {
-                  const from = displayTour.hutDetails.find((h) => h.id === leg.fromHutId)!
-                  const to = displayTour.hutDetails.find((h) => h.id === leg.toHutId)!
-                  return { coordinates: [[from.lng, from.lat], [to.lng, to.lat]] }
-                })
+              ? [
+                  // Access leg: AP → first hut
+                  ...(displayTour.startAccessPoint && displayTour.startAccessLeg
+                    ? [{
+                        coordinates: [
+                          [displayTour.startAccessPoint.lng, displayTour.startAccessPoint.lat],
+                          [displayTour.hutDetails[0].lng, displayTour.hutDetails[0].lat],
+                        ] as [number, number][],
+                        difficulty: 'access',
+                      }]
+                    : []),
+                  // Hut-to-hut legs
+                  ...displayTour.legs.map((leg) => {
+                    const from = displayTour.hutDetails.find((h) => h.id === leg.fromHutId)!
+                    const to = displayTour.hutDetails.find((h) => h.id === leg.toHutId)!
+                    return { coordinates: [[from.lng, from.lat], [to.lng, to.lat]] as [number, number][], difficulty: leg.difficulty }
+                  }),
+                  // Access leg: last hut → AP
+                  ...(displayTour.endAccessPoint && displayTour.endAccessLeg
+                    ? [{
+                        coordinates: [
+                          [displayTour.hutDetails[displayTour.hutDetails.length - 1].lng, displayTour.hutDetails[displayTour.hutDetails.length - 1].lat],
+                          [displayTour.endAccessPoint.lng, displayTour.endAccessPoint.lat],
+                        ] as [number, number][],
+                        difficulty: 'access',
+                      }]
+                    : []),
+                ]
               : undefined
           }
         />
+
+        {/* Map transition overlay */}
+        <div
+          className={`absolute inset-0 bg-stone-50/60 backdrop-blur-[2px] z-20 flex items-center justify-center pointer-events-none transition-opacity duration-200 ${
+            mapTransitioning ? 'opacity-100' : 'opacity-0'
+          }`}
+        >
+          <div className="flex items-center gap-2.5 bg-white/90 backdrop-blur-sm rounded-full px-5 py-2.5 shadow-sm border border-stone-200/60">
+            <div className="w-4 h-4 border-2 border-alpine-600 border-t-transparent rounded-full animate-spin" />
+            <span className="text-sm text-stone-600 font-medium">Route wird geladen...</span>
+          </div>
+        </div>
 
         {/* Floating tour summary */}
         {displayTour && (

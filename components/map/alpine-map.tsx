@@ -52,15 +52,17 @@ const DEFAULT_ROUTE_COLOR = { line: '#b45309', glow: '#c2410c' }
 
 function createAccessPointIcon(type: string): HTMLDivElement {
   const el = document.createElement('div')
-  el.style.cssText = `
-    width: 36px; height: 40px; cursor: pointer;
+  el.style.cssText = `width: 36px; height: 40px; cursor: pointer;`
+  const inner = document.createElement('div')
+  inner.style.cssText = `
+    width: 100%; height: 100%;
     transition: transform 0.15s ease;
     filter: drop-shadow(0 3px 5px rgba(0,0,0,0.3));
   `
+  el.appendChild(inner)
 
   if (type === 'cable_car') {
-    // 3D gondola icon
-    el.innerHTML = `<svg width="36" height="40" viewBox="0 0 36 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    inner.innerHTML = `<svg width="36" height="40" viewBox="0 0 36 40" fill="none" xmlns="http://www.w3.org/2000/svg">
       <ellipse cx="18" cy="38" rx="10" ry="2" fill="rgba(0,0,0,0.1)"/>
       <line x1="2" y1="4" x2="34" y2="8" stroke="#475569" stroke-width="2" stroke-linecap="round"/>
       <line x1="18" y1="6" x2="18" y2="13" stroke="#64748b" stroke-width="1.5"/>
@@ -77,8 +79,7 @@ function createAccessPointIcon(type: string): HTMLDivElement {
       <line x1="18" y1="25" x2="18" y2="30" stroke="#1e40af" stroke-width="0.5"/>
     </svg>`
   } else if (type === 'parking') {
-    // 3D parking sign icon
-    el.innerHTML = `<svg width="36" height="40" viewBox="0 0 36 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    inner.innerHTML = `<svg width="36" height="40" viewBox="0 0 36 40" fill="none" xmlns="http://www.w3.org/2000/svg">
       <ellipse cx="18" cy="38" rx="8" ry="2" fill="rgba(0,0,0,0.1)"/>
       <rect x="16" y="22" width="4" height="16" rx="1" fill="#78716c"/>
       <rect x="16" y="22" width="1.5" height="16" rx="0.5" fill="#8a8580" opacity="0.5"/>
@@ -89,8 +90,7 @@ function createAccessPointIcon(type: string): HTMLDivElement {
       <text x="17" y="20" text-anchor="middle" font-size="14" font-weight="bold" fill="white" font-family="system-ui,sans-serif">P</text>
     </svg>`
   } else {
-    // 3D village with church icon
-    el.innerHTML = `<svg width="36" height="40" viewBox="0 0 36 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    inner.innerHTML = `<svg width="36" height="40" viewBox="0 0 36 40" fill="none" xmlns="http://www.w3.org/2000/svg">
       <ellipse cx="18" cy="38" rx="12" ry="2" fill="rgba(0,0,0,0.1)"/>
       <rect x="20" y="16" width="10" height="20" fill="#94a3b8"/>
       <path d="M30 16 L33 14 L33 34 L30 36 Z" fill="#64748b"/>
@@ -114,21 +114,24 @@ function createAccessPointIcon(type: string): HTMLDivElement {
     </svg>`
   }
 
-  el.addEventListener('mouseenter', () => { el.style.transform = 'scale(1.25) translateY(-2px)' })
-  el.addEventListener('mouseleave', () => { el.style.transform = 'scale(1)' })
+  el.addEventListener('mouseenter', () => { inner.style.transform = 'scale(1.25) translateY(-2px)' })
+  el.addEventListener('mouseleave', () => { inner.style.transform = 'scale(1)' })
   return el
 }
 
 function createHutIcon(animate?: boolean, index?: number): HTMLDivElement {
   const el = document.createElement('div')
   const delay = animate ? (index ?? 0) * 150 : 0
-  el.style.cssText = `
-    width: 40px; height: 44px; cursor: pointer;
+  el.style.cssText = `width: 40px; height: 44px; cursor: pointer;`
+  const inner = document.createElement('div')
+  inner.style.cssText = `
+    width: 100%; height: 100%;
     transition: transform 0.15s ease;
     filter: drop-shadow(0 3px 6px rgba(0,0,0,0.35));
     ${animate ? `opacity: 0; transform: scale(0) translateY(12px); animation: hutBounceIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) ${delay}ms forwards;` : ''}
   `
-  el.innerHTML = `<svg width="40" height="44" viewBox="0 0 40 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+  el.appendChild(inner)
+  inner.innerHTML = `<svg width="40" height="44" viewBox="0 0 40 44" fill="none" xmlns="http://www.w3.org/2000/svg">
     <!-- Ground shadow -->
     <ellipse cx="18" cy="42" rx="14" ry="2.5" fill="rgba(0,0,0,0.12)"/>
     <!-- Front wall -->
@@ -174,13 +177,13 @@ function createHutIcon(animate?: boolean, index?: number): HTMLDivElement {
     <rect x="7" y="22" width="6.5" height="6" rx="1" fill="#fbbf24" opacity="0.15"/>
     <rect x="21" y="22" width="6.5" height="6" rx="1" fill="#fbbf24" opacity="0.15"/>
   </svg>`
-  el.addEventListener('mouseenter', () => { el.style.transform = 'scale(1.25) translateY(-3px)' })
-  el.addEventListener('mouseleave', () => { el.style.transform = 'scale(1)' })
+  el.addEventListener('mouseenter', () => { inner.style.transform = 'scale(1.25) translateY(-3px)' })
+  el.addEventListener('mouseleave', () => { inner.style.transform = 'scale(1)' })
   if (animate) {
-    el.addEventListener('animationend', () => {
-      el.style.animation = 'none'
-      el.style.opacity = '1'
-      el.style.transform = 'scale(1)'
+    inner.addEventListener('animationend', () => {
+      inner.style.animation = 'none'
+      inner.style.opacity = '1'
+      inner.style.transform = 'scale(1)'
     }, { once: true })
   }
   return el

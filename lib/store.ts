@@ -1,5 +1,7 @@
 import { create } from 'zustand'
 
+export type TourType = 'rundtour' | 'flexibel' | 'egal'
+
 export interface HutDetail {
   id: string
   name: string
@@ -12,6 +14,27 @@ export interface HutDetail {
   amenities?: string[]
 }
 
+export interface AccessPointDetail {
+  id: string
+  name: string
+  type: string
+  altitude: number
+  lat: number
+  lng: number
+}
+
+export interface AccessLeg {
+  accessPointId: string
+  hutId: string
+  distance: number
+  ascent: number
+  descent: number
+  estimatedDuration: number
+  difficulty: string
+  hasCableCar: boolean
+  direction: 'ap_to_hut' | 'hut_to_ap'
+}
+
 export interface TourLeg {
   fromHutId: string
   toHutId: string
@@ -19,6 +42,7 @@ export interface TourLeg {
   ascent: number
   descent: number
   estimatedDuration: number
+  difficulty: string
 }
 
 export interface TourResult {
@@ -29,6 +53,12 @@ export interface TourResult {
   totalAscent: number
   totalDescent: number
   totalDuration: number
+  startAccessPointId?: string
+  endAccessPointId?: string
+  startAccessLeg?: AccessLeg
+  endAccessLeg?: AccessLeg
+  startAccessPoint?: AccessPointDetail
+  endAccessPoint?: AccessPointDetail
 }
 
 export interface TourParams {
@@ -41,6 +71,8 @@ export interface TourParams {
   maxAscent: number | undefined
   roomPreference: string
   maxBedsPerRoom: number | undefined
+  accessPointId: string | undefined
+  tourType: TourType
 }
 
 interface AppState {
@@ -82,6 +114,8 @@ export const useAppStore = create<AppState>((set) => ({
     maxAscent: undefined,
     roomPreference: 'any',
     maxBedsPerRoom: undefined,
+    accessPointId: undefined,
+    tourType: 'egal',
   },
   setTourParams: (params) =>
     set((state) => ({ tourParams: { ...state.tourParams, ...params } })),

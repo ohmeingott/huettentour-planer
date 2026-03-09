@@ -144,6 +144,8 @@ exports.Prisma.HutScalarFieldEnum = {
   imageUrl: 'imageUrl',
   description: 'description',
   amenities: 'amenities',
+  seasonStart: 'seasonStart',
+  seasonEnd: 'seasonEnd',
   regionId: 'regionId'
 };
 
@@ -198,6 +200,37 @@ exports.Prisma.AvailabilityCheckScalarFieldEnum = {
   available: 'available',
   checkedAt: 'checkedAt',
   source: 'source'
+};
+
+exports.Prisma.AccessPointScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  type: 'type',
+  altitude: 'altitude',
+  lat: 'lat',
+  lng: 'lng',
+  regionId: 'regionId'
+};
+
+exports.Prisma.CableCarScalarFieldEnum = {
+  id: 'id',
+  accessPointId: 'accessPointId',
+  operatorName: 'operatorName',
+  seasonStart: 'seasonStart',
+  seasonEnd: 'seasonEnd',
+  website: 'website'
+};
+
+exports.Prisma.AccessRouteScalarFieldEnum = {
+  id: 'id',
+  accessPointId: 'accessPointId',
+  hutId: 'hutId',
+  distance: 'distance',
+  ascent: 'ascent',
+  descent: 'descent',
+  estimatedDuration: 'estimatedDuration',
+  difficulty: 'difficulty',
+  hasCableCar: 'hasCableCar'
 };
 
 exports.Prisma.SortOrder = {
@@ -259,6 +292,12 @@ exports.TourStatus = exports.$Enums.TourStatus = {
   partially_available: 'partially_available'
 };
 
+exports.AccessPointType = exports.$Enums.AccessPointType = {
+  parking: 'parking',
+  village: 'village',
+  cable_car: 'cable_car'
+};
+
 exports.Prisma.ModelName = {
   Region: 'Region',
   Hut: 'Hut',
@@ -266,7 +305,10 @@ exports.Prisma.ModelName = {
   Route: 'Route',
   Tour: 'Tour',
   TourHut: 'TourHut',
-  AvailabilityCheck: 'AvailabilityCheck'
+  AvailabilityCheck: 'AvailabilityCheck',
+  AccessPoint: 'AccessPoint',
+  CableCar: 'CableCar',
+  AccessRoute: 'AccessRoute'
 };
 
 /**

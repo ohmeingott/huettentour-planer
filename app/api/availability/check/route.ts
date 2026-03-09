@@ -28,6 +28,8 @@ export async function POST(request: NextRequest) {
       hutName: hut.name,
       bookingUrl: hut.bookingUrl,
       bookingSystem: hut.bookingSystem,
+      seasonStart: hut.seasonStart,
+      seasonEnd: hut.seasonEnd,
       dates,
       groupSize,
       roomPreference: roomPreference || 'any',

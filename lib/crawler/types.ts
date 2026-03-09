@@ -6,6 +6,8 @@ export interface AvailabilityJobData {
     hutName: string
     bookingUrl: string | null
     bookingSystem: string
+    seasonStart: string | null
+    seasonEnd: string | null
     dates: string[]
     groupSize: number
     roomPreference: string
@@ -25,6 +27,7 @@ export interface HutAvailabilityResult {
   dates: {
     date: string
     available: boolean
+    uncertain?: boolean
     roomTypes: { type: string; available: number }[]
   }[]
   error?: string

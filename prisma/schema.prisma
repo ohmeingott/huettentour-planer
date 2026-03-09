@@ -41,6 +41,12 @@ enum AccommodationType {
   dorm
 }
 
+enum AccessPointType {
+  parking
+  village
+  cable_car
+}
+
 model Region {
   id                String @id @default(cuid())
   name              String
@@ -52,6 +58,7 @@ model Region {
   centerLat         Float
   centerLng         Float
   huts              Hut[]
+  accessPoints      AccessPoint[]
 }
 
 model Hut {
@@ -66,6 +73,8 @@ model Hut {
   imageUrl      String?
   description   String?
   amenities     String[]
+  seasonStart   String?           // "MM-DD" format, e.g. "06-15"
+  seasonEnd     String?           // "MM-DD" format, e.g. "09-30"
   regionId      String
   region        Region            @relation(fields: [regionId], references: [id])
   roomTypes     RoomTypeConfig[]
@@ -73,6 +82,7 @@ model Hut {
   routesTo      Route[]           @relation("routeTo")
   availability  AvailabilityCheck[]
   tourHuts      TourHut[]
+  accessRoutes  AccessRoute[]
 }
 
 model RoomTypeConfig {
@@ -141,4 +151,43 @@ model AvailabilityCheck {
   source    BookingSystem
 
   @@unique([hutId, date, roomType])
+}
+
+model AccessPoint {
+  id        String          @id @default(cuid())
+  name      String
+  type      AccessPointType
+  altitude  Int
+  lat       Float
+  lng       Float
+  regionId  String
+  region    Region          @relation(fields: [regionId], references: [id])
+  routes    AccessRoute[]
+  cableCar  CableCar?
+}
+
+model CableCar {
+  id            String      @id @default(cuid())
+  accessPointId String      @unique
+  accessPoint   AccessPoint @relation(fields: [accessPointId], references: [id])
+  operatorName  String
+  seasonStart   String?
+  seasonEnd     String?
+  website       String?
+}
+
+model AccessRoute {
+  id                String      @id @default(cuid())
+  accessPointId     String
+  accessPoint       AccessPoint @relation(fields: [accessPointId], references: [id])
+  hutId             String
+  hut               Hut         @relation(fields: [hutId], references: [id])
+  distance          Float
+  ascent            Int
+  descent           Int
+  estimatedDuration Float
+  difficulty        Difficulty
+  hasCableCar       Boolean     @default(false)
+
+  @@unique([accessPointId, hutId])
 }

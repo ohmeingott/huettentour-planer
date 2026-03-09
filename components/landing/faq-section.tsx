@@ -16,7 +16,7 @@ const faqItems: { question: string; answer: string }[] = [
   {
     question: 'Welche Regionen sind verfügbar?',
     answer:
-      'Aktuell unterstützen wir 5 Alpenregionen: Stubaier Alpen, Zillertaler Alpen, Ötztaler Alpen, Dolomiten und Berner Oberland. Weitere Regionen folgen.',
+      'Aktuell unterstützen wir 2 Alpenregionen: Stubaier Alpen und Zillertaler Alpen. Weitere Regionen folgen.',
   },
   {
     question: 'Muss ich die Hütten selbst buchen?',

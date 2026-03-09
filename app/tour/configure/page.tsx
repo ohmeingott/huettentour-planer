@@ -1,9 +1,30 @@
 'use client'
 
 import { useRouter, useSearchParams } from 'next/navigation'
-import { Suspense, useState } from 'react'
-import { useAppStore } from '@/lib/store'
+import { Suspense, useState, useEffect } from 'react'
+import { useAppStore, TourType } from '@/lib/store'
 import { ALPINE_REGIONS } from '@/lib/map/regions'
+
+interface AccessPointOption {
+  id: string
+  name: string
+  type: string
+  altitude: number
+}
+
+const AP_TYPE_LABELS: Record<string, string> = {
+  parking: 'Parkplatz',
+  village: 'Ort',
+  cable_car: 'Seilbahn',
+}
+
+const AP_TYPE_ORDER = ['parking', 'village', 'cable_car']
+
+const TOUR_TYPE_OPTIONS: { value: TourType; label: string; desc: string }[] = [
+  { value: 'rundtour', label: 'Rundtour', desc: 'Gleicher Start & Ziel' },
+  { value: 'flexibel', label: 'Flexibel', desc: 'Bevorzugt gleichen Punkt' },
+  { value: 'egal', label: 'Egal', desc: 'Beliebig' },
+]
 
 function ConfigureForm() {
   const router = useRouter()
@@ -12,6 +33,22 @@ function ConfigureForm() {
   const region = ALPINE_REGIONS.find((r) => r.id === regionId)
   const { tourParams, setTourParams } = useAppStore()
   const [loading, setLoading] = useState(false)
+  const [accessPoints, setAccessPoints] = useState<AccessPointOption[]>([])
+
+  // Load access points for the region
+  useEffect(() => {
+    if (!regionId) return
+    fetch(`/api/access-points?slug=${regionId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setAccessPoints(data.map((ap: any) => ({
+            id: ap.id, name: ap.name, type: ap.type, altitude: ap.altitude,
+          })))
+        }
+      })
+      .catch(() => {})
+  }, [regionId])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -90,6 +127,60 @@ function ConfigureForm() {
                   onChange={(e) => setTourParams({ restDays: parseInt(e.target.value) || 0 })}
                   className="w-full border border-stone-200 rounded-xl px-4 py-2.5 text-stone-900 focus:ring-2 focus:ring-alpine-500/30 focus:border-alpine-500 outline-none transition"
                 />
+              </div>
+            </div>
+          </div>
+
+          {/* Startpunkt & Tourtyp */}
+          <div className="bg-white rounded-2xl shadow-sm border border-stone-200/80 p-7 mb-6">
+            <h2 className="text-sm font-semibold text-stone-700 uppercase tracking-wider mb-5">Startpunkt & Tourtyp</h2>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-xs text-stone-500 mb-1.5">Zugangspunkt</label>
+                <select
+                  value={tourParams.accessPointId || ''}
+                  onChange={(e) => setTourParams({
+                    accessPointId: e.target.value || undefined,
+                    tourType: e.target.value ? tourParams.tourType : 'egal',
+                  })}
+                  className="w-full border border-stone-200 rounded-xl px-4 py-2.5 text-stone-900 focus:ring-2 focus:ring-alpine-500/30 focus:border-alpine-500 outline-none transition bg-white"
+                >
+                  <option value="">Beliebig (alle Hütten als Start)</option>
+                  {AP_TYPE_ORDER.map((type) => {
+                    const aps = accessPoints.filter((ap) => ap.type === type)
+                    if (aps.length === 0) return null
+                    return (
+                      <optgroup key={type} label={AP_TYPE_LABELS[type] || type}>
+                        {aps.map((ap) => (
+                          <option key={ap.id} value={ap.id}>
+                            {ap.name} ({ap.altitude} m)
+                          </option>
+                        ))}
+                      </optgroup>
+                    )
+                  })}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-xs text-stone-500 mb-2">Tourtyp</label>
+                <div className="grid grid-cols-3 gap-2">
+                  {TOUR_TYPE_OPTIONS.map((opt) => (
+                    <button
+                      key={opt.value}
+                      type="button"
+                      onClick={() => setTourParams({ tourType: opt.value })}
+                      className={`rounded-xl border px-3 py-2.5 text-center transition ${
+                        tourParams.tourType === opt.value
+                          ? 'border-alpine-500 bg-alpine-50 text-alpine-700 ring-1 ring-alpine-200'
+                          : 'border-stone-200 text-stone-600 hover:border-stone-300'
+                      }`}
+                    >
+                      <div className="text-sm font-medium">{opt.label}</div>
+                      <div className="text-[10px] mt-0.5 opacity-70">{opt.desc}</div>
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

@@ -16,8 +16,44 @@ const instrumentSerif = Instrument_Serif({
 })
 
 export const metadata: Metadata = {
-  title: 'Hütten-Tour Planner',
-  description: 'Plane deine Mehrtages-Hüttentour in den Alpen',
+  metadataBase: new URL('http://localhost:3000'),
+  title: {
+    default: 'Hüttentour Planer — Mehrtages-Hüttentouren in den Alpen planen',
+    template: '%s | Hüttentour Planer',
+  },
+  description:
+    'Plane deine Mehrtages-Hüttentour in den Alpen. Finde die perfekte Route, konfiguriere deine Tour und prüfe die Verfügbarkeit aller Hütten — alles an einem Ort.',
+  applicationName: 'Hüttentour Planer',
+  keywords: [
+    'Hüttentour',
+    'Alpen',
+    'Mehrtages-Wanderung',
+    'Berghütte',
+    'Hüttenwanderung',
+    'Stubaier Alpen',
+    'Zillertaler Alpen',
+    'Tourenplanung',
+    'Verfügbarkeit',
+    'Hüttenreservierung',
+  ],
+  openGraph: {
+    type: 'website',
+    locale: 'de_DE',
+    siteName: 'Hüttentour Planer',
+    title: 'Hüttentour Planer — Mehrtages-Hüttentouren in den Alpen planen',
+    description:
+      'Finde die perfekte Route, konfiguriere deine Tour und prüfe die Verfügbarkeit aller Hütten — alles an einem Ort.',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Hüttentour Planer — Mehrtages-Hüttentouren in den Alpen',
+    description:
+      'Finde die perfekte Route und prüfe die Verfügbarkeit aller Hütten in den Alpen.',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

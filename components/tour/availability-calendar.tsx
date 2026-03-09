@@ -3,7 +3,7 @@ interface AvailabilityCalendarProps {
     hutId: string
     hutName: string
     status: string
-    dates: { date: string; available: boolean; roomTypes: { type: string; available: number }[] }[]
+    dates: { date: string; available: boolean; uncertain?: boolean; roomTypes: { type: string; available: number }[] }[]
   }[]
   hutOrder?: string[]
 }
@@ -81,6 +81,10 @@ export default function AvailabilityCalendar({ results, hutOrder }: Availability
           <div className="w-4 h-4 rounded bg-red-100 border border-red-200" />
           <span>Belegt</span>
         </div>
+        <div className="flex items-center gap-1.5">
+          <div className="w-4 h-4 rounded bg-amber-100 border border-amber-200 flex items-center justify-center text-[8px] font-bold text-amber-600">?</div>
+          <span>Unsicher (Abfrage fehlgeschlagen)</span>
+        </div>
       </div>
 
       <div className="overflow-x-auto custom-scrollbar rounded-xl border border-stone-200">
@@ -112,8 +116,8 @@ export default function AvailabilityCalendar({ results, hutOrder }: Availability
                   <div className="flex items-center gap-2">
                     {hut.hutName}
                     {hut.status === 'error' && (
-                      <span className="text-amber-500 text-[10px] bg-amber-50 px-1.5 py-0.5 rounded">
-                        Fehler
+                      <span className="text-amber-600 text-[10px] bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded font-medium" title="Verfügbarkeit konnte nicht sicher abgefragt werden">
+                        ? Unsicher
                       </span>
                     )}
                   </div>
@@ -126,6 +130,7 @@ export default function AvailabilityCalendar({ results, hutOrder }: Availability
                 {hut.dates.map((d, dateIdx) => {
                   const isStaircase = staircaseCells.has(`${hutIdx}-${dateIdx}`)
                   const borders = staircaseBorders(hutIdx, dateIdx)
+                  const isUncertain = d.uncertain === true
 
                   return (
                     <td
@@ -136,15 +141,21 @@ export default function AvailabilityCalendar({ results, hutOrder }: Availability
                     >
                       <div
                         className={`w-8 h-8 rounded-lg flex items-center justify-center mx-auto text-[10px] font-medium transition ${
-                          d.available
-                            ? isStaircase
-                              ? 'bg-alpine-600 text-white shadow-sm'
-                              : 'bg-alpine-100 text-alpine-700'
-                            : 'bg-red-100 text-red-500'
+                          isUncertain
+                            ? 'bg-amber-100 text-amber-600 border border-amber-200'
+                            : d.available
+                              ? isStaircase
+                                ? 'bg-alpine-600 text-white shadow-sm'
+                                : 'bg-alpine-100 text-alpine-700'
+                              : 'bg-red-100 text-red-500'
                         }`}
-                        title={d.roomTypes.map((rt) => `${rt.type}: ${rt.available}`).join(', ')}
+                        title={
+                          isUncertain
+                            ? 'Verfügbarkeit unsicher – Abfrage fehlgeschlagen'
+                            : d.roomTypes.map((rt) => `${rt.type}: ${rt.available}`).join(', ')
+                        }
                       >
-                        {d.available ? '\u2713' : '\u2717'}
+                        {isUncertain ? '?' : d.available ? '\u2713' : '\u2717'}
                       </div>
                     </td>
                   )
@@ -198,22 +209,33 @@ export default function AvailabilityCalendar({ results, hutOrder }: Availability
         </div>
       )}
 
-      {windows.length === 0 && sorted.length > 0 && (
-        <div className="mt-6 p-5 bg-red-50 rounded-xl border border-red-200">
-          <div className="flex items-center gap-2 mb-2">
-            <div className="w-6 h-6 rounded-full bg-red-500 flex items-center justify-center">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3">
-                <path d="M18 6L6 18M6 6l12 12" />
-              </svg>
+      {windows.length === 0 && sorted.length > 0 && (() => {
+        const hasUncertain = sorted.some((h) => h.status === 'error')
+        return (
+          <div className={`mt-6 p-5 rounded-xl border ${hasUncertain ? 'bg-amber-50 border-amber-200' : 'bg-red-50 border-red-200'}`}>
+            <div className="flex items-center gap-2 mb-2">
+              <div className={`w-6 h-6 rounded-full flex items-center justify-center ${hasUncertain ? 'bg-amber-500' : 'bg-red-500'}`}>
+                {hasUncertain ? (
+                  <span className="text-white font-bold text-sm">?</span>
+                ) : (
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3">
+                    <path d="M18 6L6 18M6 6l12 12" />
+                  </svg>
+                )}
+              </div>
+              <h3 className={`font-semibold ${hasUncertain ? 'text-amber-900' : 'text-red-900'}`}>
+                {hasUncertain ? 'Ergebnis unsicher' : 'Kein Zeitfenster gefunden'}
+              </h3>
             </div>
-            <h3 className="font-semibold text-red-900">Kein Zeitfenster gefunden</h3>
+            <p className={`text-sm ml-8 ${hasUncertain ? 'text-amber-700' : 'text-red-700'}`}>
+              {hasUncertain
+                ? 'Für einige Hütten konnte die Verfügbarkeit nicht abgefragt werden. Prüfe die mit ? markierten Hütten direkt auf der Buchungsseite.'
+                : `Keine ${numHuts} aufeinanderfolgenden Nächte mit versetzter Verfügbarkeit in allen Hütten. Versuche einen anderen Zeitraum oder andere Tour.`
+              }
+            </p>
           </div>
-          <p className="text-sm text-red-700 ml-8">
-            Keine {numHuts} aufeinanderfolgenden Nächte mit versetzter Verfügbarkeit in allen Hütten.
-            Versuche einen anderen Zeitraum oder andere Tour.
-          </p>
-        </div>
-      )}
+        )
+      })()}
     </div>
   )
 }

@@ -14,7 +14,7 @@ const AlpineMap = dynamic(() => import('@/components/map/alpine-map'), { ssr: fa
 
 interface RegionData {
   huts: { id: string; name: string; lat: number; lng: number; altitude: number; imageUrl?: string | null; capacity?: number }[]
-  routes: { fromHutId: string; toHutId: string }[]
+  routes: { fromHutId: string; toHutId: string; difficulty?: string; gpxTrack?: [number, number][] | null }[]
   accessPoints: { id: string; name: string; type: string; altitude: number; lat: number; lng: number }[]
 }
 
@@ -63,15 +63,19 @@ export default function Home() {
   const routeLines = regionData
     ? (() => {
         const seen = new Set<string>()
-        const lines: { coordinates: [number, number][] }[] = []
+        const lines: { coordinates: [number, number][]; difficulty?: string }[] = []
         for (const route of regionData.routes) {
           const key = [route.fromHutId, route.toHutId].sort().join('-')
           if (seen.has(key)) continue
           seen.add(key)
-          const from = regionData.huts.find((h) => h.id === route.fromHutId)
-          const to = regionData.huts.find((h) => h.id === route.toHutId)
-          if (from && to) {
-            lines.push({ coordinates: [[from.lng, from.lat], [to.lng, to.lat]] })
+          if (route.gpxTrack && route.gpxTrack.length >= 2) {
+            lines.push({ coordinates: route.gpxTrack, difficulty: route.difficulty })
+          } else {
+            const from = regionData.huts.find((h) => h.id === route.fromHutId)
+            const to = regionData.huts.find((h) => h.id === route.toHutId)
+            if (from && to) {
+              lines.push({ coordinates: [[from.lng, from.lat], [to.lng, to.lat]], difficulty: route.difficulty })
+            }
           }
         }
         return lines

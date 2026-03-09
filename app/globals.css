@@ -41,15 +41,23 @@ html {
 
 /* Mapbox overrides */
 .mapboxgl-popup-content {
-  border-radius: 8px !important;
-  padding: 12px 16px !important;
+  border-radius: 12px !important;
+  padding: 0 !important;
   font-family: var(--font-body) !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18) !important;
+  overflow: hidden;
 }
 
 .mapboxgl-popup-close-button {
   font-size: 18px !important;
   padding: 4px 8px !important;
+  color: white !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.mapboxgl-popup-tip {
+  border-top-color: white !important;
 }
 
 /* Topo pattern background */
@@ -96,6 +104,24 @@ html {
   to {
     opacity: 1;
     transform: translateX(0);
+  }
+}
+
+@keyframes hutBounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0) translateY(12px);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.15) translateY(-3px);
+  }
+  80% {
+    transform: scale(0.95) translateY(1px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
   }
 }
 

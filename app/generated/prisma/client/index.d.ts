@@ -48,6 +48,21 @@ export type TourHut = $Result.DefaultSelection<Prisma.$TourHutPayload>
  * 
  */
 export type AvailabilityCheck = $Result.DefaultSelection<Prisma.$AvailabilityCheckPayload>
+/**
+ * Model AccessPoint
+ * 
+ */
+export type AccessPoint = $Result.DefaultSelection<Prisma.$AccessPointPayload>
+/**
+ * Model CableCar
+ * 
+ */
+export type CableCar = $Result.DefaultSelection<Prisma.$CableCarPayload>
+/**
+ * Model AccessRoute
+ * 
+ */
+export type AccessRoute = $Result.DefaultSelection<Prisma.$AccessRoutePayload>
 
 /**
  * Enums
@@ -101,6 +116,15 @@ export const AccommodationType: {
 
 export type AccommodationType = (typeof AccommodationType)[keyof typeof AccommodationType]
 
+
+export const AccessPointType: {
+  parking: 'parking',
+  village: 'village',
+  cable_car: 'cable_car'
+};
+
+export type AccessPointType = (typeof AccessPointType)[keyof typeof AccessPointType]
+
 }
 
 export type BookingSystem = $Enums.BookingSystem
@@ -122,6 +146,10 @@ export const TourStatus: typeof $Enums.TourStatus
 export type AccommodationType = $Enums.AccommodationType
 
 export const AccommodationType: typeof $Enums.AccommodationType
+
+export type AccessPointType = $Enums.AccessPointType
+
+export const AccessPointType: typeof $Enums.AccessPointType
 
 /**
  * ##  Prisma Client ʲˢ
@@ -313,6 +341,36 @@ export class PrismaClient<
     * ```
     */
   get availabilityCheck(): Prisma.AvailabilityCheckDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.accessPoint`: Exposes CRUD operations for the **AccessPoint** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more AccessPoints
+    * const accessPoints = await prisma.accessPoint.findMany()
+    * ```
+    */
+  get accessPoint(): Prisma.AccessPointDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.cableCar`: Exposes CRUD operations for the **CableCar** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more CableCars
+    * const cableCars = await prisma.cableCar.findMany()
+    * ```
+    */
+  get cableCar(): Prisma.CableCarDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.accessRoute`: Exposes CRUD operations for the **AccessRoute** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more AccessRoutes
+    * const accessRoutes = await prisma.accessRoute.findMany()
+    * ```
+    */
+  get accessRoute(): Prisma.AccessRouteDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -753,7 +811,10 @@ export namespace Prisma {
     Route: 'Route',
     Tour: 'Tour',
     TourHut: 'TourHut',
-    AvailabilityCheck: 'AvailabilityCheck'
+    AvailabilityCheck: 'AvailabilityCheck',
+    AccessPoint: 'AccessPoint',
+    CableCar: 'CableCar',
+    AccessRoute: 'AccessRoute'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -769,7 +830,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "region" | "hut" | "roomTypeConfig" | "route" | "tour" | "tourHut" | "availabilityCheck"
+      modelProps: "region" | "hut" | "roomTypeConfig" | "route" | "tour" | "tourHut" | "availabilityCheck" | "accessPoint" | "cableCar" | "accessRoute"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1291,6 +1352,228 @@ export namespace Prisma {
           }
         }
       }
+      AccessPoint: {
+        payload: Prisma.$AccessPointPayload<ExtArgs>
+        fields: Prisma.AccessPointFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AccessPointFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccessPointPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AccessPointFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccessPointPayload>
+          }
+          findFirst: {
+            args: Prisma.AccessPointFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccessPointPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AccessPointFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccessPointPayload>
+          }
+          findMany: {
+            args: Prisma.AccessPointFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccessPointPayload>[]
+          }
+          create: {
+            args: Prisma.AccessPointCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccessPointPayload>
+          }
+          createMany: {
+            args: Prisma.AccessPointCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AccessPointCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccessPointPayload>[]
+          }
+          delete: {
+            args: Prisma.AccessPointDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccessPointPayload>
+          }
+          update: {
+            args: Prisma.AccessPointUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccessPointPayload>
+          }
+          deleteMany: {
+            args: Prisma.AccessPointDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AccessPointUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AccessPointUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccessPointPayload>[]
+          }
+          upsert: {
+            args: Prisma.AccessPointUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccessPointPayload>
+          }
+          aggregate: {
+            args: Prisma.AccessPointAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAccessPoint>
+          }
+          groupBy: {
+            args: Prisma.AccessPointGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AccessPointGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AccessPointCountArgs<ExtArgs>
+            result: $Utils.Optional<AccessPointCountAggregateOutputType> | number
+          }
+        }
+      }
+      CableCar: {
+        payload: Prisma.$CableCarPayload<ExtArgs>
+        fields: Prisma.CableCarFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CableCarFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CableCarPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CableCarFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CableCarPayload>
+          }
+          findFirst: {
+            args: Prisma.CableCarFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CableCarPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CableCarFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CableCarPayload>
+          }
+          findMany: {
+            args: Prisma.CableCarFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CableCarPayload>[]
+          }
+          create: {
+            args: Prisma.CableCarCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CableCarPayload>
+          }
+          createMany: {
+            args: Prisma.CableCarCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CableCarCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CableCarPayload>[]
+          }
+          delete: {
+            args: Prisma.CableCarDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CableCarPayload>
+          }
+          update: {
+            args: Prisma.CableCarUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CableCarPayload>
+          }
+          deleteMany: {
+            args: Prisma.CableCarDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CableCarUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.CableCarUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CableCarPayload>[]
+          }
+          upsert: {
+            args: Prisma.CableCarUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CableCarPayload>
+          }
+          aggregate: {
+            args: Prisma.CableCarAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCableCar>
+          }
+          groupBy: {
+            args: Prisma.CableCarGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CableCarGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CableCarCountArgs<ExtArgs>
+            result: $Utils.Optional<CableCarCountAggregateOutputType> | number
+          }
+        }
+      }
+      AccessRoute: {
+        payload: Prisma.$AccessRoutePayload<ExtArgs>
+        fields: Prisma.AccessRouteFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AccessRouteFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccessRoutePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AccessRouteFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccessRoutePayload>
+          }
+          findFirst: {
+            args: Prisma.AccessRouteFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccessRoutePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AccessRouteFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccessRoutePayload>
+          }
+          findMany: {
+            args: Prisma.AccessRouteFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccessRoutePayload>[]
+          }
+          create: {
+            args: Prisma.AccessRouteCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccessRoutePayload>
+          }
+          createMany: {
+            args: Prisma.AccessRouteCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AccessRouteCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccessRoutePayload>[]
+          }
+          delete: {
+            args: Prisma.AccessRouteDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccessRoutePayload>
+          }
+          update: {
+            args: Prisma.AccessRouteUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccessRoutePayload>
+          }
+          deleteMany: {
+            args: Prisma.AccessRouteDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AccessRouteUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AccessRouteUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccessRoutePayload>[]
+          }
+          upsert: {
+            args: Prisma.AccessRouteUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AccessRoutePayload>
+          }
+          aggregate: {
+            args: Prisma.AccessRouteAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAccessRoute>
+          }
+          groupBy: {
+            args: Prisma.AccessRouteGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AccessRouteGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AccessRouteCountArgs<ExtArgs>
+            result: $Utils.Optional<AccessRouteCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1406,6 +1689,9 @@ export namespace Prisma {
     tour?: TourOmit
     tourHut?: TourHutOmit
     availabilityCheck?: AvailabilityCheckOmit
+    accessPoint?: AccessPointOmit
+    cableCar?: CableCarOmit
+    accessRoute?: AccessRouteOmit
   }
 
   /* Types for Logging */
@@ -1487,10 +1773,12 @@ export namespace Prisma {
 
   export type RegionCountOutputType = {
     huts: number
+    accessPoints: number
   }
 
   export type RegionCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     huts?: boolean | RegionCountOutputTypeCountHutsArgs
+    accessPoints?: boolean | RegionCountOutputTypeCountAccessPointsArgs
   }
 
   // Custom InputTypes
@@ -1511,6 +1799,13 @@ export namespace Prisma {
     where?: HutWhereInput
   }
 
+  /**
+   * RegionCountOutputType without action
+   */
+  export type RegionCountOutputTypeCountAccessPointsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AccessPointWhereInput
+  }
+
 
   /**
    * Count Type HutCountOutputType
@@ -1522,6 +1817,7 @@ export namespace Prisma {
     routesTo: number
     availability: number
     tourHuts: number
+    accessRoutes: number
   }
 
   export type HutCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1530,6 +1826,7 @@ export namespace Prisma {
     routesTo?: boolean | HutCountOutputTypeCountRoutesToArgs
     availability?: boolean | HutCountOutputTypeCountAvailabilityArgs
     tourHuts?: boolean | HutCountOutputTypeCountTourHutsArgs
+    accessRoutes?: boolean | HutCountOutputTypeCountAccessRoutesArgs
   }
 
   // Custom InputTypes
@@ -1578,6 +1875,13 @@ export namespace Prisma {
     where?: TourHutWhereInput
   }
 
+  /**
+   * HutCountOutputType without action
+   */
+  export type HutCountOutputTypeCountAccessRoutesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AccessRouteWhereInput
+  }
+
 
   /**
    * Count Type TourCountOutputType
@@ -1607,6 +1911,37 @@ export namespace Prisma {
    */
   export type TourCountOutputTypeCountHutsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: TourHutWhereInput
+  }
+
+
+  /**
+   * Count Type AccessPointCountOutputType
+   */
+
+  export type AccessPointCountOutputType = {
+    routes: number
+  }
+
+  export type AccessPointCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    routes?: boolean | AccessPointCountOutputTypeCountRoutesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * AccessPointCountOutputType without action
+   */
+  export type AccessPointCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccessPointCountOutputType
+     */
+    select?: AccessPointCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * AccessPointCountOutputType without action
+   */
+  export type AccessPointCountOutputTypeCountRoutesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AccessRouteWhereInput
   }
 
 
@@ -1865,6 +2200,7 @@ export namespace Prisma {
     centerLat?: boolean
     centerLng?: boolean
     huts?: boolean | Region$hutsArgs<ExtArgs>
+    accessPoints?: boolean | Region$accessPointsArgs<ExtArgs>
     _count?: boolean | RegionCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["region"]>
 
@@ -1907,6 +2243,7 @@ export namespace Prisma {
   export type RegionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "boundingBoxMinLat" | "boundingBoxMinLng" | "boundingBoxMaxLat" | "boundingBoxMaxLng" | "centerLat" | "centerLng", ExtArgs["result"]["region"]>
   export type RegionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     huts?: boolean | Region$hutsArgs<ExtArgs>
+    accessPoints?: boolean | Region$accessPointsArgs<ExtArgs>
     _count?: boolean | RegionCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type RegionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1916,6 +2253,7 @@ export namespace Prisma {
     name: "Region"
     objects: {
       huts: Prisma.$HutPayload<ExtArgs>[]
+      accessPoints: Prisma.$AccessPointPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2322,6 +2660,7 @@ export namespace Prisma {
   export interface Prisma__RegionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     huts<T extends Region$hutsArgs<ExtArgs> = {}>(args?: Subset<T, Region$hutsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HutPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    accessPoints<T extends Region$accessPointsArgs<ExtArgs> = {}>(args?: Subset<T, Region$accessPointsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccessPointPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2772,6 +3111,30 @@ export namespace Prisma {
   }
 
   /**
+   * Region.accessPoints
+   */
+  export type Region$accessPointsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccessPoint
+     */
+    select?: AccessPointSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccessPoint
+     */
+    omit?: AccessPointOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccessPointInclude<ExtArgs> | null
+    where?: AccessPointWhereInput
+    orderBy?: AccessPointOrderByWithRelationInput | AccessPointOrderByWithRelationInput[]
+    cursor?: AccessPointWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AccessPointScalarFieldEnum | AccessPointScalarFieldEnum[]
+  }
+
+  /**
    * Region without action
    */
   export type RegionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2827,6 +3190,8 @@ export namespace Prisma {
     bookingSystem: $Enums.BookingSystem | null
     imageUrl: string | null
     description: string | null
+    seasonStart: string | null
+    seasonEnd: string | null
     regionId: string | null
   }
 
@@ -2841,6 +3206,8 @@ export namespace Prisma {
     bookingSystem: $Enums.BookingSystem | null
     imageUrl: string | null
     description: string | null
+    seasonStart: string | null
+    seasonEnd: string | null
     regionId: string | null
   }
 
@@ -2856,6 +3223,8 @@ export namespace Prisma {
     imageUrl: number
     description: number
     amenities: number
+    seasonStart: number
+    seasonEnd: number
     regionId: number
     _all: number
   }
@@ -2886,6 +3255,8 @@ export namespace Prisma {
     bookingSystem?: true
     imageUrl?: true
     description?: true
+    seasonStart?: true
+    seasonEnd?: true
     regionId?: true
   }
 
@@ -2900,6 +3271,8 @@ export namespace Prisma {
     bookingSystem?: true
     imageUrl?: true
     description?: true
+    seasonStart?: true
+    seasonEnd?: true
     regionId?: true
   }
 
@@ -2915,6 +3288,8 @@ export namespace Prisma {
     imageUrl?: true
     description?: true
     amenities?: true
+    seasonStart?: true
+    seasonEnd?: true
     regionId?: true
     _all?: true
   }
@@ -3017,6 +3392,8 @@ export namespace Prisma {
     imageUrl: string | null
     description: string | null
     amenities: string[]
+    seasonStart: string | null
+    seasonEnd: string | null
     regionId: string
     _count: HutCountAggregateOutputType | null
     _avg: HutAvgAggregateOutputType | null
@@ -3051,6 +3428,8 @@ export namespace Prisma {
     imageUrl?: boolean
     description?: boolean
     amenities?: boolean
+    seasonStart?: boolean
+    seasonEnd?: boolean
     regionId?: boolean
     region?: boolean | RegionDefaultArgs<ExtArgs>
     roomTypes?: boolean | Hut$roomTypesArgs<ExtArgs>
@@ -3058,6 +3437,7 @@ export namespace Prisma {
     routesTo?: boolean | Hut$routesToArgs<ExtArgs>
     availability?: boolean | Hut$availabilityArgs<ExtArgs>
     tourHuts?: boolean | Hut$tourHutsArgs<ExtArgs>
+    accessRoutes?: boolean | Hut$accessRoutesArgs<ExtArgs>
     _count?: boolean | HutCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["hut"]>
 
@@ -3073,6 +3453,8 @@ export namespace Prisma {
     imageUrl?: boolean
     description?: boolean
     amenities?: boolean
+    seasonStart?: boolean
+    seasonEnd?: boolean
     regionId?: boolean
     region?: boolean | RegionDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["hut"]>
@@ -3089,6 +3471,8 @@ export namespace Prisma {
     imageUrl?: boolean
     description?: boolean
     amenities?: boolean
+    seasonStart?: boolean
+    seasonEnd?: boolean
     regionId?: boolean
     region?: boolean | RegionDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["hut"]>
@@ -3105,10 +3489,12 @@ export namespace Prisma {
     imageUrl?: boolean
     description?: boolean
     amenities?: boolean
+    seasonStart?: boolean
+    seasonEnd?: boolean
     regionId?: boolean
   }
 
-  export type HutOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "altitude" | "lat" | "lng" | "capacity" | "bookingUrl" | "bookingSystem" | "imageUrl" | "description" | "amenities" | "regionId", ExtArgs["result"]["hut"]>
+  export type HutOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "altitude" | "lat" | "lng" | "capacity" | "bookingUrl" | "bookingSystem" | "imageUrl" | "description" | "amenities" | "seasonStart" | "seasonEnd" | "regionId", ExtArgs["result"]["hut"]>
   export type HutInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     region?: boolean | RegionDefaultArgs<ExtArgs>
     roomTypes?: boolean | Hut$roomTypesArgs<ExtArgs>
@@ -3116,6 +3502,7 @@ export namespace Prisma {
     routesTo?: boolean | Hut$routesToArgs<ExtArgs>
     availability?: boolean | Hut$availabilityArgs<ExtArgs>
     tourHuts?: boolean | Hut$tourHutsArgs<ExtArgs>
+    accessRoutes?: boolean | Hut$accessRoutesArgs<ExtArgs>
     _count?: boolean | HutCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type HutIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3134,6 +3521,7 @@ export namespace Prisma {
       routesTo: Prisma.$RoutePayload<ExtArgs>[]
       availability: Prisma.$AvailabilityCheckPayload<ExtArgs>[]
       tourHuts: Prisma.$TourHutPayload<ExtArgs>[]
+      accessRoutes: Prisma.$AccessRoutePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3147,6 +3535,8 @@ export namespace Prisma {
       imageUrl: string | null
       description: string | null
       amenities: string[]
+      seasonStart: string | null
+      seasonEnd: string | null
       regionId: string
     }, ExtArgs["result"]["hut"]>
     composites: {}
@@ -3548,6 +3938,7 @@ export namespace Prisma {
     routesTo<T extends Hut$routesToArgs<ExtArgs> = {}>(args?: Subset<T, Hut$routesToArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RoutePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     availability<T extends Hut$availabilityArgs<ExtArgs> = {}>(args?: Subset<T, Hut$availabilityArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AvailabilityCheckPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     tourHuts<T extends Hut$tourHutsArgs<ExtArgs> = {}>(args?: Subset<T, Hut$tourHutsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TourHutPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    accessRoutes<T extends Hut$accessRoutesArgs<ExtArgs> = {}>(args?: Subset<T, Hut$accessRoutesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccessRoutePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3588,6 +3979,8 @@ export namespace Prisma {
     readonly imageUrl: FieldRef<"Hut", 'String'>
     readonly description: FieldRef<"Hut", 'String'>
     readonly amenities: FieldRef<"Hut", 'String[]'>
+    readonly seasonStart: FieldRef<"Hut", 'String'>
+    readonly seasonEnd: FieldRef<"Hut", 'String'>
     readonly regionId: FieldRef<"Hut", 'String'>
   }
     
@@ -4102,6 +4495,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: TourHutScalarFieldEnum | TourHutScalarFieldEnum[]
+  }
+
+  /**
+   * Hut.accessRoutes
+   */
+  export type Hut$accessRoutesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccessRoute
+     */
+    select?: AccessRouteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccessRoute
+     */
+    omit?: AccessRouteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccessRouteInclude<ExtArgs> | null
+    where?: AccessRouteWhereInput
+    orderBy?: AccessRouteOrderByWithRelationInput | AccessRouteOrderByWithRelationInput[]
+    cursor?: AccessRouteWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AccessRouteScalarFieldEnum | AccessRouteScalarFieldEnum[]
   }
 
   /**
@@ -9813,6 +10230,3420 @@ export namespace Prisma {
 
 
   /**
+   * Model AccessPoint
+   */
+
+  export type AggregateAccessPoint = {
+    _count: AccessPointCountAggregateOutputType | null
+    _avg: AccessPointAvgAggregateOutputType | null
+    _sum: AccessPointSumAggregateOutputType | null
+    _min: AccessPointMinAggregateOutputType | null
+    _max: AccessPointMaxAggregateOutputType | null
+  }
+
+  export type AccessPointAvgAggregateOutputType = {
+    altitude: number | null
+    lat: number | null
+    lng: number | null
+  }
+
+  export type AccessPointSumAggregateOutputType = {
+    altitude: number | null
+    lat: number | null
+    lng: number | null
+  }
+
+  export type AccessPointMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    type: $Enums.AccessPointType | null
+    altitude: number | null
+    lat: number | null
+    lng: number | null
+    regionId: string | null
+  }
+
+  export type AccessPointMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    type: $Enums.AccessPointType | null
+    altitude: number | null
+    lat: number | null
+    lng: number | null
+    regionId: string | null
+  }
+
+  export type AccessPointCountAggregateOutputType = {
+    id: number
+    name: number
+    type: number
+    altitude: number
+    lat: number
+    lng: number
+    regionId: number
+    _all: number
+  }
+
+
+  export type AccessPointAvgAggregateInputType = {
+    altitude?: true
+    lat?: true
+    lng?: true
+  }
+
+  export type AccessPointSumAggregateInputType = {
+    altitude?: true
+    lat?: true
+    lng?: true
+  }
+
+  export type AccessPointMinAggregateInputType = {
+    id?: true
+    name?: true
+    type?: true
+    altitude?: true
+    lat?: true
+    lng?: true
+    regionId?: true
+  }
+
+  export type AccessPointMaxAggregateInputType = {
+    id?: true
+    name?: true
+    type?: true
+    altitude?: true
+    lat?: true
+    lng?: true
+    regionId?: true
+  }
+
+  export type AccessPointCountAggregateInputType = {
+    id?: true
+    name?: true
+    type?: true
+    altitude?: true
+    lat?: true
+    lng?: true
+    regionId?: true
+    _all?: true
+  }
+
+  export type AccessPointAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AccessPoint to aggregate.
+     */
+    where?: AccessPointWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AccessPoints to fetch.
+     */
+    orderBy?: AccessPointOrderByWithRelationInput | AccessPointOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AccessPointWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AccessPoints from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AccessPoints.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned AccessPoints
+    **/
+    _count?: true | AccessPointCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: AccessPointAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: AccessPointSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AccessPointMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AccessPointMaxAggregateInputType
+  }
+
+  export type GetAccessPointAggregateType<T extends AccessPointAggregateArgs> = {
+        [P in keyof T & keyof AggregateAccessPoint]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAccessPoint[P]>
+      : GetScalarType<T[P], AggregateAccessPoint[P]>
+  }
+
+
+
+
+  export type AccessPointGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AccessPointWhereInput
+    orderBy?: AccessPointOrderByWithAggregationInput | AccessPointOrderByWithAggregationInput[]
+    by: AccessPointScalarFieldEnum[] | AccessPointScalarFieldEnum
+    having?: AccessPointScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AccessPointCountAggregateInputType | true
+    _avg?: AccessPointAvgAggregateInputType
+    _sum?: AccessPointSumAggregateInputType
+    _min?: AccessPointMinAggregateInputType
+    _max?: AccessPointMaxAggregateInputType
+  }
+
+  export type AccessPointGroupByOutputType = {
+    id: string
+    name: string
+    type: $Enums.AccessPointType
+    altitude: number
+    lat: number
+    lng: number
+    regionId: string
+    _count: AccessPointCountAggregateOutputType | null
+    _avg: AccessPointAvgAggregateOutputType | null
+    _sum: AccessPointSumAggregateOutputType | null
+    _min: AccessPointMinAggregateOutputType | null
+    _max: AccessPointMaxAggregateOutputType | null
+  }
+
+  type GetAccessPointGroupByPayload<T extends AccessPointGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AccessPointGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AccessPointGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AccessPointGroupByOutputType[P]>
+            : GetScalarType<T[P], AccessPointGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AccessPointSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    type?: boolean
+    altitude?: boolean
+    lat?: boolean
+    lng?: boolean
+    regionId?: boolean
+    region?: boolean | RegionDefaultArgs<ExtArgs>
+    routes?: boolean | AccessPoint$routesArgs<ExtArgs>
+    cableCar?: boolean | AccessPoint$cableCarArgs<ExtArgs>
+    _count?: boolean | AccessPointCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["accessPoint"]>
+
+  export type AccessPointSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    type?: boolean
+    altitude?: boolean
+    lat?: boolean
+    lng?: boolean
+    regionId?: boolean
+    region?: boolean | RegionDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["accessPoint"]>
+
+  export type AccessPointSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    type?: boolean
+    altitude?: boolean
+    lat?: boolean
+    lng?: boolean
+    regionId?: boolean
+    region?: boolean | RegionDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["accessPoint"]>
+
+  export type AccessPointSelectScalar = {
+    id?: boolean
+    name?: boolean
+    type?: boolean
+    altitude?: boolean
+    lat?: boolean
+    lng?: boolean
+    regionId?: boolean
+  }
+
+  export type AccessPointOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "type" | "altitude" | "lat" | "lng" | "regionId", ExtArgs["result"]["accessPoint"]>
+  export type AccessPointInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    region?: boolean | RegionDefaultArgs<ExtArgs>
+    routes?: boolean | AccessPoint$routesArgs<ExtArgs>
+    cableCar?: boolean | AccessPoint$cableCarArgs<ExtArgs>
+    _count?: boolean | AccessPointCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type AccessPointIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    region?: boolean | RegionDefaultArgs<ExtArgs>
+  }
+  export type AccessPointIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    region?: boolean | RegionDefaultArgs<ExtArgs>
+  }
+
+  export type $AccessPointPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "AccessPoint"
+    objects: {
+      region: Prisma.$RegionPayload<ExtArgs>
+      routes: Prisma.$AccessRoutePayload<ExtArgs>[]
+      cableCar: Prisma.$CableCarPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      type: $Enums.AccessPointType
+      altitude: number
+      lat: number
+      lng: number
+      regionId: string
+    }, ExtArgs["result"]["accessPoint"]>
+    composites: {}
+  }
+
+  type AccessPointGetPayload<S extends boolean | null | undefined | AccessPointDefaultArgs> = $Result.GetResult<Prisma.$AccessPointPayload, S>
+
+  type AccessPointCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AccessPointFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AccessPointCountAggregateInputType | true
+    }
+
+  export interface AccessPointDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AccessPoint'], meta: { name: 'AccessPoint' } }
+    /**
+     * Find zero or one AccessPoint that matches the filter.
+     * @param {AccessPointFindUniqueArgs} args - Arguments to find a AccessPoint
+     * @example
+     * // Get one AccessPoint
+     * const accessPoint = await prisma.accessPoint.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AccessPointFindUniqueArgs>(args: SelectSubset<T, AccessPointFindUniqueArgs<ExtArgs>>): Prisma__AccessPointClient<$Result.GetResult<Prisma.$AccessPointPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one AccessPoint that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AccessPointFindUniqueOrThrowArgs} args - Arguments to find a AccessPoint
+     * @example
+     * // Get one AccessPoint
+     * const accessPoint = await prisma.accessPoint.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AccessPointFindUniqueOrThrowArgs>(args: SelectSubset<T, AccessPointFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AccessPointClient<$Result.GetResult<Prisma.$AccessPointPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AccessPoint that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AccessPointFindFirstArgs} args - Arguments to find a AccessPoint
+     * @example
+     * // Get one AccessPoint
+     * const accessPoint = await prisma.accessPoint.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AccessPointFindFirstArgs>(args?: SelectSubset<T, AccessPointFindFirstArgs<ExtArgs>>): Prisma__AccessPointClient<$Result.GetResult<Prisma.$AccessPointPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AccessPoint that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AccessPointFindFirstOrThrowArgs} args - Arguments to find a AccessPoint
+     * @example
+     * // Get one AccessPoint
+     * const accessPoint = await prisma.accessPoint.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AccessPointFindFirstOrThrowArgs>(args?: SelectSubset<T, AccessPointFindFirstOrThrowArgs<ExtArgs>>): Prisma__AccessPointClient<$Result.GetResult<Prisma.$AccessPointPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more AccessPoints that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AccessPointFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all AccessPoints
+     * const accessPoints = await prisma.accessPoint.findMany()
+     * 
+     * // Get first 10 AccessPoints
+     * const accessPoints = await prisma.accessPoint.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const accessPointWithIdOnly = await prisma.accessPoint.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AccessPointFindManyArgs>(args?: SelectSubset<T, AccessPointFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccessPointPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a AccessPoint.
+     * @param {AccessPointCreateArgs} args - Arguments to create a AccessPoint.
+     * @example
+     * // Create one AccessPoint
+     * const AccessPoint = await prisma.accessPoint.create({
+     *   data: {
+     *     // ... data to create a AccessPoint
+     *   }
+     * })
+     * 
+     */
+    create<T extends AccessPointCreateArgs>(args: SelectSubset<T, AccessPointCreateArgs<ExtArgs>>): Prisma__AccessPointClient<$Result.GetResult<Prisma.$AccessPointPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many AccessPoints.
+     * @param {AccessPointCreateManyArgs} args - Arguments to create many AccessPoints.
+     * @example
+     * // Create many AccessPoints
+     * const accessPoint = await prisma.accessPoint.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AccessPointCreateManyArgs>(args?: SelectSubset<T, AccessPointCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many AccessPoints and returns the data saved in the database.
+     * @param {AccessPointCreateManyAndReturnArgs} args - Arguments to create many AccessPoints.
+     * @example
+     * // Create many AccessPoints
+     * const accessPoint = await prisma.accessPoint.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many AccessPoints and only return the `id`
+     * const accessPointWithIdOnly = await prisma.accessPoint.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AccessPointCreateManyAndReturnArgs>(args?: SelectSubset<T, AccessPointCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccessPointPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a AccessPoint.
+     * @param {AccessPointDeleteArgs} args - Arguments to delete one AccessPoint.
+     * @example
+     * // Delete one AccessPoint
+     * const AccessPoint = await prisma.accessPoint.delete({
+     *   where: {
+     *     // ... filter to delete one AccessPoint
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AccessPointDeleteArgs>(args: SelectSubset<T, AccessPointDeleteArgs<ExtArgs>>): Prisma__AccessPointClient<$Result.GetResult<Prisma.$AccessPointPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one AccessPoint.
+     * @param {AccessPointUpdateArgs} args - Arguments to update one AccessPoint.
+     * @example
+     * // Update one AccessPoint
+     * const accessPoint = await prisma.accessPoint.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AccessPointUpdateArgs>(args: SelectSubset<T, AccessPointUpdateArgs<ExtArgs>>): Prisma__AccessPointClient<$Result.GetResult<Prisma.$AccessPointPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more AccessPoints.
+     * @param {AccessPointDeleteManyArgs} args - Arguments to filter AccessPoints to delete.
+     * @example
+     * // Delete a few AccessPoints
+     * const { count } = await prisma.accessPoint.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AccessPointDeleteManyArgs>(args?: SelectSubset<T, AccessPointDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AccessPoints.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AccessPointUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many AccessPoints
+     * const accessPoint = await prisma.accessPoint.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AccessPointUpdateManyArgs>(args: SelectSubset<T, AccessPointUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AccessPoints and returns the data updated in the database.
+     * @param {AccessPointUpdateManyAndReturnArgs} args - Arguments to update many AccessPoints.
+     * @example
+     * // Update many AccessPoints
+     * const accessPoint = await prisma.accessPoint.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more AccessPoints and only return the `id`
+     * const accessPointWithIdOnly = await prisma.accessPoint.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AccessPointUpdateManyAndReturnArgs>(args: SelectSubset<T, AccessPointUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccessPointPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one AccessPoint.
+     * @param {AccessPointUpsertArgs} args - Arguments to update or create a AccessPoint.
+     * @example
+     * // Update or create a AccessPoint
+     * const accessPoint = await prisma.accessPoint.upsert({
+     *   create: {
+     *     // ... data to create a AccessPoint
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the AccessPoint we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AccessPointUpsertArgs>(args: SelectSubset<T, AccessPointUpsertArgs<ExtArgs>>): Prisma__AccessPointClient<$Result.GetResult<Prisma.$AccessPointPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of AccessPoints.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AccessPointCountArgs} args - Arguments to filter AccessPoints to count.
+     * @example
+     * // Count the number of AccessPoints
+     * const count = await prisma.accessPoint.count({
+     *   where: {
+     *     // ... the filter for the AccessPoints we want to count
+     *   }
+     * })
+    **/
+    count<T extends AccessPointCountArgs>(
+      args?: Subset<T, AccessPointCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AccessPointCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a AccessPoint.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AccessPointAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AccessPointAggregateArgs>(args: Subset<T, AccessPointAggregateArgs>): Prisma.PrismaPromise<GetAccessPointAggregateType<T>>
+
+    /**
+     * Group by AccessPoint.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AccessPointGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AccessPointGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AccessPointGroupByArgs['orderBy'] }
+        : { orderBy?: AccessPointGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AccessPointGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAccessPointGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the AccessPoint model
+   */
+  readonly fields: AccessPointFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for AccessPoint.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AccessPointClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    region<T extends RegionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RegionDefaultArgs<ExtArgs>>): Prisma__RegionClient<$Result.GetResult<Prisma.$RegionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    routes<T extends AccessPoint$routesArgs<ExtArgs> = {}>(args?: Subset<T, AccessPoint$routesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccessRoutePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    cableCar<T extends AccessPoint$cableCarArgs<ExtArgs> = {}>(args?: Subset<T, AccessPoint$cableCarArgs<ExtArgs>>): Prisma__CableCarClient<$Result.GetResult<Prisma.$CableCarPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the AccessPoint model
+   */
+  interface AccessPointFieldRefs {
+    readonly id: FieldRef<"AccessPoint", 'String'>
+    readonly name: FieldRef<"AccessPoint", 'String'>
+    readonly type: FieldRef<"AccessPoint", 'AccessPointType'>
+    readonly altitude: FieldRef<"AccessPoint", 'Int'>
+    readonly lat: FieldRef<"AccessPoint", 'Float'>
+    readonly lng: FieldRef<"AccessPoint", 'Float'>
+    readonly regionId: FieldRef<"AccessPoint", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * AccessPoint findUnique
+   */
+  export type AccessPointFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccessPoint
+     */
+    select?: AccessPointSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccessPoint
+     */
+    omit?: AccessPointOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccessPointInclude<ExtArgs> | null
+    /**
+     * Filter, which AccessPoint to fetch.
+     */
+    where: AccessPointWhereUniqueInput
+  }
+
+  /**
+   * AccessPoint findUniqueOrThrow
+   */
+  export type AccessPointFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccessPoint
+     */
+    select?: AccessPointSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccessPoint
+     */
+    omit?: AccessPointOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccessPointInclude<ExtArgs> | null
+    /**
+     * Filter, which AccessPoint to fetch.
+     */
+    where: AccessPointWhereUniqueInput
+  }
+
+  /**
+   * AccessPoint findFirst
+   */
+  export type AccessPointFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccessPoint
+     */
+    select?: AccessPointSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccessPoint
+     */
+    omit?: AccessPointOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccessPointInclude<ExtArgs> | null
+    /**
+     * Filter, which AccessPoint to fetch.
+     */
+    where?: AccessPointWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AccessPoints to fetch.
+     */
+    orderBy?: AccessPointOrderByWithRelationInput | AccessPointOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AccessPoints.
+     */
+    cursor?: AccessPointWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AccessPoints from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AccessPoints.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AccessPoints.
+     */
+    distinct?: AccessPointScalarFieldEnum | AccessPointScalarFieldEnum[]
+  }
+
+  /**
+   * AccessPoint findFirstOrThrow
+   */
+  export type AccessPointFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccessPoint
+     */
+    select?: AccessPointSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccessPoint
+     */
+    omit?: AccessPointOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccessPointInclude<ExtArgs> | null
+    /**
+     * Filter, which AccessPoint to fetch.
+     */
+    where?: AccessPointWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AccessPoints to fetch.
+     */
+    orderBy?: AccessPointOrderByWithRelationInput | AccessPointOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AccessPoints.
+     */
+    cursor?: AccessPointWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AccessPoints from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AccessPoints.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AccessPoints.
+     */
+    distinct?: AccessPointScalarFieldEnum | AccessPointScalarFieldEnum[]
+  }
+
+  /**
+   * AccessPoint findMany
+   */
+  export type AccessPointFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccessPoint
+     */
+    select?: AccessPointSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccessPoint
+     */
+    omit?: AccessPointOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccessPointInclude<ExtArgs> | null
+    /**
+     * Filter, which AccessPoints to fetch.
+     */
+    where?: AccessPointWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AccessPoints to fetch.
+     */
+    orderBy?: AccessPointOrderByWithRelationInput | AccessPointOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing AccessPoints.
+     */
+    cursor?: AccessPointWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AccessPoints from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AccessPoints.
+     */
+    skip?: number
+    distinct?: AccessPointScalarFieldEnum | AccessPointScalarFieldEnum[]
+  }
+
+  /**
+   * AccessPoint create
+   */
+  export type AccessPointCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccessPoint
+     */
+    select?: AccessPointSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccessPoint
+     */
+    omit?: AccessPointOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccessPointInclude<ExtArgs> | null
+    /**
+     * The data needed to create a AccessPoint.
+     */
+    data: XOR<AccessPointCreateInput, AccessPointUncheckedCreateInput>
+  }
+
+  /**
+   * AccessPoint createMany
+   */
+  export type AccessPointCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many AccessPoints.
+     */
+    data: AccessPointCreateManyInput | AccessPointCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AccessPoint createManyAndReturn
+   */
+  export type AccessPointCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccessPoint
+     */
+    select?: AccessPointSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccessPoint
+     */
+    omit?: AccessPointOmit<ExtArgs> | null
+    /**
+     * The data used to create many AccessPoints.
+     */
+    data: AccessPointCreateManyInput | AccessPointCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccessPointIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * AccessPoint update
+   */
+  export type AccessPointUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccessPoint
+     */
+    select?: AccessPointSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccessPoint
+     */
+    omit?: AccessPointOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccessPointInclude<ExtArgs> | null
+    /**
+     * The data needed to update a AccessPoint.
+     */
+    data: XOR<AccessPointUpdateInput, AccessPointUncheckedUpdateInput>
+    /**
+     * Choose, which AccessPoint to update.
+     */
+    where: AccessPointWhereUniqueInput
+  }
+
+  /**
+   * AccessPoint updateMany
+   */
+  export type AccessPointUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update AccessPoints.
+     */
+    data: XOR<AccessPointUpdateManyMutationInput, AccessPointUncheckedUpdateManyInput>
+    /**
+     * Filter which AccessPoints to update
+     */
+    where?: AccessPointWhereInput
+    /**
+     * Limit how many AccessPoints to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AccessPoint updateManyAndReturn
+   */
+  export type AccessPointUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccessPoint
+     */
+    select?: AccessPointSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccessPoint
+     */
+    omit?: AccessPointOmit<ExtArgs> | null
+    /**
+     * The data used to update AccessPoints.
+     */
+    data: XOR<AccessPointUpdateManyMutationInput, AccessPointUncheckedUpdateManyInput>
+    /**
+     * Filter which AccessPoints to update
+     */
+    where?: AccessPointWhereInput
+    /**
+     * Limit how many AccessPoints to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccessPointIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * AccessPoint upsert
+   */
+  export type AccessPointUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccessPoint
+     */
+    select?: AccessPointSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccessPoint
+     */
+    omit?: AccessPointOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccessPointInclude<ExtArgs> | null
+    /**
+     * The filter to search for the AccessPoint to update in case it exists.
+     */
+    where: AccessPointWhereUniqueInput
+    /**
+     * In case the AccessPoint found by the `where` argument doesn't exist, create a new AccessPoint with this data.
+     */
+    create: XOR<AccessPointCreateInput, AccessPointUncheckedCreateInput>
+    /**
+     * In case the AccessPoint was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AccessPointUpdateInput, AccessPointUncheckedUpdateInput>
+  }
+
+  /**
+   * AccessPoint delete
+   */
+  export type AccessPointDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccessPoint
+     */
+    select?: AccessPointSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccessPoint
+     */
+    omit?: AccessPointOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccessPointInclude<ExtArgs> | null
+    /**
+     * Filter which AccessPoint to delete.
+     */
+    where: AccessPointWhereUniqueInput
+  }
+
+  /**
+   * AccessPoint deleteMany
+   */
+  export type AccessPointDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AccessPoints to delete
+     */
+    where?: AccessPointWhereInput
+    /**
+     * Limit how many AccessPoints to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * AccessPoint.routes
+   */
+  export type AccessPoint$routesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccessRoute
+     */
+    select?: AccessRouteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccessRoute
+     */
+    omit?: AccessRouteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccessRouteInclude<ExtArgs> | null
+    where?: AccessRouteWhereInput
+    orderBy?: AccessRouteOrderByWithRelationInput | AccessRouteOrderByWithRelationInput[]
+    cursor?: AccessRouteWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AccessRouteScalarFieldEnum | AccessRouteScalarFieldEnum[]
+  }
+
+  /**
+   * AccessPoint.cableCar
+   */
+  export type AccessPoint$cableCarArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CableCar
+     */
+    select?: CableCarSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CableCar
+     */
+    omit?: CableCarOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CableCarInclude<ExtArgs> | null
+    where?: CableCarWhereInput
+  }
+
+  /**
+   * AccessPoint without action
+   */
+  export type AccessPointDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccessPoint
+     */
+    select?: AccessPointSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccessPoint
+     */
+    omit?: AccessPointOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccessPointInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model CableCar
+   */
+
+  export type AggregateCableCar = {
+    _count: CableCarCountAggregateOutputType | null
+    _min: CableCarMinAggregateOutputType | null
+    _max: CableCarMaxAggregateOutputType | null
+  }
+
+  export type CableCarMinAggregateOutputType = {
+    id: string | null
+    accessPointId: string | null
+    operatorName: string | null
+    seasonStart: string | null
+    seasonEnd: string | null
+    website: string | null
+  }
+
+  export type CableCarMaxAggregateOutputType = {
+    id: string | null
+    accessPointId: string | null
+    operatorName: string | null
+    seasonStart: string | null
+    seasonEnd: string | null
+    website: string | null
+  }
+
+  export type CableCarCountAggregateOutputType = {
+    id: number
+    accessPointId: number
+    operatorName: number
+    seasonStart: number
+    seasonEnd: number
+    website: number
+    _all: number
+  }
+
+
+  export type CableCarMinAggregateInputType = {
+    id?: true
+    accessPointId?: true
+    operatorName?: true
+    seasonStart?: true
+    seasonEnd?: true
+    website?: true
+  }
+
+  export type CableCarMaxAggregateInputType = {
+    id?: true
+    accessPointId?: true
+    operatorName?: true
+    seasonStart?: true
+    seasonEnd?: true
+    website?: true
+  }
+
+  export type CableCarCountAggregateInputType = {
+    id?: true
+    accessPointId?: true
+    operatorName?: true
+    seasonStart?: true
+    seasonEnd?: true
+    website?: true
+    _all?: true
+  }
+
+  export type CableCarAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CableCar to aggregate.
+     */
+    where?: CableCarWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CableCars to fetch.
+     */
+    orderBy?: CableCarOrderByWithRelationInput | CableCarOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CableCarWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CableCars from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CableCars.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned CableCars
+    **/
+    _count?: true | CableCarCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CableCarMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CableCarMaxAggregateInputType
+  }
+
+  export type GetCableCarAggregateType<T extends CableCarAggregateArgs> = {
+        [P in keyof T & keyof AggregateCableCar]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCableCar[P]>
+      : GetScalarType<T[P], AggregateCableCar[P]>
+  }
+
+
+
+
+  export type CableCarGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CableCarWhereInput
+    orderBy?: CableCarOrderByWithAggregationInput | CableCarOrderByWithAggregationInput[]
+    by: CableCarScalarFieldEnum[] | CableCarScalarFieldEnum
+    having?: CableCarScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CableCarCountAggregateInputType | true
+    _min?: CableCarMinAggregateInputType
+    _max?: CableCarMaxAggregateInputType
+  }
+
+  export type CableCarGroupByOutputType = {
+    id: string
+    accessPointId: string
+    operatorName: string
+    seasonStart: string | null
+    seasonEnd: string | null
+    website: string | null
+    _count: CableCarCountAggregateOutputType | null
+    _min: CableCarMinAggregateOutputType | null
+    _max: CableCarMaxAggregateOutputType | null
+  }
+
+  type GetCableCarGroupByPayload<T extends CableCarGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CableCarGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CableCarGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CableCarGroupByOutputType[P]>
+            : GetScalarType<T[P], CableCarGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CableCarSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    accessPointId?: boolean
+    operatorName?: boolean
+    seasonStart?: boolean
+    seasonEnd?: boolean
+    website?: boolean
+    accessPoint?: boolean | AccessPointDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["cableCar"]>
+
+  export type CableCarSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    accessPointId?: boolean
+    operatorName?: boolean
+    seasonStart?: boolean
+    seasonEnd?: boolean
+    website?: boolean
+    accessPoint?: boolean | AccessPointDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["cableCar"]>
+
+  export type CableCarSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    accessPointId?: boolean
+    operatorName?: boolean
+    seasonStart?: boolean
+    seasonEnd?: boolean
+    website?: boolean
+    accessPoint?: boolean | AccessPointDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["cableCar"]>
+
+  export type CableCarSelectScalar = {
+    id?: boolean
+    accessPointId?: boolean
+    operatorName?: boolean
+    seasonStart?: boolean
+    seasonEnd?: boolean
+    website?: boolean
+  }
+
+  export type CableCarOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "accessPointId" | "operatorName" | "seasonStart" | "seasonEnd" | "website", ExtArgs["result"]["cableCar"]>
+  export type CableCarInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    accessPoint?: boolean | AccessPointDefaultArgs<ExtArgs>
+  }
+  export type CableCarIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    accessPoint?: boolean | AccessPointDefaultArgs<ExtArgs>
+  }
+  export type CableCarIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    accessPoint?: boolean | AccessPointDefaultArgs<ExtArgs>
+  }
+
+  export type $CableCarPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "CableCar"
+    objects: {
+      accessPoint: Prisma.$AccessPointPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      accessPointId: string
+      operatorName: string
+      seasonStart: string | null
+      seasonEnd: string | null
+      website: string | null
+    }, ExtArgs["result"]["cableCar"]>
+    composites: {}
+  }
+
+  type CableCarGetPayload<S extends boolean | null | undefined | CableCarDefaultArgs> = $Result.GetResult<Prisma.$CableCarPayload, S>
+
+  type CableCarCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CableCarFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CableCarCountAggregateInputType | true
+    }
+
+  export interface CableCarDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['CableCar'], meta: { name: 'CableCar' } }
+    /**
+     * Find zero or one CableCar that matches the filter.
+     * @param {CableCarFindUniqueArgs} args - Arguments to find a CableCar
+     * @example
+     * // Get one CableCar
+     * const cableCar = await prisma.cableCar.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CableCarFindUniqueArgs>(args: SelectSubset<T, CableCarFindUniqueArgs<ExtArgs>>): Prisma__CableCarClient<$Result.GetResult<Prisma.$CableCarPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one CableCar that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {CableCarFindUniqueOrThrowArgs} args - Arguments to find a CableCar
+     * @example
+     * // Get one CableCar
+     * const cableCar = await prisma.cableCar.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CableCarFindUniqueOrThrowArgs>(args: SelectSubset<T, CableCarFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CableCarClient<$Result.GetResult<Prisma.$CableCarPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first CableCar that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CableCarFindFirstArgs} args - Arguments to find a CableCar
+     * @example
+     * // Get one CableCar
+     * const cableCar = await prisma.cableCar.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CableCarFindFirstArgs>(args?: SelectSubset<T, CableCarFindFirstArgs<ExtArgs>>): Prisma__CableCarClient<$Result.GetResult<Prisma.$CableCarPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first CableCar that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CableCarFindFirstOrThrowArgs} args - Arguments to find a CableCar
+     * @example
+     * // Get one CableCar
+     * const cableCar = await prisma.cableCar.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CableCarFindFirstOrThrowArgs>(args?: SelectSubset<T, CableCarFindFirstOrThrowArgs<ExtArgs>>): Prisma__CableCarClient<$Result.GetResult<Prisma.$CableCarPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more CableCars that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CableCarFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all CableCars
+     * const cableCars = await prisma.cableCar.findMany()
+     * 
+     * // Get first 10 CableCars
+     * const cableCars = await prisma.cableCar.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const cableCarWithIdOnly = await prisma.cableCar.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CableCarFindManyArgs>(args?: SelectSubset<T, CableCarFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CableCarPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a CableCar.
+     * @param {CableCarCreateArgs} args - Arguments to create a CableCar.
+     * @example
+     * // Create one CableCar
+     * const CableCar = await prisma.cableCar.create({
+     *   data: {
+     *     // ... data to create a CableCar
+     *   }
+     * })
+     * 
+     */
+    create<T extends CableCarCreateArgs>(args: SelectSubset<T, CableCarCreateArgs<ExtArgs>>): Prisma__CableCarClient<$Result.GetResult<Prisma.$CableCarPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many CableCars.
+     * @param {CableCarCreateManyArgs} args - Arguments to create many CableCars.
+     * @example
+     * // Create many CableCars
+     * const cableCar = await prisma.cableCar.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CableCarCreateManyArgs>(args?: SelectSubset<T, CableCarCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many CableCars and returns the data saved in the database.
+     * @param {CableCarCreateManyAndReturnArgs} args - Arguments to create many CableCars.
+     * @example
+     * // Create many CableCars
+     * const cableCar = await prisma.cableCar.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many CableCars and only return the `id`
+     * const cableCarWithIdOnly = await prisma.cableCar.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CableCarCreateManyAndReturnArgs>(args?: SelectSubset<T, CableCarCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CableCarPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a CableCar.
+     * @param {CableCarDeleteArgs} args - Arguments to delete one CableCar.
+     * @example
+     * // Delete one CableCar
+     * const CableCar = await prisma.cableCar.delete({
+     *   where: {
+     *     // ... filter to delete one CableCar
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CableCarDeleteArgs>(args: SelectSubset<T, CableCarDeleteArgs<ExtArgs>>): Prisma__CableCarClient<$Result.GetResult<Prisma.$CableCarPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one CableCar.
+     * @param {CableCarUpdateArgs} args - Arguments to update one CableCar.
+     * @example
+     * // Update one CableCar
+     * const cableCar = await prisma.cableCar.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CableCarUpdateArgs>(args: SelectSubset<T, CableCarUpdateArgs<ExtArgs>>): Prisma__CableCarClient<$Result.GetResult<Prisma.$CableCarPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more CableCars.
+     * @param {CableCarDeleteManyArgs} args - Arguments to filter CableCars to delete.
+     * @example
+     * // Delete a few CableCars
+     * const { count } = await prisma.cableCar.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CableCarDeleteManyArgs>(args?: SelectSubset<T, CableCarDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CableCars.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CableCarUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many CableCars
+     * const cableCar = await prisma.cableCar.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CableCarUpdateManyArgs>(args: SelectSubset<T, CableCarUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CableCars and returns the data updated in the database.
+     * @param {CableCarUpdateManyAndReturnArgs} args - Arguments to update many CableCars.
+     * @example
+     * // Update many CableCars
+     * const cableCar = await prisma.cableCar.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more CableCars and only return the `id`
+     * const cableCarWithIdOnly = await prisma.cableCar.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends CableCarUpdateManyAndReturnArgs>(args: SelectSubset<T, CableCarUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CableCarPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one CableCar.
+     * @param {CableCarUpsertArgs} args - Arguments to update or create a CableCar.
+     * @example
+     * // Update or create a CableCar
+     * const cableCar = await prisma.cableCar.upsert({
+     *   create: {
+     *     // ... data to create a CableCar
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the CableCar we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CableCarUpsertArgs>(args: SelectSubset<T, CableCarUpsertArgs<ExtArgs>>): Prisma__CableCarClient<$Result.GetResult<Prisma.$CableCarPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of CableCars.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CableCarCountArgs} args - Arguments to filter CableCars to count.
+     * @example
+     * // Count the number of CableCars
+     * const count = await prisma.cableCar.count({
+     *   where: {
+     *     // ... the filter for the CableCars we want to count
+     *   }
+     * })
+    **/
+    count<T extends CableCarCountArgs>(
+      args?: Subset<T, CableCarCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CableCarCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a CableCar.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CableCarAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CableCarAggregateArgs>(args: Subset<T, CableCarAggregateArgs>): Prisma.PrismaPromise<GetCableCarAggregateType<T>>
+
+    /**
+     * Group by CableCar.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CableCarGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CableCarGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CableCarGroupByArgs['orderBy'] }
+        : { orderBy?: CableCarGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CableCarGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCableCarGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the CableCar model
+   */
+  readonly fields: CableCarFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for CableCar.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CableCarClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    accessPoint<T extends AccessPointDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AccessPointDefaultArgs<ExtArgs>>): Prisma__AccessPointClient<$Result.GetResult<Prisma.$AccessPointPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the CableCar model
+   */
+  interface CableCarFieldRefs {
+    readonly id: FieldRef<"CableCar", 'String'>
+    readonly accessPointId: FieldRef<"CableCar", 'String'>
+    readonly operatorName: FieldRef<"CableCar", 'String'>
+    readonly seasonStart: FieldRef<"CableCar", 'String'>
+    readonly seasonEnd: FieldRef<"CableCar", 'String'>
+    readonly website: FieldRef<"CableCar", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * CableCar findUnique
+   */
+  export type CableCarFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CableCar
+     */
+    select?: CableCarSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CableCar
+     */
+    omit?: CableCarOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CableCarInclude<ExtArgs> | null
+    /**
+     * Filter, which CableCar to fetch.
+     */
+    where: CableCarWhereUniqueInput
+  }
+
+  /**
+   * CableCar findUniqueOrThrow
+   */
+  export type CableCarFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CableCar
+     */
+    select?: CableCarSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CableCar
+     */
+    omit?: CableCarOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CableCarInclude<ExtArgs> | null
+    /**
+     * Filter, which CableCar to fetch.
+     */
+    where: CableCarWhereUniqueInput
+  }
+
+  /**
+   * CableCar findFirst
+   */
+  export type CableCarFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CableCar
+     */
+    select?: CableCarSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CableCar
+     */
+    omit?: CableCarOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CableCarInclude<ExtArgs> | null
+    /**
+     * Filter, which CableCar to fetch.
+     */
+    where?: CableCarWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CableCars to fetch.
+     */
+    orderBy?: CableCarOrderByWithRelationInput | CableCarOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CableCars.
+     */
+    cursor?: CableCarWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CableCars from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CableCars.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CableCars.
+     */
+    distinct?: CableCarScalarFieldEnum | CableCarScalarFieldEnum[]
+  }
+
+  /**
+   * CableCar findFirstOrThrow
+   */
+  export type CableCarFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CableCar
+     */
+    select?: CableCarSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CableCar
+     */
+    omit?: CableCarOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CableCarInclude<ExtArgs> | null
+    /**
+     * Filter, which CableCar to fetch.
+     */
+    where?: CableCarWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CableCars to fetch.
+     */
+    orderBy?: CableCarOrderByWithRelationInput | CableCarOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CableCars.
+     */
+    cursor?: CableCarWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CableCars from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CableCars.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CableCars.
+     */
+    distinct?: CableCarScalarFieldEnum | CableCarScalarFieldEnum[]
+  }
+
+  /**
+   * CableCar findMany
+   */
+  export type CableCarFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CableCar
+     */
+    select?: CableCarSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CableCar
+     */
+    omit?: CableCarOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CableCarInclude<ExtArgs> | null
+    /**
+     * Filter, which CableCars to fetch.
+     */
+    where?: CableCarWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CableCars to fetch.
+     */
+    orderBy?: CableCarOrderByWithRelationInput | CableCarOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing CableCars.
+     */
+    cursor?: CableCarWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CableCars from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CableCars.
+     */
+    skip?: number
+    distinct?: CableCarScalarFieldEnum | CableCarScalarFieldEnum[]
+  }
+
+  /**
+   * CableCar create
+   */
+  export type CableCarCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CableCar
+     */
+    select?: CableCarSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CableCar
+     */
+    omit?: CableCarOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CableCarInclude<ExtArgs> | null
+    /**
+     * The data needed to create a CableCar.
+     */
+    data: XOR<CableCarCreateInput, CableCarUncheckedCreateInput>
+  }
+
+  /**
+   * CableCar createMany
+   */
+  export type CableCarCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many CableCars.
+     */
+    data: CableCarCreateManyInput | CableCarCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * CableCar createManyAndReturn
+   */
+  export type CableCarCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CableCar
+     */
+    select?: CableCarSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the CableCar
+     */
+    omit?: CableCarOmit<ExtArgs> | null
+    /**
+     * The data used to create many CableCars.
+     */
+    data: CableCarCreateManyInput | CableCarCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CableCarIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * CableCar update
+   */
+  export type CableCarUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CableCar
+     */
+    select?: CableCarSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CableCar
+     */
+    omit?: CableCarOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CableCarInclude<ExtArgs> | null
+    /**
+     * The data needed to update a CableCar.
+     */
+    data: XOR<CableCarUpdateInput, CableCarUncheckedUpdateInput>
+    /**
+     * Choose, which CableCar to update.
+     */
+    where: CableCarWhereUniqueInput
+  }
+
+  /**
+   * CableCar updateMany
+   */
+  export type CableCarUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update CableCars.
+     */
+    data: XOR<CableCarUpdateManyMutationInput, CableCarUncheckedUpdateManyInput>
+    /**
+     * Filter which CableCars to update
+     */
+    where?: CableCarWhereInput
+    /**
+     * Limit how many CableCars to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * CableCar updateManyAndReturn
+   */
+  export type CableCarUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CableCar
+     */
+    select?: CableCarSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the CableCar
+     */
+    omit?: CableCarOmit<ExtArgs> | null
+    /**
+     * The data used to update CableCars.
+     */
+    data: XOR<CableCarUpdateManyMutationInput, CableCarUncheckedUpdateManyInput>
+    /**
+     * Filter which CableCars to update
+     */
+    where?: CableCarWhereInput
+    /**
+     * Limit how many CableCars to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CableCarIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * CableCar upsert
+   */
+  export type CableCarUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CableCar
+     */
+    select?: CableCarSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CableCar
+     */
+    omit?: CableCarOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CableCarInclude<ExtArgs> | null
+    /**
+     * The filter to search for the CableCar to update in case it exists.
+     */
+    where: CableCarWhereUniqueInput
+    /**
+     * In case the CableCar found by the `where` argument doesn't exist, create a new CableCar with this data.
+     */
+    create: XOR<CableCarCreateInput, CableCarUncheckedCreateInput>
+    /**
+     * In case the CableCar was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CableCarUpdateInput, CableCarUncheckedUpdateInput>
+  }
+
+  /**
+   * CableCar delete
+   */
+  export type CableCarDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CableCar
+     */
+    select?: CableCarSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CableCar
+     */
+    omit?: CableCarOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CableCarInclude<ExtArgs> | null
+    /**
+     * Filter which CableCar to delete.
+     */
+    where: CableCarWhereUniqueInput
+  }
+
+  /**
+   * CableCar deleteMany
+   */
+  export type CableCarDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CableCars to delete
+     */
+    where?: CableCarWhereInput
+    /**
+     * Limit how many CableCars to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * CableCar without action
+   */
+  export type CableCarDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CableCar
+     */
+    select?: CableCarSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CableCar
+     */
+    omit?: CableCarOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CableCarInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model AccessRoute
+   */
+
+  export type AggregateAccessRoute = {
+    _count: AccessRouteCountAggregateOutputType | null
+    _avg: AccessRouteAvgAggregateOutputType | null
+    _sum: AccessRouteSumAggregateOutputType | null
+    _min: AccessRouteMinAggregateOutputType | null
+    _max: AccessRouteMaxAggregateOutputType | null
+  }
+
+  export type AccessRouteAvgAggregateOutputType = {
+    distance: number | null
+    ascent: number | null
+    descent: number | null
+    estimatedDuration: number | null
+  }
+
+  export type AccessRouteSumAggregateOutputType = {
+    distance: number | null
+    ascent: number | null
+    descent: number | null
+    estimatedDuration: number | null
+  }
+
+  export type AccessRouteMinAggregateOutputType = {
+    id: string | null
+    accessPointId: string | null
+    hutId: string | null
+    distance: number | null
+    ascent: number | null
+    descent: number | null
+    estimatedDuration: number | null
+    difficulty: $Enums.Difficulty | null
+    hasCableCar: boolean | null
+  }
+
+  export type AccessRouteMaxAggregateOutputType = {
+    id: string | null
+    accessPointId: string | null
+    hutId: string | null
+    distance: number | null
+    ascent: number | null
+    descent: number | null
+    estimatedDuration: number | null
+    difficulty: $Enums.Difficulty | null
+    hasCableCar: boolean | null
+  }
+
+  export type AccessRouteCountAggregateOutputType = {
+    id: number
+    accessPointId: number
+    hutId: number
+    distance: number
+    ascent: number
+    descent: number
+    estimatedDuration: number
+    difficulty: number
+    hasCableCar: number
+    _all: number
+  }
+
+
+  export type AccessRouteAvgAggregateInputType = {
+    distance?: true
+    ascent?: true
+    descent?: true
+    estimatedDuration?: true
+  }
+
+  export type AccessRouteSumAggregateInputType = {
+    distance?: true
+    ascent?: true
+    descent?: true
+    estimatedDuration?: true
+  }
+
+  export type AccessRouteMinAggregateInputType = {
+    id?: true
+    accessPointId?: true
+    hutId?: true
+    distance?: true
+    ascent?: true
+    descent?: true
+    estimatedDuration?: true
+    difficulty?: true
+    hasCableCar?: true
+  }
+
+  export type AccessRouteMaxAggregateInputType = {
+    id?: true
+    accessPointId?: true
+    hutId?: true
+    distance?: true
+    ascent?: true
+    descent?: true
+    estimatedDuration?: true
+    difficulty?: true
+    hasCableCar?: true
+  }
+
+  export type AccessRouteCountAggregateInputType = {
+    id?: true
+    accessPointId?: true
+    hutId?: true
+    distance?: true
+    ascent?: true
+    descent?: true
+    estimatedDuration?: true
+    difficulty?: true
+    hasCableCar?: true
+    _all?: true
+  }
+
+  export type AccessRouteAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AccessRoute to aggregate.
+     */
+    where?: AccessRouteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AccessRoutes to fetch.
+     */
+    orderBy?: AccessRouteOrderByWithRelationInput | AccessRouteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AccessRouteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AccessRoutes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AccessRoutes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned AccessRoutes
+    **/
+    _count?: true | AccessRouteCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: AccessRouteAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: AccessRouteSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AccessRouteMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AccessRouteMaxAggregateInputType
+  }
+
+  export type GetAccessRouteAggregateType<T extends AccessRouteAggregateArgs> = {
+        [P in keyof T & keyof AggregateAccessRoute]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAccessRoute[P]>
+      : GetScalarType<T[P], AggregateAccessRoute[P]>
+  }
+
+
+
+
+  export type AccessRouteGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AccessRouteWhereInput
+    orderBy?: AccessRouteOrderByWithAggregationInput | AccessRouteOrderByWithAggregationInput[]
+    by: AccessRouteScalarFieldEnum[] | AccessRouteScalarFieldEnum
+    having?: AccessRouteScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AccessRouteCountAggregateInputType | true
+    _avg?: AccessRouteAvgAggregateInputType
+    _sum?: AccessRouteSumAggregateInputType
+    _min?: AccessRouteMinAggregateInputType
+    _max?: AccessRouteMaxAggregateInputType
+  }
+
+  export type AccessRouteGroupByOutputType = {
+    id: string
+    accessPointId: string
+    hutId: string
+    distance: number
+    ascent: number
+    descent: number
+    estimatedDuration: number
+    difficulty: $Enums.Difficulty
+    hasCableCar: boolean
+    _count: AccessRouteCountAggregateOutputType | null
+    _avg: AccessRouteAvgAggregateOutputType | null
+    _sum: AccessRouteSumAggregateOutputType | null
+    _min: AccessRouteMinAggregateOutputType | null
+    _max: AccessRouteMaxAggregateOutputType | null
+  }
+
+  type GetAccessRouteGroupByPayload<T extends AccessRouteGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AccessRouteGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AccessRouteGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AccessRouteGroupByOutputType[P]>
+            : GetScalarType<T[P], AccessRouteGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AccessRouteSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    accessPointId?: boolean
+    hutId?: boolean
+    distance?: boolean
+    ascent?: boolean
+    descent?: boolean
+    estimatedDuration?: boolean
+    difficulty?: boolean
+    hasCableCar?: boolean
+    accessPoint?: boolean | AccessPointDefaultArgs<ExtArgs>
+    hut?: boolean | HutDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["accessRoute"]>
+
+  export type AccessRouteSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    accessPointId?: boolean
+    hutId?: boolean
+    distance?: boolean
+    ascent?: boolean
+    descent?: boolean
+    estimatedDuration?: boolean
+    difficulty?: boolean
+    hasCableCar?: boolean
+    accessPoint?: boolean | AccessPointDefaultArgs<ExtArgs>
+    hut?: boolean | HutDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["accessRoute"]>
+
+  export type AccessRouteSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    accessPointId?: boolean
+    hutId?: boolean
+    distance?: boolean
+    ascent?: boolean
+    descent?: boolean
+    estimatedDuration?: boolean
+    difficulty?: boolean
+    hasCableCar?: boolean
+    accessPoint?: boolean | AccessPointDefaultArgs<ExtArgs>
+    hut?: boolean | HutDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["accessRoute"]>
+
+  export type AccessRouteSelectScalar = {
+    id?: boolean
+    accessPointId?: boolean
+    hutId?: boolean
+    distance?: boolean
+    ascent?: boolean
+    descent?: boolean
+    estimatedDuration?: boolean
+    difficulty?: boolean
+    hasCableCar?: boolean
+  }
+
+  export type AccessRouteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "accessPointId" | "hutId" | "distance" | "ascent" | "descent" | "estimatedDuration" | "difficulty" | "hasCableCar", ExtArgs["result"]["accessRoute"]>
+  export type AccessRouteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    accessPoint?: boolean | AccessPointDefaultArgs<ExtArgs>
+    hut?: boolean | HutDefaultArgs<ExtArgs>
+  }
+  export type AccessRouteIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    accessPoint?: boolean | AccessPointDefaultArgs<ExtArgs>
+    hut?: boolean | HutDefaultArgs<ExtArgs>
+  }
+  export type AccessRouteIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    accessPoint?: boolean | AccessPointDefaultArgs<ExtArgs>
+    hut?: boolean | HutDefaultArgs<ExtArgs>
+  }
+
+  export type $AccessRoutePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "AccessRoute"
+    objects: {
+      accessPoint: Prisma.$AccessPointPayload<ExtArgs>
+      hut: Prisma.$HutPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      accessPointId: string
+      hutId: string
+      distance: number
+      ascent: number
+      descent: number
+      estimatedDuration: number
+      difficulty: $Enums.Difficulty
+      hasCableCar: boolean
+    }, ExtArgs["result"]["accessRoute"]>
+    composites: {}
+  }
+
+  type AccessRouteGetPayload<S extends boolean | null | undefined | AccessRouteDefaultArgs> = $Result.GetResult<Prisma.$AccessRoutePayload, S>
+
+  type AccessRouteCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AccessRouteFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AccessRouteCountAggregateInputType | true
+    }
+
+  export interface AccessRouteDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AccessRoute'], meta: { name: 'AccessRoute' } }
+    /**
+     * Find zero or one AccessRoute that matches the filter.
+     * @param {AccessRouteFindUniqueArgs} args - Arguments to find a AccessRoute
+     * @example
+     * // Get one AccessRoute
+     * const accessRoute = await prisma.accessRoute.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AccessRouteFindUniqueArgs>(args: SelectSubset<T, AccessRouteFindUniqueArgs<ExtArgs>>): Prisma__AccessRouteClient<$Result.GetResult<Prisma.$AccessRoutePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one AccessRoute that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AccessRouteFindUniqueOrThrowArgs} args - Arguments to find a AccessRoute
+     * @example
+     * // Get one AccessRoute
+     * const accessRoute = await prisma.accessRoute.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AccessRouteFindUniqueOrThrowArgs>(args: SelectSubset<T, AccessRouteFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AccessRouteClient<$Result.GetResult<Prisma.$AccessRoutePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AccessRoute that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AccessRouteFindFirstArgs} args - Arguments to find a AccessRoute
+     * @example
+     * // Get one AccessRoute
+     * const accessRoute = await prisma.accessRoute.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AccessRouteFindFirstArgs>(args?: SelectSubset<T, AccessRouteFindFirstArgs<ExtArgs>>): Prisma__AccessRouteClient<$Result.GetResult<Prisma.$AccessRoutePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AccessRoute that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AccessRouteFindFirstOrThrowArgs} args - Arguments to find a AccessRoute
+     * @example
+     * // Get one AccessRoute
+     * const accessRoute = await prisma.accessRoute.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AccessRouteFindFirstOrThrowArgs>(args?: SelectSubset<T, AccessRouteFindFirstOrThrowArgs<ExtArgs>>): Prisma__AccessRouteClient<$Result.GetResult<Prisma.$AccessRoutePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more AccessRoutes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AccessRouteFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all AccessRoutes
+     * const accessRoutes = await prisma.accessRoute.findMany()
+     * 
+     * // Get first 10 AccessRoutes
+     * const accessRoutes = await prisma.accessRoute.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const accessRouteWithIdOnly = await prisma.accessRoute.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AccessRouteFindManyArgs>(args?: SelectSubset<T, AccessRouteFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccessRoutePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a AccessRoute.
+     * @param {AccessRouteCreateArgs} args - Arguments to create a AccessRoute.
+     * @example
+     * // Create one AccessRoute
+     * const AccessRoute = await prisma.accessRoute.create({
+     *   data: {
+     *     // ... data to create a AccessRoute
+     *   }
+     * })
+     * 
+     */
+    create<T extends AccessRouteCreateArgs>(args: SelectSubset<T, AccessRouteCreateArgs<ExtArgs>>): Prisma__AccessRouteClient<$Result.GetResult<Prisma.$AccessRoutePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many AccessRoutes.
+     * @param {AccessRouteCreateManyArgs} args - Arguments to create many AccessRoutes.
+     * @example
+     * // Create many AccessRoutes
+     * const accessRoute = await prisma.accessRoute.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AccessRouteCreateManyArgs>(args?: SelectSubset<T, AccessRouteCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many AccessRoutes and returns the data saved in the database.
+     * @param {AccessRouteCreateManyAndReturnArgs} args - Arguments to create many AccessRoutes.
+     * @example
+     * // Create many AccessRoutes
+     * const accessRoute = await prisma.accessRoute.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many AccessRoutes and only return the `id`
+     * const accessRouteWithIdOnly = await prisma.accessRoute.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AccessRouteCreateManyAndReturnArgs>(args?: SelectSubset<T, AccessRouteCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccessRoutePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a AccessRoute.
+     * @param {AccessRouteDeleteArgs} args - Arguments to delete one AccessRoute.
+     * @example
+     * // Delete one AccessRoute
+     * const AccessRoute = await prisma.accessRoute.delete({
+     *   where: {
+     *     // ... filter to delete one AccessRoute
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AccessRouteDeleteArgs>(args: SelectSubset<T, AccessRouteDeleteArgs<ExtArgs>>): Prisma__AccessRouteClient<$Result.GetResult<Prisma.$AccessRoutePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one AccessRoute.
+     * @param {AccessRouteUpdateArgs} args - Arguments to update one AccessRoute.
+     * @example
+     * // Update one AccessRoute
+     * const accessRoute = await prisma.accessRoute.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AccessRouteUpdateArgs>(args: SelectSubset<T, AccessRouteUpdateArgs<ExtArgs>>): Prisma__AccessRouteClient<$Result.GetResult<Prisma.$AccessRoutePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more AccessRoutes.
+     * @param {AccessRouteDeleteManyArgs} args - Arguments to filter AccessRoutes to delete.
+     * @example
+     * // Delete a few AccessRoutes
+     * const { count } = await prisma.accessRoute.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AccessRouteDeleteManyArgs>(args?: SelectSubset<T, AccessRouteDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AccessRoutes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AccessRouteUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many AccessRoutes
+     * const accessRoute = await prisma.accessRoute.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AccessRouteUpdateManyArgs>(args: SelectSubset<T, AccessRouteUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AccessRoutes and returns the data updated in the database.
+     * @param {AccessRouteUpdateManyAndReturnArgs} args - Arguments to update many AccessRoutes.
+     * @example
+     * // Update many AccessRoutes
+     * const accessRoute = await prisma.accessRoute.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more AccessRoutes and only return the `id`
+     * const accessRouteWithIdOnly = await prisma.accessRoute.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AccessRouteUpdateManyAndReturnArgs>(args: SelectSubset<T, AccessRouteUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccessRoutePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one AccessRoute.
+     * @param {AccessRouteUpsertArgs} args - Arguments to update or create a AccessRoute.
+     * @example
+     * // Update or create a AccessRoute
+     * const accessRoute = await prisma.accessRoute.upsert({
+     *   create: {
+     *     // ... data to create a AccessRoute
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the AccessRoute we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AccessRouteUpsertArgs>(args: SelectSubset<T, AccessRouteUpsertArgs<ExtArgs>>): Prisma__AccessRouteClient<$Result.GetResult<Prisma.$AccessRoutePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of AccessRoutes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AccessRouteCountArgs} args - Arguments to filter AccessRoutes to count.
+     * @example
+     * // Count the number of AccessRoutes
+     * const count = await prisma.accessRoute.count({
+     *   where: {
+     *     // ... the filter for the AccessRoutes we want to count
+     *   }
+     * })
+    **/
+    count<T extends AccessRouteCountArgs>(
+      args?: Subset<T, AccessRouteCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AccessRouteCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a AccessRoute.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AccessRouteAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AccessRouteAggregateArgs>(args: Subset<T, AccessRouteAggregateArgs>): Prisma.PrismaPromise<GetAccessRouteAggregateType<T>>
+
+    /**
+     * Group by AccessRoute.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AccessRouteGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AccessRouteGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AccessRouteGroupByArgs['orderBy'] }
+        : { orderBy?: AccessRouteGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AccessRouteGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAccessRouteGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the AccessRoute model
+   */
+  readonly fields: AccessRouteFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for AccessRoute.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AccessRouteClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    accessPoint<T extends AccessPointDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AccessPointDefaultArgs<ExtArgs>>): Prisma__AccessPointClient<$Result.GetResult<Prisma.$AccessPointPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    hut<T extends HutDefaultArgs<ExtArgs> = {}>(args?: Subset<T, HutDefaultArgs<ExtArgs>>): Prisma__HutClient<$Result.GetResult<Prisma.$HutPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the AccessRoute model
+   */
+  interface AccessRouteFieldRefs {
+    readonly id: FieldRef<"AccessRoute", 'String'>
+    readonly accessPointId: FieldRef<"AccessRoute", 'String'>
+    readonly hutId: FieldRef<"AccessRoute", 'String'>
+    readonly distance: FieldRef<"AccessRoute", 'Float'>
+    readonly ascent: FieldRef<"AccessRoute", 'Int'>
+    readonly descent: FieldRef<"AccessRoute", 'Int'>
+    readonly estimatedDuration: FieldRef<"AccessRoute", 'Float'>
+    readonly difficulty: FieldRef<"AccessRoute", 'Difficulty'>
+    readonly hasCableCar: FieldRef<"AccessRoute", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * AccessRoute findUnique
+   */
+  export type AccessRouteFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccessRoute
+     */
+    select?: AccessRouteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccessRoute
+     */
+    omit?: AccessRouteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccessRouteInclude<ExtArgs> | null
+    /**
+     * Filter, which AccessRoute to fetch.
+     */
+    where: AccessRouteWhereUniqueInput
+  }
+
+  /**
+   * AccessRoute findUniqueOrThrow
+   */
+  export type AccessRouteFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccessRoute
+     */
+    select?: AccessRouteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccessRoute
+     */
+    omit?: AccessRouteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccessRouteInclude<ExtArgs> | null
+    /**
+     * Filter, which AccessRoute to fetch.
+     */
+    where: AccessRouteWhereUniqueInput
+  }
+
+  /**
+   * AccessRoute findFirst
+   */
+  export type AccessRouteFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccessRoute
+     */
+    select?: AccessRouteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccessRoute
+     */
+    omit?: AccessRouteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccessRouteInclude<ExtArgs> | null
+    /**
+     * Filter, which AccessRoute to fetch.
+     */
+    where?: AccessRouteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AccessRoutes to fetch.
+     */
+    orderBy?: AccessRouteOrderByWithRelationInput | AccessRouteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AccessRoutes.
+     */
+    cursor?: AccessRouteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AccessRoutes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AccessRoutes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AccessRoutes.
+     */
+    distinct?: AccessRouteScalarFieldEnum | AccessRouteScalarFieldEnum[]
+  }
+
+  /**
+   * AccessRoute findFirstOrThrow
+   */
+  export type AccessRouteFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccessRoute
+     */
+    select?: AccessRouteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccessRoute
+     */
+    omit?: AccessRouteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccessRouteInclude<ExtArgs> | null
+    /**
+     * Filter, which AccessRoute to fetch.
+     */
+    where?: AccessRouteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AccessRoutes to fetch.
+     */
+    orderBy?: AccessRouteOrderByWithRelationInput | AccessRouteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AccessRoutes.
+     */
+    cursor?: AccessRouteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AccessRoutes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AccessRoutes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AccessRoutes.
+     */
+    distinct?: AccessRouteScalarFieldEnum | AccessRouteScalarFieldEnum[]
+  }
+
+  /**
+   * AccessRoute findMany
+   */
+  export type AccessRouteFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccessRoute
+     */
+    select?: AccessRouteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccessRoute
+     */
+    omit?: AccessRouteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccessRouteInclude<ExtArgs> | null
+    /**
+     * Filter, which AccessRoutes to fetch.
+     */
+    where?: AccessRouteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AccessRoutes to fetch.
+     */
+    orderBy?: AccessRouteOrderByWithRelationInput | AccessRouteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing AccessRoutes.
+     */
+    cursor?: AccessRouteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AccessRoutes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AccessRoutes.
+     */
+    skip?: number
+    distinct?: AccessRouteScalarFieldEnum | AccessRouteScalarFieldEnum[]
+  }
+
+  /**
+   * AccessRoute create
+   */
+  export type AccessRouteCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccessRoute
+     */
+    select?: AccessRouteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccessRoute
+     */
+    omit?: AccessRouteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccessRouteInclude<ExtArgs> | null
+    /**
+     * The data needed to create a AccessRoute.
+     */
+    data: XOR<AccessRouteCreateInput, AccessRouteUncheckedCreateInput>
+  }
+
+  /**
+   * AccessRoute createMany
+   */
+  export type AccessRouteCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many AccessRoutes.
+     */
+    data: AccessRouteCreateManyInput | AccessRouteCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AccessRoute createManyAndReturn
+   */
+  export type AccessRouteCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccessRoute
+     */
+    select?: AccessRouteSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccessRoute
+     */
+    omit?: AccessRouteOmit<ExtArgs> | null
+    /**
+     * The data used to create many AccessRoutes.
+     */
+    data: AccessRouteCreateManyInput | AccessRouteCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccessRouteIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * AccessRoute update
+   */
+  export type AccessRouteUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccessRoute
+     */
+    select?: AccessRouteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccessRoute
+     */
+    omit?: AccessRouteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccessRouteInclude<ExtArgs> | null
+    /**
+     * The data needed to update a AccessRoute.
+     */
+    data: XOR<AccessRouteUpdateInput, AccessRouteUncheckedUpdateInput>
+    /**
+     * Choose, which AccessRoute to update.
+     */
+    where: AccessRouteWhereUniqueInput
+  }
+
+  /**
+   * AccessRoute updateMany
+   */
+  export type AccessRouteUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update AccessRoutes.
+     */
+    data: XOR<AccessRouteUpdateManyMutationInput, AccessRouteUncheckedUpdateManyInput>
+    /**
+     * Filter which AccessRoutes to update
+     */
+    where?: AccessRouteWhereInput
+    /**
+     * Limit how many AccessRoutes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AccessRoute updateManyAndReturn
+   */
+  export type AccessRouteUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccessRoute
+     */
+    select?: AccessRouteSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccessRoute
+     */
+    omit?: AccessRouteOmit<ExtArgs> | null
+    /**
+     * The data used to update AccessRoutes.
+     */
+    data: XOR<AccessRouteUpdateManyMutationInput, AccessRouteUncheckedUpdateManyInput>
+    /**
+     * Filter which AccessRoutes to update
+     */
+    where?: AccessRouteWhereInput
+    /**
+     * Limit how many AccessRoutes to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccessRouteIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * AccessRoute upsert
+   */
+  export type AccessRouteUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccessRoute
+     */
+    select?: AccessRouteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccessRoute
+     */
+    omit?: AccessRouteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccessRouteInclude<ExtArgs> | null
+    /**
+     * The filter to search for the AccessRoute to update in case it exists.
+     */
+    where: AccessRouteWhereUniqueInput
+    /**
+     * In case the AccessRoute found by the `where` argument doesn't exist, create a new AccessRoute with this data.
+     */
+    create: XOR<AccessRouteCreateInput, AccessRouteUncheckedCreateInput>
+    /**
+     * In case the AccessRoute was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AccessRouteUpdateInput, AccessRouteUncheckedUpdateInput>
+  }
+
+  /**
+   * AccessRoute delete
+   */
+  export type AccessRouteDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccessRoute
+     */
+    select?: AccessRouteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccessRoute
+     */
+    omit?: AccessRouteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccessRouteInclude<ExtArgs> | null
+    /**
+     * Filter which AccessRoute to delete.
+     */
+    where: AccessRouteWhereUniqueInput
+  }
+
+  /**
+   * AccessRoute deleteMany
+   */
+  export type AccessRouteDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AccessRoutes to delete
+     */
+    where?: AccessRouteWhereInput
+    /**
+     * Limit how many AccessRoutes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * AccessRoute without action
+   */
+  export type AccessRouteDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AccessRoute
+     */
+    select?: AccessRouteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AccessRoute
+     */
+    omit?: AccessRouteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccessRouteInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -9853,6 +13684,8 @@ export namespace Prisma {
     imageUrl: 'imageUrl',
     description: 'description',
     amenities: 'amenities',
+    seasonStart: 'seasonStart',
+    seasonEnd: 'seasonEnd',
     regionId: 'regionId'
   };
 
@@ -9925,6 +13758,46 @@ export namespace Prisma {
   };
 
   export type AvailabilityCheckScalarFieldEnum = (typeof AvailabilityCheckScalarFieldEnum)[keyof typeof AvailabilityCheckScalarFieldEnum]
+
+
+  export const AccessPointScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    type: 'type',
+    altitude: 'altitude',
+    lat: 'lat',
+    lng: 'lng',
+    regionId: 'regionId'
+  };
+
+  export type AccessPointScalarFieldEnum = (typeof AccessPointScalarFieldEnum)[keyof typeof AccessPointScalarFieldEnum]
+
+
+  export const CableCarScalarFieldEnum: {
+    id: 'id',
+    accessPointId: 'accessPointId',
+    operatorName: 'operatorName',
+    seasonStart: 'seasonStart',
+    seasonEnd: 'seasonEnd',
+    website: 'website'
+  };
+
+  export type CableCarScalarFieldEnum = (typeof CableCarScalarFieldEnum)[keyof typeof CableCarScalarFieldEnum]
+
+
+  export const AccessRouteScalarFieldEnum: {
+    id: 'id',
+    accessPointId: 'accessPointId',
+    hutId: 'hutId',
+    distance: 'distance',
+    ascent: 'ascent',
+    descent: 'descent',
+    estimatedDuration: 'estimatedDuration',
+    difficulty: 'difficulty',
+    hasCableCar: 'hasCableCar'
+  };
+
+  export type AccessRouteScalarFieldEnum = (typeof AccessRouteScalarFieldEnum)[keyof typeof AccessRouteScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -10111,6 +13984,27 @@ export namespace Prisma {
    */
   export type ListEnumTourStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TourStatus[]'>
     
+
+
+  /**
+   * Reference to a field of type 'AccessPointType'
+   */
+  export type EnumAccessPointTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AccessPointType'>
+    
+
+
+  /**
+   * Reference to a field of type 'AccessPointType[]'
+   */
+  export type ListEnumAccessPointTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AccessPointType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
   /**
    * Deep Input Types
    */
@@ -10130,6 +14024,7 @@ export namespace Prisma {
     centerLat?: FloatFilter<"Region"> | number
     centerLng?: FloatFilter<"Region"> | number
     huts?: HutListRelationFilter
+    accessPoints?: AccessPointListRelationFilter
   }
 
   export type RegionOrderByWithRelationInput = {
@@ -10143,6 +14038,7 @@ export namespace Prisma {
     centerLat?: SortOrder
     centerLng?: SortOrder
     huts?: HutOrderByRelationAggregateInput
+    accessPoints?: AccessPointOrderByRelationAggregateInput
   }
 
   export type RegionWhereUniqueInput = Prisma.AtLeast<{
@@ -10159,6 +14055,7 @@ export namespace Prisma {
     centerLat?: FloatFilter<"Region"> | number
     centerLng?: FloatFilter<"Region"> | number
     huts?: HutListRelationFilter
+    accessPoints?: AccessPointListRelationFilter
   }, "id" | "slug">
 
   export type RegionOrderByWithAggregationInput = {
@@ -10208,6 +14105,8 @@ export namespace Prisma {
     imageUrl?: StringNullableFilter<"Hut"> | string | null
     description?: StringNullableFilter<"Hut"> | string | null
     amenities?: StringNullableListFilter<"Hut">
+    seasonStart?: StringNullableFilter<"Hut"> | string | null
+    seasonEnd?: StringNullableFilter<"Hut"> | string | null
     regionId?: StringFilter<"Hut"> | string
     region?: XOR<RegionScalarRelationFilter, RegionWhereInput>
     roomTypes?: RoomTypeConfigListRelationFilter
@@ -10215,6 +14114,7 @@ export namespace Prisma {
     routesTo?: RouteListRelationFilter
     availability?: AvailabilityCheckListRelationFilter
     tourHuts?: TourHutListRelationFilter
+    accessRoutes?: AccessRouteListRelationFilter
   }
 
   export type HutOrderByWithRelationInput = {
@@ -10229,6 +14129,8 @@ export namespace Prisma {
     imageUrl?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
     amenities?: SortOrder
+    seasonStart?: SortOrderInput | SortOrder
+    seasonEnd?: SortOrderInput | SortOrder
     regionId?: SortOrder
     region?: RegionOrderByWithRelationInput
     roomTypes?: RoomTypeConfigOrderByRelationAggregateInput
@@ -10236,6 +14138,7 @@ export namespace Prisma {
     routesTo?: RouteOrderByRelationAggregateInput
     availability?: AvailabilityCheckOrderByRelationAggregateInput
     tourHuts?: TourHutOrderByRelationAggregateInput
+    accessRoutes?: AccessRouteOrderByRelationAggregateInput
   }
 
   export type HutWhereUniqueInput = Prisma.AtLeast<{
@@ -10253,6 +14156,8 @@ export namespace Prisma {
     imageUrl?: StringNullableFilter<"Hut"> | string | null
     description?: StringNullableFilter<"Hut"> | string | null
     amenities?: StringNullableListFilter<"Hut">
+    seasonStart?: StringNullableFilter<"Hut"> | string | null
+    seasonEnd?: StringNullableFilter<"Hut"> | string | null
     regionId?: StringFilter<"Hut"> | string
     region?: XOR<RegionScalarRelationFilter, RegionWhereInput>
     roomTypes?: RoomTypeConfigListRelationFilter
@@ -10260,6 +14165,7 @@ export namespace Prisma {
     routesTo?: RouteListRelationFilter
     availability?: AvailabilityCheckListRelationFilter
     tourHuts?: TourHutListRelationFilter
+    accessRoutes?: AccessRouteListRelationFilter
   }, "id">
 
   export type HutOrderByWithAggregationInput = {
@@ -10274,6 +14180,8 @@ export namespace Prisma {
     imageUrl?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
     amenities?: SortOrder
+    seasonStart?: SortOrderInput | SortOrder
+    seasonEnd?: SortOrderInput | SortOrder
     regionId?: SortOrder
     _count?: HutCountOrderByAggregateInput
     _avg?: HutAvgOrderByAggregateInput
@@ -10297,6 +14205,8 @@ export namespace Prisma {
     imageUrl?: StringNullableWithAggregatesFilter<"Hut"> | string | null
     description?: StringNullableWithAggregatesFilter<"Hut"> | string | null
     amenities?: StringNullableListFilter<"Hut">
+    seasonStart?: StringNullableWithAggregatesFilter<"Hut"> | string | null
+    seasonEnd?: StringNullableWithAggregatesFilter<"Hut"> | string | null
     regionId?: StringWithAggregatesFilter<"Hut"> | string
   }
 
@@ -10660,6 +14570,220 @@ export namespace Prisma {
     source?: EnumBookingSystemWithAggregatesFilter<"AvailabilityCheck"> | $Enums.BookingSystem
   }
 
+  export type AccessPointWhereInput = {
+    AND?: AccessPointWhereInput | AccessPointWhereInput[]
+    OR?: AccessPointWhereInput[]
+    NOT?: AccessPointWhereInput | AccessPointWhereInput[]
+    id?: StringFilter<"AccessPoint"> | string
+    name?: StringFilter<"AccessPoint"> | string
+    type?: EnumAccessPointTypeFilter<"AccessPoint"> | $Enums.AccessPointType
+    altitude?: IntFilter<"AccessPoint"> | number
+    lat?: FloatFilter<"AccessPoint"> | number
+    lng?: FloatFilter<"AccessPoint"> | number
+    regionId?: StringFilter<"AccessPoint"> | string
+    region?: XOR<RegionScalarRelationFilter, RegionWhereInput>
+    routes?: AccessRouteListRelationFilter
+    cableCar?: XOR<CableCarNullableScalarRelationFilter, CableCarWhereInput> | null
+  }
+
+  export type AccessPointOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    type?: SortOrder
+    altitude?: SortOrder
+    lat?: SortOrder
+    lng?: SortOrder
+    regionId?: SortOrder
+    region?: RegionOrderByWithRelationInput
+    routes?: AccessRouteOrderByRelationAggregateInput
+    cableCar?: CableCarOrderByWithRelationInput
+  }
+
+  export type AccessPointWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: AccessPointWhereInput | AccessPointWhereInput[]
+    OR?: AccessPointWhereInput[]
+    NOT?: AccessPointWhereInput | AccessPointWhereInput[]
+    name?: StringFilter<"AccessPoint"> | string
+    type?: EnumAccessPointTypeFilter<"AccessPoint"> | $Enums.AccessPointType
+    altitude?: IntFilter<"AccessPoint"> | number
+    lat?: FloatFilter<"AccessPoint"> | number
+    lng?: FloatFilter<"AccessPoint"> | number
+    regionId?: StringFilter<"AccessPoint"> | string
+    region?: XOR<RegionScalarRelationFilter, RegionWhereInput>
+    routes?: AccessRouteListRelationFilter
+    cableCar?: XOR<CableCarNullableScalarRelationFilter, CableCarWhereInput> | null
+  }, "id">
+
+  export type AccessPointOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    type?: SortOrder
+    altitude?: SortOrder
+    lat?: SortOrder
+    lng?: SortOrder
+    regionId?: SortOrder
+    _count?: AccessPointCountOrderByAggregateInput
+    _avg?: AccessPointAvgOrderByAggregateInput
+    _max?: AccessPointMaxOrderByAggregateInput
+    _min?: AccessPointMinOrderByAggregateInput
+    _sum?: AccessPointSumOrderByAggregateInput
+  }
+
+  export type AccessPointScalarWhereWithAggregatesInput = {
+    AND?: AccessPointScalarWhereWithAggregatesInput | AccessPointScalarWhereWithAggregatesInput[]
+    OR?: AccessPointScalarWhereWithAggregatesInput[]
+    NOT?: AccessPointScalarWhereWithAggregatesInput | AccessPointScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"AccessPoint"> | string
+    name?: StringWithAggregatesFilter<"AccessPoint"> | string
+    type?: EnumAccessPointTypeWithAggregatesFilter<"AccessPoint"> | $Enums.AccessPointType
+    altitude?: IntWithAggregatesFilter<"AccessPoint"> | number
+    lat?: FloatWithAggregatesFilter<"AccessPoint"> | number
+    lng?: FloatWithAggregatesFilter<"AccessPoint"> | number
+    regionId?: StringWithAggregatesFilter<"AccessPoint"> | string
+  }
+
+  export type CableCarWhereInput = {
+    AND?: CableCarWhereInput | CableCarWhereInput[]
+    OR?: CableCarWhereInput[]
+    NOT?: CableCarWhereInput | CableCarWhereInput[]
+    id?: StringFilter<"CableCar"> | string
+    accessPointId?: StringFilter<"CableCar"> | string
+    operatorName?: StringFilter<"CableCar"> | string
+    seasonStart?: StringNullableFilter<"CableCar"> | string | null
+    seasonEnd?: StringNullableFilter<"CableCar"> | string | null
+    website?: StringNullableFilter<"CableCar"> | string | null
+    accessPoint?: XOR<AccessPointScalarRelationFilter, AccessPointWhereInput>
+  }
+
+  export type CableCarOrderByWithRelationInput = {
+    id?: SortOrder
+    accessPointId?: SortOrder
+    operatorName?: SortOrder
+    seasonStart?: SortOrderInput | SortOrder
+    seasonEnd?: SortOrderInput | SortOrder
+    website?: SortOrderInput | SortOrder
+    accessPoint?: AccessPointOrderByWithRelationInput
+  }
+
+  export type CableCarWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    accessPointId?: string
+    AND?: CableCarWhereInput | CableCarWhereInput[]
+    OR?: CableCarWhereInput[]
+    NOT?: CableCarWhereInput | CableCarWhereInput[]
+    operatorName?: StringFilter<"CableCar"> | string
+    seasonStart?: StringNullableFilter<"CableCar"> | string | null
+    seasonEnd?: StringNullableFilter<"CableCar"> | string | null
+    website?: StringNullableFilter<"CableCar"> | string | null
+    accessPoint?: XOR<AccessPointScalarRelationFilter, AccessPointWhereInput>
+  }, "id" | "accessPointId">
+
+  export type CableCarOrderByWithAggregationInput = {
+    id?: SortOrder
+    accessPointId?: SortOrder
+    operatorName?: SortOrder
+    seasonStart?: SortOrderInput | SortOrder
+    seasonEnd?: SortOrderInput | SortOrder
+    website?: SortOrderInput | SortOrder
+    _count?: CableCarCountOrderByAggregateInput
+    _max?: CableCarMaxOrderByAggregateInput
+    _min?: CableCarMinOrderByAggregateInput
+  }
+
+  export type CableCarScalarWhereWithAggregatesInput = {
+    AND?: CableCarScalarWhereWithAggregatesInput | CableCarScalarWhereWithAggregatesInput[]
+    OR?: CableCarScalarWhereWithAggregatesInput[]
+    NOT?: CableCarScalarWhereWithAggregatesInput | CableCarScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"CableCar"> | string
+    accessPointId?: StringWithAggregatesFilter<"CableCar"> | string
+    operatorName?: StringWithAggregatesFilter<"CableCar"> | string
+    seasonStart?: StringNullableWithAggregatesFilter<"CableCar"> | string | null
+    seasonEnd?: StringNullableWithAggregatesFilter<"CableCar"> | string | null
+    website?: StringNullableWithAggregatesFilter<"CableCar"> | string | null
+  }
+
+  export type AccessRouteWhereInput = {
+    AND?: AccessRouteWhereInput | AccessRouteWhereInput[]
+    OR?: AccessRouteWhereInput[]
+    NOT?: AccessRouteWhereInput | AccessRouteWhereInput[]
+    id?: StringFilter<"AccessRoute"> | string
+    accessPointId?: StringFilter<"AccessRoute"> | string
+    hutId?: StringFilter<"AccessRoute"> | string
+    distance?: FloatFilter<"AccessRoute"> | number
+    ascent?: IntFilter<"AccessRoute"> | number
+    descent?: IntFilter<"AccessRoute"> | number
+    estimatedDuration?: FloatFilter<"AccessRoute"> | number
+    difficulty?: EnumDifficultyFilter<"AccessRoute"> | $Enums.Difficulty
+    hasCableCar?: BoolFilter<"AccessRoute"> | boolean
+    accessPoint?: XOR<AccessPointScalarRelationFilter, AccessPointWhereInput>
+    hut?: XOR<HutScalarRelationFilter, HutWhereInput>
+  }
+
+  export type AccessRouteOrderByWithRelationInput = {
+    id?: SortOrder
+    accessPointId?: SortOrder
+    hutId?: SortOrder
+    distance?: SortOrder
+    ascent?: SortOrder
+    descent?: SortOrder
+    estimatedDuration?: SortOrder
+    difficulty?: SortOrder
+    hasCableCar?: SortOrder
+    accessPoint?: AccessPointOrderByWithRelationInput
+    hut?: HutOrderByWithRelationInput
+  }
+
+  export type AccessRouteWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    accessPointId_hutId?: AccessRouteAccessPointIdHutIdCompoundUniqueInput
+    AND?: AccessRouteWhereInput | AccessRouteWhereInput[]
+    OR?: AccessRouteWhereInput[]
+    NOT?: AccessRouteWhereInput | AccessRouteWhereInput[]
+    accessPointId?: StringFilter<"AccessRoute"> | string
+    hutId?: StringFilter<"AccessRoute"> | string
+    distance?: FloatFilter<"AccessRoute"> | number
+    ascent?: IntFilter<"AccessRoute"> | number
+    descent?: IntFilter<"AccessRoute"> | number
+    estimatedDuration?: FloatFilter<"AccessRoute"> | number
+    difficulty?: EnumDifficultyFilter<"AccessRoute"> | $Enums.Difficulty
+    hasCableCar?: BoolFilter<"AccessRoute"> | boolean
+    accessPoint?: XOR<AccessPointScalarRelationFilter, AccessPointWhereInput>
+    hut?: XOR<HutScalarRelationFilter, HutWhereInput>
+  }, "id" | "accessPointId_hutId">
+
+  export type AccessRouteOrderByWithAggregationInput = {
+    id?: SortOrder
+    accessPointId?: SortOrder
+    hutId?: SortOrder
+    distance?: SortOrder
+    ascent?: SortOrder
+    descent?: SortOrder
+    estimatedDuration?: SortOrder
+    difficulty?: SortOrder
+    hasCableCar?: SortOrder
+    _count?: AccessRouteCountOrderByAggregateInput
+    _avg?: AccessRouteAvgOrderByAggregateInput
+    _max?: AccessRouteMaxOrderByAggregateInput
+    _min?: AccessRouteMinOrderByAggregateInput
+    _sum?: AccessRouteSumOrderByAggregateInput
+  }
+
+  export type AccessRouteScalarWhereWithAggregatesInput = {
+    AND?: AccessRouteScalarWhereWithAggregatesInput | AccessRouteScalarWhereWithAggregatesInput[]
+    OR?: AccessRouteScalarWhereWithAggregatesInput[]
+    NOT?: AccessRouteScalarWhereWithAggregatesInput | AccessRouteScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"AccessRoute"> | string
+    accessPointId?: StringWithAggregatesFilter<"AccessRoute"> | string
+    hutId?: StringWithAggregatesFilter<"AccessRoute"> | string
+    distance?: FloatWithAggregatesFilter<"AccessRoute"> | number
+    ascent?: IntWithAggregatesFilter<"AccessRoute"> | number
+    descent?: IntWithAggregatesFilter<"AccessRoute"> | number
+    estimatedDuration?: FloatWithAggregatesFilter<"AccessRoute"> | number
+    difficulty?: EnumDifficultyWithAggregatesFilter<"AccessRoute"> | $Enums.Difficulty
+    hasCableCar?: BoolWithAggregatesFilter<"AccessRoute"> | boolean
+  }
+
   export type RegionCreateInput = {
     id?: string
     name: string
@@ -10671,6 +14795,7 @@ export namespace Prisma {
     centerLat: number
     centerLng: number
     huts?: HutCreateNestedManyWithoutRegionInput
+    accessPoints?: AccessPointCreateNestedManyWithoutRegionInput
   }
 
   export type RegionUncheckedCreateInput = {
@@ -10684,6 +14809,7 @@ export namespace Prisma {
     centerLat: number
     centerLng: number
     huts?: HutUncheckedCreateNestedManyWithoutRegionInput
+    accessPoints?: AccessPointUncheckedCreateNestedManyWithoutRegionInput
   }
 
   export type RegionUpdateInput = {
@@ -10697,6 +14823,7 @@ export namespace Prisma {
     centerLat?: FloatFieldUpdateOperationsInput | number
     centerLng?: FloatFieldUpdateOperationsInput | number
     huts?: HutUpdateManyWithoutRegionNestedInput
+    accessPoints?: AccessPointUpdateManyWithoutRegionNestedInput
   }
 
   export type RegionUncheckedUpdateInput = {
@@ -10710,6 +14837,7 @@ export namespace Prisma {
     centerLat?: FloatFieldUpdateOperationsInput | number
     centerLng?: FloatFieldUpdateOperationsInput | number
     huts?: HutUncheckedUpdateManyWithoutRegionNestedInput
+    accessPoints?: AccessPointUncheckedUpdateManyWithoutRegionNestedInput
   }
 
   export type RegionCreateManyInput = {
@@ -10760,12 +14888,15 @@ export namespace Prisma {
     imageUrl?: string | null
     description?: string | null
     amenities?: HutCreateamenitiesInput | string[]
+    seasonStart?: string | null
+    seasonEnd?: string | null
     region: RegionCreateNestedOneWithoutHutsInput
     roomTypes?: RoomTypeConfigCreateNestedManyWithoutHutInput
     routesFrom?: RouteCreateNestedManyWithoutFromHutInput
     routesTo?: RouteCreateNestedManyWithoutToHutInput
     availability?: AvailabilityCheckCreateNestedManyWithoutHutInput
     tourHuts?: TourHutCreateNestedManyWithoutHutInput
+    accessRoutes?: AccessRouteCreateNestedManyWithoutHutInput
   }
 
   export type HutUncheckedCreateInput = {
@@ -10780,12 +14911,15 @@ export namespace Prisma {
     imageUrl?: string | null
     description?: string | null
     amenities?: HutCreateamenitiesInput | string[]
+    seasonStart?: string | null
+    seasonEnd?: string | null
     regionId: string
     roomTypes?: RoomTypeConfigUncheckedCreateNestedManyWithoutHutInput
     routesFrom?: RouteUncheckedCreateNestedManyWithoutFromHutInput
     routesTo?: RouteUncheckedCreateNestedManyWithoutToHutInput
     availability?: AvailabilityCheckUncheckedCreateNestedManyWithoutHutInput
     tourHuts?: TourHutUncheckedCreateNestedManyWithoutHutInput
+    accessRoutes?: AccessRouteUncheckedCreateNestedManyWithoutHutInput
   }
 
   export type HutUpdateInput = {
@@ -10800,12 +14934,15 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     amenities?: HutUpdateamenitiesInput | string[]
+    seasonStart?: NullableStringFieldUpdateOperationsInput | string | null
+    seasonEnd?: NullableStringFieldUpdateOperationsInput | string | null
     region?: RegionUpdateOneRequiredWithoutHutsNestedInput
     roomTypes?: RoomTypeConfigUpdateManyWithoutHutNestedInput
     routesFrom?: RouteUpdateManyWithoutFromHutNestedInput
     routesTo?: RouteUpdateManyWithoutToHutNestedInput
     availability?: AvailabilityCheckUpdateManyWithoutHutNestedInput
     tourHuts?: TourHutUpdateManyWithoutHutNestedInput
+    accessRoutes?: AccessRouteUpdateManyWithoutHutNestedInput
   }
 
   export type HutUncheckedUpdateInput = {
@@ -10820,12 +14957,15 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     amenities?: HutUpdateamenitiesInput | string[]
+    seasonStart?: NullableStringFieldUpdateOperationsInput | string | null
+    seasonEnd?: NullableStringFieldUpdateOperationsInput | string | null
     regionId?: StringFieldUpdateOperationsInput | string
     roomTypes?: RoomTypeConfigUncheckedUpdateManyWithoutHutNestedInput
     routesFrom?: RouteUncheckedUpdateManyWithoutFromHutNestedInput
     routesTo?: RouteUncheckedUpdateManyWithoutToHutNestedInput
     availability?: AvailabilityCheckUncheckedUpdateManyWithoutHutNestedInput
     tourHuts?: TourHutUncheckedUpdateManyWithoutHutNestedInput
+    accessRoutes?: AccessRouteUncheckedUpdateManyWithoutHutNestedInput
   }
 
   export type HutCreateManyInput = {
@@ -10840,6 +14980,8 @@ export namespace Prisma {
     imageUrl?: string | null
     description?: string | null
     amenities?: HutCreateamenitiesInput | string[]
+    seasonStart?: string | null
+    seasonEnd?: string | null
     regionId: string
   }
 
@@ -10855,6 +14997,8 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     amenities?: HutUpdateamenitiesInput | string[]
+    seasonStart?: NullableStringFieldUpdateOperationsInput | string | null
+    seasonEnd?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type HutUncheckedUpdateManyInput = {
@@ -10869,6 +15013,8 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     amenities?: HutUpdateamenitiesInput | string[]
+    seasonStart?: NullableStringFieldUpdateOperationsInput | string | null
+    seasonEnd?: NullableStringFieldUpdateOperationsInput | string | null
     regionId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -11241,6 +15387,227 @@ export namespace Prisma {
     source?: EnumBookingSystemFieldUpdateOperationsInput | $Enums.BookingSystem
   }
 
+  export type AccessPointCreateInput = {
+    id?: string
+    name: string
+    type: $Enums.AccessPointType
+    altitude: number
+    lat: number
+    lng: number
+    region: RegionCreateNestedOneWithoutAccessPointsInput
+    routes?: AccessRouteCreateNestedManyWithoutAccessPointInput
+    cableCar?: CableCarCreateNestedOneWithoutAccessPointInput
+  }
+
+  export type AccessPointUncheckedCreateInput = {
+    id?: string
+    name: string
+    type: $Enums.AccessPointType
+    altitude: number
+    lat: number
+    lng: number
+    regionId: string
+    routes?: AccessRouteUncheckedCreateNestedManyWithoutAccessPointInput
+    cableCar?: CableCarUncheckedCreateNestedOneWithoutAccessPointInput
+  }
+
+  export type AccessPointUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: EnumAccessPointTypeFieldUpdateOperationsInput | $Enums.AccessPointType
+    altitude?: IntFieldUpdateOperationsInput | number
+    lat?: FloatFieldUpdateOperationsInput | number
+    lng?: FloatFieldUpdateOperationsInput | number
+    region?: RegionUpdateOneRequiredWithoutAccessPointsNestedInput
+    routes?: AccessRouteUpdateManyWithoutAccessPointNestedInput
+    cableCar?: CableCarUpdateOneWithoutAccessPointNestedInput
+  }
+
+  export type AccessPointUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: EnumAccessPointTypeFieldUpdateOperationsInput | $Enums.AccessPointType
+    altitude?: IntFieldUpdateOperationsInput | number
+    lat?: FloatFieldUpdateOperationsInput | number
+    lng?: FloatFieldUpdateOperationsInput | number
+    regionId?: StringFieldUpdateOperationsInput | string
+    routes?: AccessRouteUncheckedUpdateManyWithoutAccessPointNestedInput
+    cableCar?: CableCarUncheckedUpdateOneWithoutAccessPointNestedInput
+  }
+
+  export type AccessPointCreateManyInput = {
+    id?: string
+    name: string
+    type: $Enums.AccessPointType
+    altitude: number
+    lat: number
+    lng: number
+    regionId: string
+  }
+
+  export type AccessPointUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: EnumAccessPointTypeFieldUpdateOperationsInput | $Enums.AccessPointType
+    altitude?: IntFieldUpdateOperationsInput | number
+    lat?: FloatFieldUpdateOperationsInput | number
+    lng?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type AccessPointUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: EnumAccessPointTypeFieldUpdateOperationsInput | $Enums.AccessPointType
+    altitude?: IntFieldUpdateOperationsInput | number
+    lat?: FloatFieldUpdateOperationsInput | number
+    lng?: FloatFieldUpdateOperationsInput | number
+    regionId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type CableCarCreateInput = {
+    id?: string
+    operatorName: string
+    seasonStart?: string | null
+    seasonEnd?: string | null
+    website?: string | null
+    accessPoint: AccessPointCreateNestedOneWithoutCableCarInput
+  }
+
+  export type CableCarUncheckedCreateInput = {
+    id?: string
+    accessPointId: string
+    operatorName: string
+    seasonStart?: string | null
+    seasonEnd?: string | null
+    website?: string | null
+  }
+
+  export type CableCarUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    operatorName?: StringFieldUpdateOperationsInput | string
+    seasonStart?: NullableStringFieldUpdateOperationsInput | string | null
+    seasonEnd?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    accessPoint?: AccessPointUpdateOneRequiredWithoutCableCarNestedInput
+  }
+
+  export type CableCarUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    accessPointId?: StringFieldUpdateOperationsInput | string
+    operatorName?: StringFieldUpdateOperationsInput | string
+    seasonStart?: NullableStringFieldUpdateOperationsInput | string | null
+    seasonEnd?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type CableCarCreateManyInput = {
+    id?: string
+    accessPointId: string
+    operatorName: string
+    seasonStart?: string | null
+    seasonEnd?: string | null
+    website?: string | null
+  }
+
+  export type CableCarUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    operatorName?: StringFieldUpdateOperationsInput | string
+    seasonStart?: NullableStringFieldUpdateOperationsInput | string | null
+    seasonEnd?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type CableCarUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    accessPointId?: StringFieldUpdateOperationsInput | string
+    operatorName?: StringFieldUpdateOperationsInput | string
+    seasonStart?: NullableStringFieldUpdateOperationsInput | string | null
+    seasonEnd?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type AccessRouteCreateInput = {
+    id?: string
+    distance: number
+    ascent: number
+    descent: number
+    estimatedDuration: number
+    difficulty: $Enums.Difficulty
+    hasCableCar?: boolean
+    accessPoint: AccessPointCreateNestedOneWithoutRoutesInput
+    hut: HutCreateNestedOneWithoutAccessRoutesInput
+  }
+
+  export type AccessRouteUncheckedCreateInput = {
+    id?: string
+    accessPointId: string
+    hutId: string
+    distance: number
+    ascent: number
+    descent: number
+    estimatedDuration: number
+    difficulty: $Enums.Difficulty
+    hasCableCar?: boolean
+  }
+
+  export type AccessRouteUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    distance?: FloatFieldUpdateOperationsInput | number
+    ascent?: IntFieldUpdateOperationsInput | number
+    descent?: IntFieldUpdateOperationsInput | number
+    estimatedDuration?: FloatFieldUpdateOperationsInput | number
+    difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    hasCableCar?: BoolFieldUpdateOperationsInput | boolean
+    accessPoint?: AccessPointUpdateOneRequiredWithoutRoutesNestedInput
+    hut?: HutUpdateOneRequiredWithoutAccessRoutesNestedInput
+  }
+
+  export type AccessRouteUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    accessPointId?: StringFieldUpdateOperationsInput | string
+    hutId?: StringFieldUpdateOperationsInput | string
+    distance?: FloatFieldUpdateOperationsInput | number
+    ascent?: IntFieldUpdateOperationsInput | number
+    descent?: IntFieldUpdateOperationsInput | number
+    estimatedDuration?: FloatFieldUpdateOperationsInput | number
+    difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    hasCableCar?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type AccessRouteCreateManyInput = {
+    id?: string
+    accessPointId: string
+    hutId: string
+    distance: number
+    ascent: number
+    descent: number
+    estimatedDuration: number
+    difficulty: $Enums.Difficulty
+    hasCableCar?: boolean
+  }
+
+  export type AccessRouteUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    distance?: FloatFieldUpdateOperationsInput | number
+    ascent?: IntFieldUpdateOperationsInput | number
+    descent?: IntFieldUpdateOperationsInput | number
+    estimatedDuration?: FloatFieldUpdateOperationsInput | number
+    difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    hasCableCar?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type AccessRouteUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    accessPointId?: StringFieldUpdateOperationsInput | string
+    hutId?: StringFieldUpdateOperationsInput | string
+    distance?: FloatFieldUpdateOperationsInput | number
+    ascent?: IntFieldUpdateOperationsInput | number
+    descent?: IntFieldUpdateOperationsInput | number
+    estimatedDuration?: FloatFieldUpdateOperationsInput | number
+    difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    hasCableCar?: BoolFieldUpdateOperationsInput | boolean
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -11273,7 +15640,17 @@ export namespace Prisma {
     none?: HutWhereInput
   }
 
+  export type AccessPointListRelationFilter = {
+    every?: AccessPointWhereInput
+    some?: AccessPointWhereInput
+    none?: AccessPointWhereInput
+  }
+
   export type HutOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type AccessPointOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -11435,6 +15812,12 @@ export namespace Prisma {
     none?: TourHutWhereInput
   }
 
+  export type AccessRouteListRelationFilter = {
+    every?: AccessRouteWhereInput
+    some?: AccessRouteWhereInput
+    none?: AccessRouteWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -11456,6 +15839,10 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type AccessRouteOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type HutCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -11468,6 +15855,8 @@ export namespace Prisma {
     imageUrl?: SortOrder
     description?: SortOrder
     amenities?: SortOrder
+    seasonStart?: SortOrder
+    seasonEnd?: SortOrder
     regionId?: SortOrder
   }
 
@@ -11489,6 +15878,8 @@ export namespace Prisma {
     bookingSystem?: SortOrder
     imageUrl?: SortOrder
     description?: SortOrder
+    seasonStart?: SortOrder
+    seasonEnd?: SortOrder
     regionId?: SortOrder
   }
 
@@ -11503,6 +15894,8 @@ export namespace Prisma {
     bookingSystem?: SortOrder
     imageUrl?: SortOrder
     description?: SortOrder
+    seasonStart?: SortOrder
+    seasonEnd?: SortOrder
     regionId?: SortOrder
   }
 
@@ -12024,6 +16417,170 @@ export namespace Prisma {
     available?: SortOrder
   }
 
+  export type EnumAccessPointTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.AccessPointType | EnumAccessPointTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.AccessPointType[] | ListEnumAccessPointTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AccessPointType[] | ListEnumAccessPointTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumAccessPointTypeFilter<$PrismaModel> | $Enums.AccessPointType
+  }
+
+  export type CableCarNullableScalarRelationFilter = {
+    is?: CableCarWhereInput | null
+    isNot?: CableCarWhereInput | null
+  }
+
+  export type AccessPointCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    type?: SortOrder
+    altitude?: SortOrder
+    lat?: SortOrder
+    lng?: SortOrder
+    regionId?: SortOrder
+  }
+
+  export type AccessPointAvgOrderByAggregateInput = {
+    altitude?: SortOrder
+    lat?: SortOrder
+    lng?: SortOrder
+  }
+
+  export type AccessPointMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    type?: SortOrder
+    altitude?: SortOrder
+    lat?: SortOrder
+    lng?: SortOrder
+    regionId?: SortOrder
+  }
+
+  export type AccessPointMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    type?: SortOrder
+    altitude?: SortOrder
+    lat?: SortOrder
+    lng?: SortOrder
+    regionId?: SortOrder
+  }
+
+  export type AccessPointSumOrderByAggregateInput = {
+    altitude?: SortOrder
+    lat?: SortOrder
+    lng?: SortOrder
+  }
+
+  export type EnumAccessPointTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.AccessPointType | EnumAccessPointTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.AccessPointType[] | ListEnumAccessPointTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AccessPointType[] | ListEnumAccessPointTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumAccessPointTypeWithAggregatesFilter<$PrismaModel> | $Enums.AccessPointType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumAccessPointTypeFilter<$PrismaModel>
+    _max?: NestedEnumAccessPointTypeFilter<$PrismaModel>
+  }
+
+  export type AccessPointScalarRelationFilter = {
+    is?: AccessPointWhereInput
+    isNot?: AccessPointWhereInput
+  }
+
+  export type CableCarCountOrderByAggregateInput = {
+    id?: SortOrder
+    accessPointId?: SortOrder
+    operatorName?: SortOrder
+    seasonStart?: SortOrder
+    seasonEnd?: SortOrder
+    website?: SortOrder
+  }
+
+  export type CableCarMaxOrderByAggregateInput = {
+    id?: SortOrder
+    accessPointId?: SortOrder
+    operatorName?: SortOrder
+    seasonStart?: SortOrder
+    seasonEnd?: SortOrder
+    website?: SortOrder
+  }
+
+  export type CableCarMinOrderByAggregateInput = {
+    id?: SortOrder
+    accessPointId?: SortOrder
+    operatorName?: SortOrder
+    seasonStart?: SortOrder
+    seasonEnd?: SortOrder
+    website?: SortOrder
+  }
+
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type AccessRouteAccessPointIdHutIdCompoundUniqueInput = {
+    accessPointId: string
+    hutId: string
+  }
+
+  export type AccessRouteCountOrderByAggregateInput = {
+    id?: SortOrder
+    accessPointId?: SortOrder
+    hutId?: SortOrder
+    distance?: SortOrder
+    ascent?: SortOrder
+    descent?: SortOrder
+    estimatedDuration?: SortOrder
+    difficulty?: SortOrder
+    hasCableCar?: SortOrder
+  }
+
+  export type AccessRouteAvgOrderByAggregateInput = {
+    distance?: SortOrder
+    ascent?: SortOrder
+    descent?: SortOrder
+    estimatedDuration?: SortOrder
+  }
+
+  export type AccessRouteMaxOrderByAggregateInput = {
+    id?: SortOrder
+    accessPointId?: SortOrder
+    hutId?: SortOrder
+    distance?: SortOrder
+    ascent?: SortOrder
+    descent?: SortOrder
+    estimatedDuration?: SortOrder
+    difficulty?: SortOrder
+    hasCableCar?: SortOrder
+  }
+
+  export type AccessRouteMinOrderByAggregateInput = {
+    id?: SortOrder
+    accessPointId?: SortOrder
+    hutId?: SortOrder
+    distance?: SortOrder
+    ascent?: SortOrder
+    descent?: SortOrder
+    estimatedDuration?: SortOrder
+    difficulty?: SortOrder
+    hasCableCar?: SortOrder
+  }
+
+  export type AccessRouteSumOrderByAggregateInput = {
+    distance?: SortOrder
+    ascent?: SortOrder
+    descent?: SortOrder
+    estimatedDuration?: SortOrder
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type HutCreateNestedManyWithoutRegionInput = {
     create?: XOR<HutCreateWithoutRegionInput, HutUncheckedCreateWithoutRegionInput> | HutCreateWithoutRegionInput[] | HutUncheckedCreateWithoutRegionInput[]
     connectOrCreate?: HutCreateOrConnectWithoutRegionInput | HutCreateOrConnectWithoutRegionInput[]
@@ -12031,11 +16588,25 @@ export namespace Prisma {
     connect?: HutWhereUniqueInput | HutWhereUniqueInput[]
   }
 
+  export type AccessPointCreateNestedManyWithoutRegionInput = {
+    create?: XOR<AccessPointCreateWithoutRegionInput, AccessPointUncheckedCreateWithoutRegionInput> | AccessPointCreateWithoutRegionInput[] | AccessPointUncheckedCreateWithoutRegionInput[]
+    connectOrCreate?: AccessPointCreateOrConnectWithoutRegionInput | AccessPointCreateOrConnectWithoutRegionInput[]
+    createMany?: AccessPointCreateManyRegionInputEnvelope
+    connect?: AccessPointWhereUniqueInput | AccessPointWhereUniqueInput[]
+  }
+
   export type HutUncheckedCreateNestedManyWithoutRegionInput = {
     create?: XOR<HutCreateWithoutRegionInput, HutUncheckedCreateWithoutRegionInput> | HutCreateWithoutRegionInput[] | HutUncheckedCreateWithoutRegionInput[]
     connectOrCreate?: HutCreateOrConnectWithoutRegionInput | HutCreateOrConnectWithoutRegionInput[]
     createMany?: HutCreateManyRegionInputEnvelope
     connect?: HutWhereUniqueInput | HutWhereUniqueInput[]
+  }
+
+  export type AccessPointUncheckedCreateNestedManyWithoutRegionInput = {
+    create?: XOR<AccessPointCreateWithoutRegionInput, AccessPointUncheckedCreateWithoutRegionInput> | AccessPointCreateWithoutRegionInput[] | AccessPointUncheckedCreateWithoutRegionInput[]
+    connectOrCreate?: AccessPointCreateOrConnectWithoutRegionInput | AccessPointCreateOrConnectWithoutRegionInput[]
+    createMany?: AccessPointCreateManyRegionInputEnvelope
+    connect?: AccessPointWhereUniqueInput | AccessPointWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -12064,6 +16635,20 @@ export namespace Prisma {
     deleteMany?: HutScalarWhereInput | HutScalarWhereInput[]
   }
 
+  export type AccessPointUpdateManyWithoutRegionNestedInput = {
+    create?: XOR<AccessPointCreateWithoutRegionInput, AccessPointUncheckedCreateWithoutRegionInput> | AccessPointCreateWithoutRegionInput[] | AccessPointUncheckedCreateWithoutRegionInput[]
+    connectOrCreate?: AccessPointCreateOrConnectWithoutRegionInput | AccessPointCreateOrConnectWithoutRegionInput[]
+    upsert?: AccessPointUpsertWithWhereUniqueWithoutRegionInput | AccessPointUpsertWithWhereUniqueWithoutRegionInput[]
+    createMany?: AccessPointCreateManyRegionInputEnvelope
+    set?: AccessPointWhereUniqueInput | AccessPointWhereUniqueInput[]
+    disconnect?: AccessPointWhereUniqueInput | AccessPointWhereUniqueInput[]
+    delete?: AccessPointWhereUniqueInput | AccessPointWhereUniqueInput[]
+    connect?: AccessPointWhereUniqueInput | AccessPointWhereUniqueInput[]
+    update?: AccessPointUpdateWithWhereUniqueWithoutRegionInput | AccessPointUpdateWithWhereUniqueWithoutRegionInput[]
+    updateMany?: AccessPointUpdateManyWithWhereWithoutRegionInput | AccessPointUpdateManyWithWhereWithoutRegionInput[]
+    deleteMany?: AccessPointScalarWhereInput | AccessPointScalarWhereInput[]
+  }
+
   export type HutUncheckedUpdateManyWithoutRegionNestedInput = {
     create?: XOR<HutCreateWithoutRegionInput, HutUncheckedCreateWithoutRegionInput> | HutCreateWithoutRegionInput[] | HutUncheckedCreateWithoutRegionInput[]
     connectOrCreate?: HutCreateOrConnectWithoutRegionInput | HutCreateOrConnectWithoutRegionInput[]
@@ -12076,6 +16661,20 @@ export namespace Prisma {
     update?: HutUpdateWithWhereUniqueWithoutRegionInput | HutUpdateWithWhereUniqueWithoutRegionInput[]
     updateMany?: HutUpdateManyWithWhereWithoutRegionInput | HutUpdateManyWithWhereWithoutRegionInput[]
     deleteMany?: HutScalarWhereInput | HutScalarWhereInput[]
+  }
+
+  export type AccessPointUncheckedUpdateManyWithoutRegionNestedInput = {
+    create?: XOR<AccessPointCreateWithoutRegionInput, AccessPointUncheckedCreateWithoutRegionInput> | AccessPointCreateWithoutRegionInput[] | AccessPointUncheckedCreateWithoutRegionInput[]
+    connectOrCreate?: AccessPointCreateOrConnectWithoutRegionInput | AccessPointCreateOrConnectWithoutRegionInput[]
+    upsert?: AccessPointUpsertWithWhereUniqueWithoutRegionInput | AccessPointUpsertWithWhereUniqueWithoutRegionInput[]
+    createMany?: AccessPointCreateManyRegionInputEnvelope
+    set?: AccessPointWhereUniqueInput | AccessPointWhereUniqueInput[]
+    disconnect?: AccessPointWhereUniqueInput | AccessPointWhereUniqueInput[]
+    delete?: AccessPointWhereUniqueInput | AccessPointWhereUniqueInput[]
+    connect?: AccessPointWhereUniqueInput | AccessPointWhereUniqueInput[]
+    update?: AccessPointUpdateWithWhereUniqueWithoutRegionInput | AccessPointUpdateWithWhereUniqueWithoutRegionInput[]
+    updateMany?: AccessPointUpdateManyWithWhereWithoutRegionInput | AccessPointUpdateManyWithWhereWithoutRegionInput[]
+    deleteMany?: AccessPointScalarWhereInput | AccessPointScalarWhereInput[]
   }
 
   export type HutCreateamenitiesInput = {
@@ -12123,6 +16722,13 @@ export namespace Prisma {
     connect?: TourHutWhereUniqueInput | TourHutWhereUniqueInput[]
   }
 
+  export type AccessRouteCreateNestedManyWithoutHutInput = {
+    create?: XOR<AccessRouteCreateWithoutHutInput, AccessRouteUncheckedCreateWithoutHutInput> | AccessRouteCreateWithoutHutInput[] | AccessRouteUncheckedCreateWithoutHutInput[]
+    connectOrCreate?: AccessRouteCreateOrConnectWithoutHutInput | AccessRouteCreateOrConnectWithoutHutInput[]
+    createMany?: AccessRouteCreateManyHutInputEnvelope
+    connect?: AccessRouteWhereUniqueInput | AccessRouteWhereUniqueInput[]
+  }
+
   export type RoomTypeConfigUncheckedCreateNestedManyWithoutHutInput = {
     create?: XOR<RoomTypeConfigCreateWithoutHutInput, RoomTypeConfigUncheckedCreateWithoutHutInput> | RoomTypeConfigCreateWithoutHutInput[] | RoomTypeConfigUncheckedCreateWithoutHutInput[]
     connectOrCreate?: RoomTypeConfigCreateOrConnectWithoutHutInput | RoomTypeConfigCreateOrConnectWithoutHutInput[]
@@ -12156,6 +16762,13 @@ export namespace Prisma {
     connectOrCreate?: TourHutCreateOrConnectWithoutHutInput | TourHutCreateOrConnectWithoutHutInput[]
     createMany?: TourHutCreateManyHutInputEnvelope
     connect?: TourHutWhereUniqueInput | TourHutWhereUniqueInput[]
+  }
+
+  export type AccessRouteUncheckedCreateNestedManyWithoutHutInput = {
+    create?: XOR<AccessRouteCreateWithoutHutInput, AccessRouteUncheckedCreateWithoutHutInput> | AccessRouteCreateWithoutHutInput[] | AccessRouteUncheckedCreateWithoutHutInput[]
+    connectOrCreate?: AccessRouteCreateOrConnectWithoutHutInput | AccessRouteCreateOrConnectWithoutHutInput[]
+    createMany?: AccessRouteCreateManyHutInputEnvelope
+    connect?: AccessRouteWhereUniqueInput | AccessRouteWhereUniqueInput[]
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -12257,6 +16870,20 @@ export namespace Prisma {
     deleteMany?: TourHutScalarWhereInput | TourHutScalarWhereInput[]
   }
 
+  export type AccessRouteUpdateManyWithoutHutNestedInput = {
+    create?: XOR<AccessRouteCreateWithoutHutInput, AccessRouteUncheckedCreateWithoutHutInput> | AccessRouteCreateWithoutHutInput[] | AccessRouteUncheckedCreateWithoutHutInput[]
+    connectOrCreate?: AccessRouteCreateOrConnectWithoutHutInput | AccessRouteCreateOrConnectWithoutHutInput[]
+    upsert?: AccessRouteUpsertWithWhereUniqueWithoutHutInput | AccessRouteUpsertWithWhereUniqueWithoutHutInput[]
+    createMany?: AccessRouteCreateManyHutInputEnvelope
+    set?: AccessRouteWhereUniqueInput | AccessRouteWhereUniqueInput[]
+    disconnect?: AccessRouteWhereUniqueInput | AccessRouteWhereUniqueInput[]
+    delete?: AccessRouteWhereUniqueInput | AccessRouteWhereUniqueInput[]
+    connect?: AccessRouteWhereUniqueInput | AccessRouteWhereUniqueInput[]
+    update?: AccessRouteUpdateWithWhereUniqueWithoutHutInput | AccessRouteUpdateWithWhereUniqueWithoutHutInput[]
+    updateMany?: AccessRouteUpdateManyWithWhereWithoutHutInput | AccessRouteUpdateManyWithWhereWithoutHutInput[]
+    deleteMany?: AccessRouteScalarWhereInput | AccessRouteScalarWhereInput[]
+  }
+
   export type RoomTypeConfigUncheckedUpdateManyWithoutHutNestedInput = {
     create?: XOR<RoomTypeConfigCreateWithoutHutInput, RoomTypeConfigUncheckedCreateWithoutHutInput> | RoomTypeConfigCreateWithoutHutInput[] | RoomTypeConfigUncheckedCreateWithoutHutInput[]
     connectOrCreate?: RoomTypeConfigCreateOrConnectWithoutHutInput | RoomTypeConfigCreateOrConnectWithoutHutInput[]
@@ -12325,6 +16952,20 @@ export namespace Prisma {
     update?: TourHutUpdateWithWhereUniqueWithoutHutInput | TourHutUpdateWithWhereUniqueWithoutHutInput[]
     updateMany?: TourHutUpdateManyWithWhereWithoutHutInput | TourHutUpdateManyWithWhereWithoutHutInput[]
     deleteMany?: TourHutScalarWhereInput | TourHutScalarWhereInput[]
+  }
+
+  export type AccessRouteUncheckedUpdateManyWithoutHutNestedInput = {
+    create?: XOR<AccessRouteCreateWithoutHutInput, AccessRouteUncheckedCreateWithoutHutInput> | AccessRouteCreateWithoutHutInput[] | AccessRouteUncheckedCreateWithoutHutInput[]
+    connectOrCreate?: AccessRouteCreateOrConnectWithoutHutInput | AccessRouteCreateOrConnectWithoutHutInput[]
+    upsert?: AccessRouteUpsertWithWhereUniqueWithoutHutInput | AccessRouteUpsertWithWhereUniqueWithoutHutInput[]
+    createMany?: AccessRouteCreateManyHutInputEnvelope
+    set?: AccessRouteWhereUniqueInput | AccessRouteWhereUniqueInput[]
+    disconnect?: AccessRouteWhereUniqueInput | AccessRouteWhereUniqueInput[]
+    delete?: AccessRouteWhereUniqueInput | AccessRouteWhereUniqueInput[]
+    connect?: AccessRouteWhereUniqueInput | AccessRouteWhereUniqueInput[]
+    update?: AccessRouteUpdateWithWhereUniqueWithoutHutInput | AccessRouteUpdateWithWhereUniqueWithoutHutInput[]
+    updateMany?: AccessRouteUpdateManyWithWhereWithoutHutInput | AccessRouteUpdateManyWithWhereWithoutHutInput[]
+    deleteMany?: AccessRouteScalarWhereInput | AccessRouteScalarWhereInput[]
   }
 
   export type HutCreateNestedOneWithoutRoomTypesInput = {
@@ -12491,6 +17132,144 @@ export namespace Prisma {
     upsert?: HutUpsertWithoutAvailabilityInput
     connect?: HutWhereUniqueInput
     update?: XOR<XOR<HutUpdateToOneWithWhereWithoutAvailabilityInput, HutUpdateWithoutAvailabilityInput>, HutUncheckedUpdateWithoutAvailabilityInput>
+  }
+
+  export type RegionCreateNestedOneWithoutAccessPointsInput = {
+    create?: XOR<RegionCreateWithoutAccessPointsInput, RegionUncheckedCreateWithoutAccessPointsInput>
+    connectOrCreate?: RegionCreateOrConnectWithoutAccessPointsInput
+    connect?: RegionWhereUniqueInput
+  }
+
+  export type AccessRouteCreateNestedManyWithoutAccessPointInput = {
+    create?: XOR<AccessRouteCreateWithoutAccessPointInput, AccessRouteUncheckedCreateWithoutAccessPointInput> | AccessRouteCreateWithoutAccessPointInput[] | AccessRouteUncheckedCreateWithoutAccessPointInput[]
+    connectOrCreate?: AccessRouteCreateOrConnectWithoutAccessPointInput | AccessRouteCreateOrConnectWithoutAccessPointInput[]
+    createMany?: AccessRouteCreateManyAccessPointInputEnvelope
+    connect?: AccessRouteWhereUniqueInput | AccessRouteWhereUniqueInput[]
+  }
+
+  export type CableCarCreateNestedOneWithoutAccessPointInput = {
+    create?: XOR<CableCarCreateWithoutAccessPointInput, CableCarUncheckedCreateWithoutAccessPointInput>
+    connectOrCreate?: CableCarCreateOrConnectWithoutAccessPointInput
+    connect?: CableCarWhereUniqueInput
+  }
+
+  export type AccessRouteUncheckedCreateNestedManyWithoutAccessPointInput = {
+    create?: XOR<AccessRouteCreateWithoutAccessPointInput, AccessRouteUncheckedCreateWithoutAccessPointInput> | AccessRouteCreateWithoutAccessPointInput[] | AccessRouteUncheckedCreateWithoutAccessPointInput[]
+    connectOrCreate?: AccessRouteCreateOrConnectWithoutAccessPointInput | AccessRouteCreateOrConnectWithoutAccessPointInput[]
+    createMany?: AccessRouteCreateManyAccessPointInputEnvelope
+    connect?: AccessRouteWhereUniqueInput | AccessRouteWhereUniqueInput[]
+  }
+
+  export type CableCarUncheckedCreateNestedOneWithoutAccessPointInput = {
+    create?: XOR<CableCarCreateWithoutAccessPointInput, CableCarUncheckedCreateWithoutAccessPointInput>
+    connectOrCreate?: CableCarCreateOrConnectWithoutAccessPointInput
+    connect?: CableCarWhereUniqueInput
+  }
+
+  export type EnumAccessPointTypeFieldUpdateOperationsInput = {
+    set?: $Enums.AccessPointType
+  }
+
+  export type RegionUpdateOneRequiredWithoutAccessPointsNestedInput = {
+    create?: XOR<RegionCreateWithoutAccessPointsInput, RegionUncheckedCreateWithoutAccessPointsInput>
+    connectOrCreate?: RegionCreateOrConnectWithoutAccessPointsInput
+    upsert?: RegionUpsertWithoutAccessPointsInput
+    connect?: RegionWhereUniqueInput
+    update?: XOR<XOR<RegionUpdateToOneWithWhereWithoutAccessPointsInput, RegionUpdateWithoutAccessPointsInput>, RegionUncheckedUpdateWithoutAccessPointsInput>
+  }
+
+  export type AccessRouteUpdateManyWithoutAccessPointNestedInput = {
+    create?: XOR<AccessRouteCreateWithoutAccessPointInput, AccessRouteUncheckedCreateWithoutAccessPointInput> | AccessRouteCreateWithoutAccessPointInput[] | AccessRouteUncheckedCreateWithoutAccessPointInput[]
+    connectOrCreate?: AccessRouteCreateOrConnectWithoutAccessPointInput | AccessRouteCreateOrConnectWithoutAccessPointInput[]
+    upsert?: AccessRouteUpsertWithWhereUniqueWithoutAccessPointInput | AccessRouteUpsertWithWhereUniqueWithoutAccessPointInput[]
+    createMany?: AccessRouteCreateManyAccessPointInputEnvelope
+    set?: AccessRouteWhereUniqueInput | AccessRouteWhereUniqueInput[]
+    disconnect?: AccessRouteWhereUniqueInput | AccessRouteWhereUniqueInput[]
+    delete?: AccessRouteWhereUniqueInput | AccessRouteWhereUniqueInput[]
+    connect?: AccessRouteWhereUniqueInput | AccessRouteWhereUniqueInput[]
+    update?: AccessRouteUpdateWithWhereUniqueWithoutAccessPointInput | AccessRouteUpdateWithWhereUniqueWithoutAccessPointInput[]
+    updateMany?: AccessRouteUpdateManyWithWhereWithoutAccessPointInput | AccessRouteUpdateManyWithWhereWithoutAccessPointInput[]
+    deleteMany?: AccessRouteScalarWhereInput | AccessRouteScalarWhereInput[]
+  }
+
+  export type CableCarUpdateOneWithoutAccessPointNestedInput = {
+    create?: XOR<CableCarCreateWithoutAccessPointInput, CableCarUncheckedCreateWithoutAccessPointInput>
+    connectOrCreate?: CableCarCreateOrConnectWithoutAccessPointInput
+    upsert?: CableCarUpsertWithoutAccessPointInput
+    disconnect?: CableCarWhereInput | boolean
+    delete?: CableCarWhereInput | boolean
+    connect?: CableCarWhereUniqueInput
+    update?: XOR<XOR<CableCarUpdateToOneWithWhereWithoutAccessPointInput, CableCarUpdateWithoutAccessPointInput>, CableCarUncheckedUpdateWithoutAccessPointInput>
+  }
+
+  export type AccessRouteUncheckedUpdateManyWithoutAccessPointNestedInput = {
+    create?: XOR<AccessRouteCreateWithoutAccessPointInput, AccessRouteUncheckedCreateWithoutAccessPointInput> | AccessRouteCreateWithoutAccessPointInput[] | AccessRouteUncheckedCreateWithoutAccessPointInput[]
+    connectOrCreate?: AccessRouteCreateOrConnectWithoutAccessPointInput | AccessRouteCreateOrConnectWithoutAccessPointInput[]
+    upsert?: AccessRouteUpsertWithWhereUniqueWithoutAccessPointInput | AccessRouteUpsertWithWhereUniqueWithoutAccessPointInput[]
+    createMany?: AccessRouteCreateManyAccessPointInputEnvelope
+    set?: AccessRouteWhereUniqueInput | AccessRouteWhereUniqueInput[]
+    disconnect?: AccessRouteWhereUniqueInput | AccessRouteWhereUniqueInput[]
+    delete?: AccessRouteWhereUniqueInput | AccessRouteWhereUniqueInput[]
+    connect?: AccessRouteWhereUniqueInput | AccessRouteWhereUniqueInput[]
+    update?: AccessRouteUpdateWithWhereUniqueWithoutAccessPointInput | AccessRouteUpdateWithWhereUniqueWithoutAccessPointInput[]
+    updateMany?: AccessRouteUpdateManyWithWhereWithoutAccessPointInput | AccessRouteUpdateManyWithWhereWithoutAccessPointInput[]
+    deleteMany?: AccessRouteScalarWhereInput | AccessRouteScalarWhereInput[]
+  }
+
+  export type CableCarUncheckedUpdateOneWithoutAccessPointNestedInput = {
+    create?: XOR<CableCarCreateWithoutAccessPointInput, CableCarUncheckedCreateWithoutAccessPointInput>
+    connectOrCreate?: CableCarCreateOrConnectWithoutAccessPointInput
+    upsert?: CableCarUpsertWithoutAccessPointInput
+    disconnect?: CableCarWhereInput | boolean
+    delete?: CableCarWhereInput | boolean
+    connect?: CableCarWhereUniqueInput
+    update?: XOR<XOR<CableCarUpdateToOneWithWhereWithoutAccessPointInput, CableCarUpdateWithoutAccessPointInput>, CableCarUncheckedUpdateWithoutAccessPointInput>
+  }
+
+  export type AccessPointCreateNestedOneWithoutCableCarInput = {
+    create?: XOR<AccessPointCreateWithoutCableCarInput, AccessPointUncheckedCreateWithoutCableCarInput>
+    connectOrCreate?: AccessPointCreateOrConnectWithoutCableCarInput
+    connect?: AccessPointWhereUniqueInput
+  }
+
+  export type AccessPointUpdateOneRequiredWithoutCableCarNestedInput = {
+    create?: XOR<AccessPointCreateWithoutCableCarInput, AccessPointUncheckedCreateWithoutCableCarInput>
+    connectOrCreate?: AccessPointCreateOrConnectWithoutCableCarInput
+    upsert?: AccessPointUpsertWithoutCableCarInput
+    connect?: AccessPointWhereUniqueInput
+    update?: XOR<XOR<AccessPointUpdateToOneWithWhereWithoutCableCarInput, AccessPointUpdateWithoutCableCarInput>, AccessPointUncheckedUpdateWithoutCableCarInput>
+  }
+
+  export type AccessPointCreateNestedOneWithoutRoutesInput = {
+    create?: XOR<AccessPointCreateWithoutRoutesInput, AccessPointUncheckedCreateWithoutRoutesInput>
+    connectOrCreate?: AccessPointCreateOrConnectWithoutRoutesInput
+    connect?: AccessPointWhereUniqueInput
+  }
+
+  export type HutCreateNestedOneWithoutAccessRoutesInput = {
+    create?: XOR<HutCreateWithoutAccessRoutesInput, HutUncheckedCreateWithoutAccessRoutesInput>
+    connectOrCreate?: HutCreateOrConnectWithoutAccessRoutesInput
+    connect?: HutWhereUniqueInput
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
+  export type AccessPointUpdateOneRequiredWithoutRoutesNestedInput = {
+    create?: XOR<AccessPointCreateWithoutRoutesInput, AccessPointUncheckedCreateWithoutRoutesInput>
+    connectOrCreate?: AccessPointCreateOrConnectWithoutRoutesInput
+    upsert?: AccessPointUpsertWithoutRoutesInput
+    connect?: AccessPointWhereUniqueInput
+    update?: XOR<XOR<AccessPointUpdateToOneWithWhereWithoutRoutesInput, AccessPointUpdateWithoutRoutesInput>, AccessPointUncheckedUpdateWithoutRoutesInput>
+  }
+
+  export type HutUpdateOneRequiredWithoutAccessRoutesNestedInput = {
+    create?: XOR<HutCreateWithoutAccessRoutesInput, HutUncheckedCreateWithoutAccessRoutesInput>
+    connectOrCreate?: HutCreateOrConnectWithoutAccessRoutesInput
+    upsert?: HutUpsertWithoutAccessRoutesInput
+    connect?: HutWhereUniqueInput
+    update?: XOR<XOR<HutUpdateToOneWithWhereWithoutAccessRoutesInput, HutUpdateWithoutAccessRoutesInput>, HutUncheckedUpdateWithoutAccessRoutesInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -12821,6 +17600,36 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedEnumAccessPointTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.AccessPointType | EnumAccessPointTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.AccessPointType[] | ListEnumAccessPointTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AccessPointType[] | ListEnumAccessPointTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumAccessPointTypeFilter<$PrismaModel> | $Enums.AccessPointType
+  }
+
+  export type NestedEnumAccessPointTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.AccessPointType | EnumAccessPointTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.AccessPointType[] | ListEnumAccessPointTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AccessPointType[] | ListEnumAccessPointTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumAccessPointTypeWithAggregatesFilter<$PrismaModel> | $Enums.AccessPointType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumAccessPointTypeFilter<$PrismaModel>
+    _max?: NestedEnumAccessPointTypeFilter<$PrismaModel>
+  }
+
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type HutCreateWithoutRegionInput = {
     id?: string
     name: string
@@ -12833,11 +17642,14 @@ export namespace Prisma {
     imageUrl?: string | null
     description?: string | null
     amenities?: HutCreateamenitiesInput | string[]
+    seasonStart?: string | null
+    seasonEnd?: string | null
     roomTypes?: RoomTypeConfigCreateNestedManyWithoutHutInput
     routesFrom?: RouteCreateNestedManyWithoutFromHutInput
     routesTo?: RouteCreateNestedManyWithoutToHutInput
     availability?: AvailabilityCheckCreateNestedManyWithoutHutInput
     tourHuts?: TourHutCreateNestedManyWithoutHutInput
+    accessRoutes?: AccessRouteCreateNestedManyWithoutHutInput
   }
 
   export type HutUncheckedCreateWithoutRegionInput = {
@@ -12852,11 +17664,14 @@ export namespace Prisma {
     imageUrl?: string | null
     description?: string | null
     amenities?: HutCreateamenitiesInput | string[]
+    seasonStart?: string | null
+    seasonEnd?: string | null
     roomTypes?: RoomTypeConfigUncheckedCreateNestedManyWithoutHutInput
     routesFrom?: RouteUncheckedCreateNestedManyWithoutFromHutInput
     routesTo?: RouteUncheckedCreateNestedManyWithoutToHutInput
     availability?: AvailabilityCheckUncheckedCreateNestedManyWithoutHutInput
     tourHuts?: TourHutUncheckedCreateNestedManyWithoutHutInput
+    accessRoutes?: AccessRouteUncheckedCreateNestedManyWithoutHutInput
   }
 
   export type HutCreateOrConnectWithoutRegionInput = {
@@ -12866,6 +17681,38 @@ export namespace Prisma {
 
   export type HutCreateManyRegionInputEnvelope = {
     data: HutCreateManyRegionInput | HutCreateManyRegionInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type AccessPointCreateWithoutRegionInput = {
+    id?: string
+    name: string
+    type: $Enums.AccessPointType
+    altitude: number
+    lat: number
+    lng: number
+    routes?: AccessRouteCreateNestedManyWithoutAccessPointInput
+    cableCar?: CableCarCreateNestedOneWithoutAccessPointInput
+  }
+
+  export type AccessPointUncheckedCreateWithoutRegionInput = {
+    id?: string
+    name: string
+    type: $Enums.AccessPointType
+    altitude: number
+    lat: number
+    lng: number
+    routes?: AccessRouteUncheckedCreateNestedManyWithoutAccessPointInput
+    cableCar?: CableCarUncheckedCreateNestedOneWithoutAccessPointInput
+  }
+
+  export type AccessPointCreateOrConnectWithoutRegionInput = {
+    where: AccessPointWhereUniqueInput
+    create: XOR<AccessPointCreateWithoutRegionInput, AccessPointUncheckedCreateWithoutRegionInput>
+  }
+
+  export type AccessPointCreateManyRegionInputEnvelope = {
+    data: AccessPointCreateManyRegionInput | AccessPointCreateManyRegionInput[]
     skipDuplicates?: boolean
   }
 
@@ -12900,7 +17747,38 @@ export namespace Prisma {
     imageUrl?: StringNullableFilter<"Hut"> | string | null
     description?: StringNullableFilter<"Hut"> | string | null
     amenities?: StringNullableListFilter<"Hut">
+    seasonStart?: StringNullableFilter<"Hut"> | string | null
+    seasonEnd?: StringNullableFilter<"Hut"> | string | null
     regionId?: StringFilter<"Hut"> | string
+  }
+
+  export type AccessPointUpsertWithWhereUniqueWithoutRegionInput = {
+    where: AccessPointWhereUniqueInput
+    update: XOR<AccessPointUpdateWithoutRegionInput, AccessPointUncheckedUpdateWithoutRegionInput>
+    create: XOR<AccessPointCreateWithoutRegionInput, AccessPointUncheckedCreateWithoutRegionInput>
+  }
+
+  export type AccessPointUpdateWithWhereUniqueWithoutRegionInput = {
+    where: AccessPointWhereUniqueInput
+    data: XOR<AccessPointUpdateWithoutRegionInput, AccessPointUncheckedUpdateWithoutRegionInput>
+  }
+
+  export type AccessPointUpdateManyWithWhereWithoutRegionInput = {
+    where: AccessPointScalarWhereInput
+    data: XOR<AccessPointUpdateManyMutationInput, AccessPointUncheckedUpdateManyWithoutRegionInput>
+  }
+
+  export type AccessPointScalarWhereInput = {
+    AND?: AccessPointScalarWhereInput | AccessPointScalarWhereInput[]
+    OR?: AccessPointScalarWhereInput[]
+    NOT?: AccessPointScalarWhereInput | AccessPointScalarWhereInput[]
+    id?: StringFilter<"AccessPoint"> | string
+    name?: StringFilter<"AccessPoint"> | string
+    type?: EnumAccessPointTypeFilter<"AccessPoint"> | $Enums.AccessPointType
+    altitude?: IntFilter<"AccessPoint"> | number
+    lat?: FloatFilter<"AccessPoint"> | number
+    lng?: FloatFilter<"AccessPoint"> | number
+    regionId?: StringFilter<"AccessPoint"> | string
   }
 
   export type RegionCreateWithoutHutsInput = {
@@ -12913,6 +17791,7 @@ export namespace Prisma {
     boundingBoxMaxLng: number
     centerLat: number
     centerLng: number
+    accessPoints?: AccessPointCreateNestedManyWithoutRegionInput
   }
 
   export type RegionUncheckedCreateWithoutHutsInput = {
@@ -12925,6 +17804,7 @@ export namespace Prisma {
     boundingBoxMaxLng: number
     centerLat: number
     centerLng: number
+    accessPoints?: AccessPointUncheckedCreateNestedManyWithoutRegionInput
   }
 
   export type RegionCreateOrConnectWithoutHutsInput = {
@@ -13068,6 +17948,38 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type AccessRouteCreateWithoutHutInput = {
+    id?: string
+    distance: number
+    ascent: number
+    descent: number
+    estimatedDuration: number
+    difficulty: $Enums.Difficulty
+    hasCableCar?: boolean
+    accessPoint: AccessPointCreateNestedOneWithoutRoutesInput
+  }
+
+  export type AccessRouteUncheckedCreateWithoutHutInput = {
+    id?: string
+    accessPointId: string
+    distance: number
+    ascent: number
+    descent: number
+    estimatedDuration: number
+    difficulty: $Enums.Difficulty
+    hasCableCar?: boolean
+  }
+
+  export type AccessRouteCreateOrConnectWithoutHutInput = {
+    where: AccessRouteWhereUniqueInput
+    create: XOR<AccessRouteCreateWithoutHutInput, AccessRouteUncheckedCreateWithoutHutInput>
+  }
+
+  export type AccessRouteCreateManyHutInputEnvelope = {
+    data: AccessRouteCreateManyHutInput | AccessRouteCreateManyHutInput[]
+    skipDuplicates?: boolean
+  }
+
   export type RegionUpsertWithoutHutsInput = {
     update: XOR<RegionUpdateWithoutHutsInput, RegionUncheckedUpdateWithoutHutsInput>
     create: XOR<RegionCreateWithoutHutsInput, RegionUncheckedCreateWithoutHutsInput>
@@ -13089,6 +18001,7 @@ export namespace Prisma {
     boundingBoxMaxLng?: FloatFieldUpdateOperationsInput | number
     centerLat?: FloatFieldUpdateOperationsInput | number
     centerLng?: FloatFieldUpdateOperationsInput | number
+    accessPoints?: AccessPointUpdateManyWithoutRegionNestedInput
   }
 
   export type RegionUncheckedUpdateWithoutHutsInput = {
@@ -13101,6 +18014,7 @@ export namespace Prisma {
     boundingBoxMaxLng?: FloatFieldUpdateOperationsInput | number
     centerLat?: FloatFieldUpdateOperationsInput | number
     centerLng?: FloatFieldUpdateOperationsInput | number
+    accessPoints?: AccessPointUncheckedUpdateManyWithoutRegionNestedInput
   }
 
   export type RoomTypeConfigUpsertWithWhereUniqueWithoutHutInput = {
@@ -13231,6 +18145,37 @@ export namespace Prisma {
     dayNumber?: IntFilter<"TourHut"> | number
   }
 
+  export type AccessRouteUpsertWithWhereUniqueWithoutHutInput = {
+    where: AccessRouteWhereUniqueInput
+    update: XOR<AccessRouteUpdateWithoutHutInput, AccessRouteUncheckedUpdateWithoutHutInput>
+    create: XOR<AccessRouteCreateWithoutHutInput, AccessRouteUncheckedCreateWithoutHutInput>
+  }
+
+  export type AccessRouteUpdateWithWhereUniqueWithoutHutInput = {
+    where: AccessRouteWhereUniqueInput
+    data: XOR<AccessRouteUpdateWithoutHutInput, AccessRouteUncheckedUpdateWithoutHutInput>
+  }
+
+  export type AccessRouteUpdateManyWithWhereWithoutHutInput = {
+    where: AccessRouteScalarWhereInput
+    data: XOR<AccessRouteUpdateManyMutationInput, AccessRouteUncheckedUpdateManyWithoutHutInput>
+  }
+
+  export type AccessRouteScalarWhereInput = {
+    AND?: AccessRouteScalarWhereInput | AccessRouteScalarWhereInput[]
+    OR?: AccessRouteScalarWhereInput[]
+    NOT?: AccessRouteScalarWhereInput | AccessRouteScalarWhereInput[]
+    id?: StringFilter<"AccessRoute"> | string
+    accessPointId?: StringFilter<"AccessRoute"> | string
+    hutId?: StringFilter<"AccessRoute"> | string
+    distance?: FloatFilter<"AccessRoute"> | number
+    ascent?: IntFilter<"AccessRoute"> | number
+    descent?: IntFilter<"AccessRoute"> | number
+    estimatedDuration?: FloatFilter<"AccessRoute"> | number
+    difficulty?: EnumDifficultyFilter<"AccessRoute"> | $Enums.Difficulty
+    hasCableCar?: BoolFilter<"AccessRoute"> | boolean
+  }
+
   export type HutCreateWithoutRoomTypesInput = {
     id?: string
     name: string
@@ -13243,11 +18188,14 @@ export namespace Prisma {
     imageUrl?: string | null
     description?: string | null
     amenities?: HutCreateamenitiesInput | string[]
+    seasonStart?: string | null
+    seasonEnd?: string | null
     region: RegionCreateNestedOneWithoutHutsInput
     routesFrom?: RouteCreateNestedManyWithoutFromHutInput
     routesTo?: RouteCreateNestedManyWithoutToHutInput
     availability?: AvailabilityCheckCreateNestedManyWithoutHutInput
     tourHuts?: TourHutCreateNestedManyWithoutHutInput
+    accessRoutes?: AccessRouteCreateNestedManyWithoutHutInput
   }
 
   export type HutUncheckedCreateWithoutRoomTypesInput = {
@@ -13262,11 +18210,14 @@ export namespace Prisma {
     imageUrl?: string | null
     description?: string | null
     amenities?: HutCreateamenitiesInput | string[]
+    seasonStart?: string | null
+    seasonEnd?: string | null
     regionId: string
     routesFrom?: RouteUncheckedCreateNestedManyWithoutFromHutInput
     routesTo?: RouteUncheckedCreateNestedManyWithoutToHutInput
     availability?: AvailabilityCheckUncheckedCreateNestedManyWithoutHutInput
     tourHuts?: TourHutUncheckedCreateNestedManyWithoutHutInput
+    accessRoutes?: AccessRouteUncheckedCreateNestedManyWithoutHutInput
   }
 
   export type HutCreateOrConnectWithoutRoomTypesInput = {
@@ -13297,11 +18248,14 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     amenities?: HutUpdateamenitiesInput | string[]
+    seasonStart?: NullableStringFieldUpdateOperationsInput | string | null
+    seasonEnd?: NullableStringFieldUpdateOperationsInput | string | null
     region?: RegionUpdateOneRequiredWithoutHutsNestedInput
     routesFrom?: RouteUpdateManyWithoutFromHutNestedInput
     routesTo?: RouteUpdateManyWithoutToHutNestedInput
     availability?: AvailabilityCheckUpdateManyWithoutHutNestedInput
     tourHuts?: TourHutUpdateManyWithoutHutNestedInput
+    accessRoutes?: AccessRouteUpdateManyWithoutHutNestedInput
   }
 
   export type HutUncheckedUpdateWithoutRoomTypesInput = {
@@ -13316,11 +18270,14 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     amenities?: HutUpdateamenitiesInput | string[]
+    seasonStart?: NullableStringFieldUpdateOperationsInput | string | null
+    seasonEnd?: NullableStringFieldUpdateOperationsInput | string | null
     regionId?: StringFieldUpdateOperationsInput | string
     routesFrom?: RouteUncheckedUpdateManyWithoutFromHutNestedInput
     routesTo?: RouteUncheckedUpdateManyWithoutToHutNestedInput
     availability?: AvailabilityCheckUncheckedUpdateManyWithoutHutNestedInput
     tourHuts?: TourHutUncheckedUpdateManyWithoutHutNestedInput
+    accessRoutes?: AccessRouteUncheckedUpdateManyWithoutHutNestedInput
   }
 
   export type HutCreateWithoutRoutesFromInput = {
@@ -13335,11 +18292,14 @@ export namespace Prisma {
     imageUrl?: string | null
     description?: string | null
     amenities?: HutCreateamenitiesInput | string[]
+    seasonStart?: string | null
+    seasonEnd?: string | null
     region: RegionCreateNestedOneWithoutHutsInput
     roomTypes?: RoomTypeConfigCreateNestedManyWithoutHutInput
     routesTo?: RouteCreateNestedManyWithoutToHutInput
     availability?: AvailabilityCheckCreateNestedManyWithoutHutInput
     tourHuts?: TourHutCreateNestedManyWithoutHutInput
+    accessRoutes?: AccessRouteCreateNestedManyWithoutHutInput
   }
 
   export type HutUncheckedCreateWithoutRoutesFromInput = {
@@ -13354,11 +18314,14 @@ export namespace Prisma {
     imageUrl?: string | null
     description?: string | null
     amenities?: HutCreateamenitiesInput | string[]
+    seasonStart?: string | null
+    seasonEnd?: string | null
     regionId: string
     roomTypes?: RoomTypeConfigUncheckedCreateNestedManyWithoutHutInput
     routesTo?: RouteUncheckedCreateNestedManyWithoutToHutInput
     availability?: AvailabilityCheckUncheckedCreateNestedManyWithoutHutInput
     tourHuts?: TourHutUncheckedCreateNestedManyWithoutHutInput
+    accessRoutes?: AccessRouteUncheckedCreateNestedManyWithoutHutInput
   }
 
   export type HutCreateOrConnectWithoutRoutesFromInput = {
@@ -13378,11 +18341,14 @@ export namespace Prisma {
     imageUrl?: string | null
     description?: string | null
     amenities?: HutCreateamenitiesInput | string[]
+    seasonStart?: string | null
+    seasonEnd?: string | null
     region: RegionCreateNestedOneWithoutHutsInput
     roomTypes?: RoomTypeConfigCreateNestedManyWithoutHutInput
     routesFrom?: RouteCreateNestedManyWithoutFromHutInput
     availability?: AvailabilityCheckCreateNestedManyWithoutHutInput
     tourHuts?: TourHutCreateNestedManyWithoutHutInput
+    accessRoutes?: AccessRouteCreateNestedManyWithoutHutInput
   }
 
   export type HutUncheckedCreateWithoutRoutesToInput = {
@@ -13397,11 +18363,14 @@ export namespace Prisma {
     imageUrl?: string | null
     description?: string | null
     amenities?: HutCreateamenitiesInput | string[]
+    seasonStart?: string | null
+    seasonEnd?: string | null
     regionId: string
     roomTypes?: RoomTypeConfigUncheckedCreateNestedManyWithoutHutInput
     routesFrom?: RouteUncheckedCreateNestedManyWithoutFromHutInput
     availability?: AvailabilityCheckUncheckedCreateNestedManyWithoutHutInput
     tourHuts?: TourHutUncheckedCreateNestedManyWithoutHutInput
+    accessRoutes?: AccessRouteUncheckedCreateNestedManyWithoutHutInput
   }
 
   export type HutCreateOrConnectWithoutRoutesToInput = {
@@ -13432,11 +18401,14 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     amenities?: HutUpdateamenitiesInput | string[]
+    seasonStart?: NullableStringFieldUpdateOperationsInput | string | null
+    seasonEnd?: NullableStringFieldUpdateOperationsInput | string | null
     region?: RegionUpdateOneRequiredWithoutHutsNestedInput
     roomTypes?: RoomTypeConfigUpdateManyWithoutHutNestedInput
     routesTo?: RouteUpdateManyWithoutToHutNestedInput
     availability?: AvailabilityCheckUpdateManyWithoutHutNestedInput
     tourHuts?: TourHutUpdateManyWithoutHutNestedInput
+    accessRoutes?: AccessRouteUpdateManyWithoutHutNestedInput
   }
 
   export type HutUncheckedUpdateWithoutRoutesFromInput = {
@@ -13451,11 +18423,14 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     amenities?: HutUpdateamenitiesInput | string[]
+    seasonStart?: NullableStringFieldUpdateOperationsInput | string | null
+    seasonEnd?: NullableStringFieldUpdateOperationsInput | string | null
     regionId?: StringFieldUpdateOperationsInput | string
     roomTypes?: RoomTypeConfigUncheckedUpdateManyWithoutHutNestedInput
     routesTo?: RouteUncheckedUpdateManyWithoutToHutNestedInput
     availability?: AvailabilityCheckUncheckedUpdateManyWithoutHutNestedInput
     tourHuts?: TourHutUncheckedUpdateManyWithoutHutNestedInput
+    accessRoutes?: AccessRouteUncheckedUpdateManyWithoutHutNestedInput
   }
 
   export type HutUpsertWithoutRoutesToInput = {
@@ -13481,11 +18456,14 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     amenities?: HutUpdateamenitiesInput | string[]
+    seasonStart?: NullableStringFieldUpdateOperationsInput | string | null
+    seasonEnd?: NullableStringFieldUpdateOperationsInput | string | null
     region?: RegionUpdateOneRequiredWithoutHutsNestedInput
     roomTypes?: RoomTypeConfigUpdateManyWithoutHutNestedInput
     routesFrom?: RouteUpdateManyWithoutFromHutNestedInput
     availability?: AvailabilityCheckUpdateManyWithoutHutNestedInput
     tourHuts?: TourHutUpdateManyWithoutHutNestedInput
+    accessRoutes?: AccessRouteUpdateManyWithoutHutNestedInput
   }
 
   export type HutUncheckedUpdateWithoutRoutesToInput = {
@@ -13500,11 +18478,14 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     amenities?: HutUpdateamenitiesInput | string[]
+    seasonStart?: NullableStringFieldUpdateOperationsInput | string | null
+    seasonEnd?: NullableStringFieldUpdateOperationsInput | string | null
     regionId?: StringFieldUpdateOperationsInput | string
     roomTypes?: RoomTypeConfigUncheckedUpdateManyWithoutHutNestedInput
     routesFrom?: RouteUncheckedUpdateManyWithoutFromHutNestedInput
     availability?: AvailabilityCheckUncheckedUpdateManyWithoutHutNestedInput
     tourHuts?: TourHutUncheckedUpdateManyWithoutHutNestedInput
+    accessRoutes?: AccessRouteUncheckedUpdateManyWithoutHutNestedInput
   }
 
   export type TourHutCreateWithoutTourInput = {
@@ -13596,11 +18577,14 @@ export namespace Prisma {
     imageUrl?: string | null
     description?: string | null
     amenities?: HutCreateamenitiesInput | string[]
+    seasonStart?: string | null
+    seasonEnd?: string | null
     region: RegionCreateNestedOneWithoutHutsInput
     roomTypes?: RoomTypeConfigCreateNestedManyWithoutHutInput
     routesFrom?: RouteCreateNestedManyWithoutFromHutInput
     routesTo?: RouteCreateNestedManyWithoutToHutInput
     availability?: AvailabilityCheckCreateNestedManyWithoutHutInput
+    accessRoutes?: AccessRouteCreateNestedManyWithoutHutInput
   }
 
   export type HutUncheckedCreateWithoutTourHutsInput = {
@@ -13615,11 +18599,14 @@ export namespace Prisma {
     imageUrl?: string | null
     description?: string | null
     amenities?: HutCreateamenitiesInput | string[]
+    seasonStart?: string | null
+    seasonEnd?: string | null
     regionId: string
     roomTypes?: RoomTypeConfigUncheckedCreateNestedManyWithoutHutInput
     routesFrom?: RouteUncheckedCreateNestedManyWithoutFromHutInput
     routesTo?: RouteUncheckedCreateNestedManyWithoutToHutInput
     availability?: AvailabilityCheckUncheckedCreateNestedManyWithoutHutInput
+    accessRoutes?: AccessRouteUncheckedCreateNestedManyWithoutHutInput
   }
 
   export type HutCreateOrConnectWithoutTourHutsInput = {
@@ -13695,11 +18682,14 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     amenities?: HutUpdateamenitiesInput | string[]
+    seasonStart?: NullableStringFieldUpdateOperationsInput | string | null
+    seasonEnd?: NullableStringFieldUpdateOperationsInput | string | null
     region?: RegionUpdateOneRequiredWithoutHutsNestedInput
     roomTypes?: RoomTypeConfigUpdateManyWithoutHutNestedInput
     routesFrom?: RouteUpdateManyWithoutFromHutNestedInput
     routesTo?: RouteUpdateManyWithoutToHutNestedInput
     availability?: AvailabilityCheckUpdateManyWithoutHutNestedInput
+    accessRoutes?: AccessRouteUpdateManyWithoutHutNestedInput
   }
 
   export type HutUncheckedUpdateWithoutTourHutsInput = {
@@ -13714,11 +18704,14 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     amenities?: HutUpdateamenitiesInput | string[]
+    seasonStart?: NullableStringFieldUpdateOperationsInput | string | null
+    seasonEnd?: NullableStringFieldUpdateOperationsInput | string | null
     regionId?: StringFieldUpdateOperationsInput | string
     roomTypes?: RoomTypeConfigUncheckedUpdateManyWithoutHutNestedInput
     routesFrom?: RouteUncheckedUpdateManyWithoutFromHutNestedInput
     routesTo?: RouteUncheckedUpdateManyWithoutToHutNestedInput
     availability?: AvailabilityCheckUncheckedUpdateManyWithoutHutNestedInput
+    accessRoutes?: AccessRouteUncheckedUpdateManyWithoutHutNestedInput
   }
 
   export type HutCreateWithoutAvailabilityInput = {
@@ -13733,11 +18726,14 @@ export namespace Prisma {
     imageUrl?: string | null
     description?: string | null
     amenities?: HutCreateamenitiesInput | string[]
+    seasonStart?: string | null
+    seasonEnd?: string | null
     region: RegionCreateNestedOneWithoutHutsInput
     roomTypes?: RoomTypeConfigCreateNestedManyWithoutHutInput
     routesFrom?: RouteCreateNestedManyWithoutFromHutInput
     routesTo?: RouteCreateNestedManyWithoutToHutInput
     tourHuts?: TourHutCreateNestedManyWithoutHutInput
+    accessRoutes?: AccessRouteCreateNestedManyWithoutHutInput
   }
 
   export type HutUncheckedCreateWithoutAvailabilityInput = {
@@ -13752,11 +18748,14 @@ export namespace Prisma {
     imageUrl?: string | null
     description?: string | null
     amenities?: HutCreateamenitiesInput | string[]
+    seasonStart?: string | null
+    seasonEnd?: string | null
     regionId: string
     roomTypes?: RoomTypeConfigUncheckedCreateNestedManyWithoutHutInput
     routesFrom?: RouteUncheckedCreateNestedManyWithoutFromHutInput
     routesTo?: RouteUncheckedCreateNestedManyWithoutToHutInput
     tourHuts?: TourHutUncheckedCreateNestedManyWithoutHutInput
+    accessRoutes?: AccessRouteUncheckedCreateNestedManyWithoutHutInput
   }
 
   export type HutCreateOrConnectWithoutAvailabilityInput = {
@@ -13787,11 +18786,14 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     amenities?: HutUpdateamenitiesInput | string[]
+    seasonStart?: NullableStringFieldUpdateOperationsInput | string | null
+    seasonEnd?: NullableStringFieldUpdateOperationsInput | string | null
     region?: RegionUpdateOneRequiredWithoutHutsNestedInput
     roomTypes?: RoomTypeConfigUpdateManyWithoutHutNestedInput
     routesFrom?: RouteUpdateManyWithoutFromHutNestedInput
     routesTo?: RouteUpdateManyWithoutToHutNestedInput
     tourHuts?: TourHutUpdateManyWithoutHutNestedInput
+    accessRoutes?: AccessRouteUpdateManyWithoutHutNestedInput
   }
 
   export type HutUncheckedUpdateWithoutAvailabilityInput = {
@@ -13806,10 +18808,401 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     amenities?: HutUpdateamenitiesInput | string[]
+    seasonStart?: NullableStringFieldUpdateOperationsInput | string | null
+    seasonEnd?: NullableStringFieldUpdateOperationsInput | string | null
     regionId?: StringFieldUpdateOperationsInput | string
     roomTypes?: RoomTypeConfigUncheckedUpdateManyWithoutHutNestedInput
     routesFrom?: RouteUncheckedUpdateManyWithoutFromHutNestedInput
     routesTo?: RouteUncheckedUpdateManyWithoutToHutNestedInput
+    tourHuts?: TourHutUncheckedUpdateManyWithoutHutNestedInput
+    accessRoutes?: AccessRouteUncheckedUpdateManyWithoutHutNestedInput
+  }
+
+  export type RegionCreateWithoutAccessPointsInput = {
+    id?: string
+    name: string
+    slug: string
+    boundingBoxMinLat: number
+    boundingBoxMinLng: number
+    boundingBoxMaxLat: number
+    boundingBoxMaxLng: number
+    centerLat: number
+    centerLng: number
+    huts?: HutCreateNestedManyWithoutRegionInput
+  }
+
+  export type RegionUncheckedCreateWithoutAccessPointsInput = {
+    id?: string
+    name: string
+    slug: string
+    boundingBoxMinLat: number
+    boundingBoxMinLng: number
+    boundingBoxMaxLat: number
+    boundingBoxMaxLng: number
+    centerLat: number
+    centerLng: number
+    huts?: HutUncheckedCreateNestedManyWithoutRegionInput
+  }
+
+  export type RegionCreateOrConnectWithoutAccessPointsInput = {
+    where: RegionWhereUniqueInput
+    create: XOR<RegionCreateWithoutAccessPointsInput, RegionUncheckedCreateWithoutAccessPointsInput>
+  }
+
+  export type AccessRouteCreateWithoutAccessPointInput = {
+    id?: string
+    distance: number
+    ascent: number
+    descent: number
+    estimatedDuration: number
+    difficulty: $Enums.Difficulty
+    hasCableCar?: boolean
+    hut: HutCreateNestedOneWithoutAccessRoutesInput
+  }
+
+  export type AccessRouteUncheckedCreateWithoutAccessPointInput = {
+    id?: string
+    hutId: string
+    distance: number
+    ascent: number
+    descent: number
+    estimatedDuration: number
+    difficulty: $Enums.Difficulty
+    hasCableCar?: boolean
+  }
+
+  export type AccessRouteCreateOrConnectWithoutAccessPointInput = {
+    where: AccessRouteWhereUniqueInput
+    create: XOR<AccessRouteCreateWithoutAccessPointInput, AccessRouteUncheckedCreateWithoutAccessPointInput>
+  }
+
+  export type AccessRouteCreateManyAccessPointInputEnvelope = {
+    data: AccessRouteCreateManyAccessPointInput | AccessRouteCreateManyAccessPointInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CableCarCreateWithoutAccessPointInput = {
+    id?: string
+    operatorName: string
+    seasonStart?: string | null
+    seasonEnd?: string | null
+    website?: string | null
+  }
+
+  export type CableCarUncheckedCreateWithoutAccessPointInput = {
+    id?: string
+    operatorName: string
+    seasonStart?: string | null
+    seasonEnd?: string | null
+    website?: string | null
+  }
+
+  export type CableCarCreateOrConnectWithoutAccessPointInput = {
+    where: CableCarWhereUniqueInput
+    create: XOR<CableCarCreateWithoutAccessPointInput, CableCarUncheckedCreateWithoutAccessPointInput>
+  }
+
+  export type RegionUpsertWithoutAccessPointsInput = {
+    update: XOR<RegionUpdateWithoutAccessPointsInput, RegionUncheckedUpdateWithoutAccessPointsInput>
+    create: XOR<RegionCreateWithoutAccessPointsInput, RegionUncheckedCreateWithoutAccessPointsInput>
+    where?: RegionWhereInput
+  }
+
+  export type RegionUpdateToOneWithWhereWithoutAccessPointsInput = {
+    where?: RegionWhereInput
+    data: XOR<RegionUpdateWithoutAccessPointsInput, RegionUncheckedUpdateWithoutAccessPointsInput>
+  }
+
+  export type RegionUpdateWithoutAccessPointsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    boundingBoxMinLat?: FloatFieldUpdateOperationsInput | number
+    boundingBoxMinLng?: FloatFieldUpdateOperationsInput | number
+    boundingBoxMaxLat?: FloatFieldUpdateOperationsInput | number
+    boundingBoxMaxLng?: FloatFieldUpdateOperationsInput | number
+    centerLat?: FloatFieldUpdateOperationsInput | number
+    centerLng?: FloatFieldUpdateOperationsInput | number
+    huts?: HutUpdateManyWithoutRegionNestedInput
+  }
+
+  export type RegionUncheckedUpdateWithoutAccessPointsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    boundingBoxMinLat?: FloatFieldUpdateOperationsInput | number
+    boundingBoxMinLng?: FloatFieldUpdateOperationsInput | number
+    boundingBoxMaxLat?: FloatFieldUpdateOperationsInput | number
+    boundingBoxMaxLng?: FloatFieldUpdateOperationsInput | number
+    centerLat?: FloatFieldUpdateOperationsInput | number
+    centerLng?: FloatFieldUpdateOperationsInput | number
+    huts?: HutUncheckedUpdateManyWithoutRegionNestedInput
+  }
+
+  export type AccessRouteUpsertWithWhereUniqueWithoutAccessPointInput = {
+    where: AccessRouteWhereUniqueInput
+    update: XOR<AccessRouteUpdateWithoutAccessPointInput, AccessRouteUncheckedUpdateWithoutAccessPointInput>
+    create: XOR<AccessRouteCreateWithoutAccessPointInput, AccessRouteUncheckedCreateWithoutAccessPointInput>
+  }
+
+  export type AccessRouteUpdateWithWhereUniqueWithoutAccessPointInput = {
+    where: AccessRouteWhereUniqueInput
+    data: XOR<AccessRouteUpdateWithoutAccessPointInput, AccessRouteUncheckedUpdateWithoutAccessPointInput>
+  }
+
+  export type AccessRouteUpdateManyWithWhereWithoutAccessPointInput = {
+    where: AccessRouteScalarWhereInput
+    data: XOR<AccessRouteUpdateManyMutationInput, AccessRouteUncheckedUpdateManyWithoutAccessPointInput>
+  }
+
+  export type CableCarUpsertWithoutAccessPointInput = {
+    update: XOR<CableCarUpdateWithoutAccessPointInput, CableCarUncheckedUpdateWithoutAccessPointInput>
+    create: XOR<CableCarCreateWithoutAccessPointInput, CableCarUncheckedCreateWithoutAccessPointInput>
+    where?: CableCarWhereInput
+  }
+
+  export type CableCarUpdateToOneWithWhereWithoutAccessPointInput = {
+    where?: CableCarWhereInput
+    data: XOR<CableCarUpdateWithoutAccessPointInput, CableCarUncheckedUpdateWithoutAccessPointInput>
+  }
+
+  export type CableCarUpdateWithoutAccessPointInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    operatorName?: StringFieldUpdateOperationsInput | string
+    seasonStart?: NullableStringFieldUpdateOperationsInput | string | null
+    seasonEnd?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type CableCarUncheckedUpdateWithoutAccessPointInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    operatorName?: StringFieldUpdateOperationsInput | string
+    seasonStart?: NullableStringFieldUpdateOperationsInput | string | null
+    seasonEnd?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type AccessPointCreateWithoutCableCarInput = {
+    id?: string
+    name: string
+    type: $Enums.AccessPointType
+    altitude: number
+    lat: number
+    lng: number
+    region: RegionCreateNestedOneWithoutAccessPointsInput
+    routes?: AccessRouteCreateNestedManyWithoutAccessPointInput
+  }
+
+  export type AccessPointUncheckedCreateWithoutCableCarInput = {
+    id?: string
+    name: string
+    type: $Enums.AccessPointType
+    altitude: number
+    lat: number
+    lng: number
+    regionId: string
+    routes?: AccessRouteUncheckedCreateNestedManyWithoutAccessPointInput
+  }
+
+  export type AccessPointCreateOrConnectWithoutCableCarInput = {
+    where: AccessPointWhereUniqueInput
+    create: XOR<AccessPointCreateWithoutCableCarInput, AccessPointUncheckedCreateWithoutCableCarInput>
+  }
+
+  export type AccessPointUpsertWithoutCableCarInput = {
+    update: XOR<AccessPointUpdateWithoutCableCarInput, AccessPointUncheckedUpdateWithoutCableCarInput>
+    create: XOR<AccessPointCreateWithoutCableCarInput, AccessPointUncheckedCreateWithoutCableCarInput>
+    where?: AccessPointWhereInput
+  }
+
+  export type AccessPointUpdateToOneWithWhereWithoutCableCarInput = {
+    where?: AccessPointWhereInput
+    data: XOR<AccessPointUpdateWithoutCableCarInput, AccessPointUncheckedUpdateWithoutCableCarInput>
+  }
+
+  export type AccessPointUpdateWithoutCableCarInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: EnumAccessPointTypeFieldUpdateOperationsInput | $Enums.AccessPointType
+    altitude?: IntFieldUpdateOperationsInput | number
+    lat?: FloatFieldUpdateOperationsInput | number
+    lng?: FloatFieldUpdateOperationsInput | number
+    region?: RegionUpdateOneRequiredWithoutAccessPointsNestedInput
+    routes?: AccessRouteUpdateManyWithoutAccessPointNestedInput
+  }
+
+  export type AccessPointUncheckedUpdateWithoutCableCarInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: EnumAccessPointTypeFieldUpdateOperationsInput | $Enums.AccessPointType
+    altitude?: IntFieldUpdateOperationsInput | number
+    lat?: FloatFieldUpdateOperationsInput | number
+    lng?: FloatFieldUpdateOperationsInput | number
+    regionId?: StringFieldUpdateOperationsInput | string
+    routes?: AccessRouteUncheckedUpdateManyWithoutAccessPointNestedInput
+  }
+
+  export type AccessPointCreateWithoutRoutesInput = {
+    id?: string
+    name: string
+    type: $Enums.AccessPointType
+    altitude: number
+    lat: number
+    lng: number
+    region: RegionCreateNestedOneWithoutAccessPointsInput
+    cableCar?: CableCarCreateNestedOneWithoutAccessPointInput
+  }
+
+  export type AccessPointUncheckedCreateWithoutRoutesInput = {
+    id?: string
+    name: string
+    type: $Enums.AccessPointType
+    altitude: number
+    lat: number
+    lng: number
+    regionId: string
+    cableCar?: CableCarUncheckedCreateNestedOneWithoutAccessPointInput
+  }
+
+  export type AccessPointCreateOrConnectWithoutRoutesInput = {
+    where: AccessPointWhereUniqueInput
+    create: XOR<AccessPointCreateWithoutRoutesInput, AccessPointUncheckedCreateWithoutRoutesInput>
+  }
+
+  export type HutCreateWithoutAccessRoutesInput = {
+    id?: string
+    name: string
+    altitude: number
+    lat: number
+    lng: number
+    capacity: number
+    bookingUrl?: string | null
+    bookingSystem?: $Enums.BookingSystem
+    imageUrl?: string | null
+    description?: string | null
+    amenities?: HutCreateamenitiesInput | string[]
+    seasonStart?: string | null
+    seasonEnd?: string | null
+    region: RegionCreateNestedOneWithoutHutsInput
+    roomTypes?: RoomTypeConfigCreateNestedManyWithoutHutInput
+    routesFrom?: RouteCreateNestedManyWithoutFromHutInput
+    routesTo?: RouteCreateNestedManyWithoutToHutInput
+    availability?: AvailabilityCheckCreateNestedManyWithoutHutInput
+    tourHuts?: TourHutCreateNestedManyWithoutHutInput
+  }
+
+  export type HutUncheckedCreateWithoutAccessRoutesInput = {
+    id?: string
+    name: string
+    altitude: number
+    lat: number
+    lng: number
+    capacity: number
+    bookingUrl?: string | null
+    bookingSystem?: $Enums.BookingSystem
+    imageUrl?: string | null
+    description?: string | null
+    amenities?: HutCreateamenitiesInput | string[]
+    seasonStart?: string | null
+    seasonEnd?: string | null
+    regionId: string
+    roomTypes?: RoomTypeConfigUncheckedCreateNestedManyWithoutHutInput
+    routesFrom?: RouteUncheckedCreateNestedManyWithoutFromHutInput
+    routesTo?: RouteUncheckedCreateNestedManyWithoutToHutInput
+    availability?: AvailabilityCheckUncheckedCreateNestedManyWithoutHutInput
+    tourHuts?: TourHutUncheckedCreateNestedManyWithoutHutInput
+  }
+
+  export type HutCreateOrConnectWithoutAccessRoutesInput = {
+    where: HutWhereUniqueInput
+    create: XOR<HutCreateWithoutAccessRoutesInput, HutUncheckedCreateWithoutAccessRoutesInput>
+  }
+
+  export type AccessPointUpsertWithoutRoutesInput = {
+    update: XOR<AccessPointUpdateWithoutRoutesInput, AccessPointUncheckedUpdateWithoutRoutesInput>
+    create: XOR<AccessPointCreateWithoutRoutesInput, AccessPointUncheckedCreateWithoutRoutesInput>
+    where?: AccessPointWhereInput
+  }
+
+  export type AccessPointUpdateToOneWithWhereWithoutRoutesInput = {
+    where?: AccessPointWhereInput
+    data: XOR<AccessPointUpdateWithoutRoutesInput, AccessPointUncheckedUpdateWithoutRoutesInput>
+  }
+
+  export type AccessPointUpdateWithoutRoutesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: EnumAccessPointTypeFieldUpdateOperationsInput | $Enums.AccessPointType
+    altitude?: IntFieldUpdateOperationsInput | number
+    lat?: FloatFieldUpdateOperationsInput | number
+    lng?: FloatFieldUpdateOperationsInput | number
+    region?: RegionUpdateOneRequiredWithoutAccessPointsNestedInput
+    cableCar?: CableCarUpdateOneWithoutAccessPointNestedInput
+  }
+
+  export type AccessPointUncheckedUpdateWithoutRoutesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: EnumAccessPointTypeFieldUpdateOperationsInput | $Enums.AccessPointType
+    altitude?: IntFieldUpdateOperationsInput | number
+    lat?: FloatFieldUpdateOperationsInput | number
+    lng?: FloatFieldUpdateOperationsInput | number
+    regionId?: StringFieldUpdateOperationsInput | string
+    cableCar?: CableCarUncheckedUpdateOneWithoutAccessPointNestedInput
+  }
+
+  export type HutUpsertWithoutAccessRoutesInput = {
+    update: XOR<HutUpdateWithoutAccessRoutesInput, HutUncheckedUpdateWithoutAccessRoutesInput>
+    create: XOR<HutCreateWithoutAccessRoutesInput, HutUncheckedCreateWithoutAccessRoutesInput>
+    where?: HutWhereInput
+  }
+
+  export type HutUpdateToOneWithWhereWithoutAccessRoutesInput = {
+    where?: HutWhereInput
+    data: XOR<HutUpdateWithoutAccessRoutesInput, HutUncheckedUpdateWithoutAccessRoutesInput>
+  }
+
+  export type HutUpdateWithoutAccessRoutesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    altitude?: IntFieldUpdateOperationsInput | number
+    lat?: FloatFieldUpdateOperationsInput | number
+    lng?: FloatFieldUpdateOperationsInput | number
+    capacity?: IntFieldUpdateOperationsInput | number
+    bookingUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    bookingSystem?: EnumBookingSystemFieldUpdateOperationsInput | $Enums.BookingSystem
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    amenities?: HutUpdateamenitiesInput | string[]
+    seasonStart?: NullableStringFieldUpdateOperationsInput | string | null
+    seasonEnd?: NullableStringFieldUpdateOperationsInput | string | null
+    region?: RegionUpdateOneRequiredWithoutHutsNestedInput
+    roomTypes?: RoomTypeConfigUpdateManyWithoutHutNestedInput
+    routesFrom?: RouteUpdateManyWithoutFromHutNestedInput
+    routesTo?: RouteUpdateManyWithoutToHutNestedInput
+    availability?: AvailabilityCheckUpdateManyWithoutHutNestedInput
+    tourHuts?: TourHutUpdateManyWithoutHutNestedInput
+  }
+
+  export type HutUncheckedUpdateWithoutAccessRoutesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    altitude?: IntFieldUpdateOperationsInput | number
+    lat?: FloatFieldUpdateOperationsInput | number
+    lng?: FloatFieldUpdateOperationsInput | number
+    capacity?: IntFieldUpdateOperationsInput | number
+    bookingUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    bookingSystem?: EnumBookingSystemFieldUpdateOperationsInput | $Enums.BookingSystem
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    amenities?: HutUpdateamenitiesInput | string[]
+    seasonStart?: NullableStringFieldUpdateOperationsInput | string | null
+    seasonEnd?: NullableStringFieldUpdateOperationsInput | string | null
+    regionId?: StringFieldUpdateOperationsInput | string
+    roomTypes?: RoomTypeConfigUncheckedUpdateManyWithoutHutNestedInput
+    routesFrom?: RouteUncheckedUpdateManyWithoutFromHutNestedInput
+    routesTo?: RouteUncheckedUpdateManyWithoutToHutNestedInput
+    availability?: AvailabilityCheckUncheckedUpdateManyWithoutHutNestedInput
     tourHuts?: TourHutUncheckedUpdateManyWithoutHutNestedInput
   }
 
@@ -13825,6 +19218,17 @@ export namespace Prisma {
     imageUrl?: string | null
     description?: string | null
     amenities?: HutCreateamenitiesInput | string[]
+    seasonStart?: string | null
+    seasonEnd?: string | null
+  }
+
+  export type AccessPointCreateManyRegionInput = {
+    id?: string
+    name: string
+    type: $Enums.AccessPointType
+    altitude: number
+    lat: number
+    lng: number
   }
 
   export type HutUpdateWithoutRegionInput = {
@@ -13839,11 +19243,14 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     amenities?: HutUpdateamenitiesInput | string[]
+    seasonStart?: NullableStringFieldUpdateOperationsInput | string | null
+    seasonEnd?: NullableStringFieldUpdateOperationsInput | string | null
     roomTypes?: RoomTypeConfigUpdateManyWithoutHutNestedInput
     routesFrom?: RouteUpdateManyWithoutFromHutNestedInput
     routesTo?: RouteUpdateManyWithoutToHutNestedInput
     availability?: AvailabilityCheckUpdateManyWithoutHutNestedInput
     tourHuts?: TourHutUpdateManyWithoutHutNestedInput
+    accessRoutes?: AccessRouteUpdateManyWithoutHutNestedInput
   }
 
   export type HutUncheckedUpdateWithoutRegionInput = {
@@ -13858,11 +19265,14 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     amenities?: HutUpdateamenitiesInput | string[]
+    seasonStart?: NullableStringFieldUpdateOperationsInput | string | null
+    seasonEnd?: NullableStringFieldUpdateOperationsInput | string | null
     roomTypes?: RoomTypeConfigUncheckedUpdateManyWithoutHutNestedInput
     routesFrom?: RouteUncheckedUpdateManyWithoutFromHutNestedInput
     routesTo?: RouteUncheckedUpdateManyWithoutToHutNestedInput
     availability?: AvailabilityCheckUncheckedUpdateManyWithoutHutNestedInput
     tourHuts?: TourHutUncheckedUpdateManyWithoutHutNestedInput
+    accessRoutes?: AccessRouteUncheckedUpdateManyWithoutHutNestedInput
   }
 
   export type HutUncheckedUpdateManyWithoutRegionInput = {
@@ -13877,6 +19287,39 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     amenities?: HutUpdateamenitiesInput | string[]
+    seasonStart?: NullableStringFieldUpdateOperationsInput | string | null
+    seasonEnd?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type AccessPointUpdateWithoutRegionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: EnumAccessPointTypeFieldUpdateOperationsInput | $Enums.AccessPointType
+    altitude?: IntFieldUpdateOperationsInput | number
+    lat?: FloatFieldUpdateOperationsInput | number
+    lng?: FloatFieldUpdateOperationsInput | number
+    routes?: AccessRouteUpdateManyWithoutAccessPointNestedInput
+    cableCar?: CableCarUpdateOneWithoutAccessPointNestedInput
+  }
+
+  export type AccessPointUncheckedUpdateWithoutRegionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: EnumAccessPointTypeFieldUpdateOperationsInput | $Enums.AccessPointType
+    altitude?: IntFieldUpdateOperationsInput | number
+    lat?: FloatFieldUpdateOperationsInput | number
+    lng?: FloatFieldUpdateOperationsInput | number
+    routes?: AccessRouteUncheckedUpdateManyWithoutAccessPointNestedInput
+    cableCar?: CableCarUncheckedUpdateOneWithoutAccessPointNestedInput
+  }
+
+  export type AccessPointUncheckedUpdateManyWithoutRegionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: EnumAccessPointTypeFieldUpdateOperationsInput | $Enums.AccessPointType
+    altitude?: IntFieldUpdateOperationsInput | number
+    lat?: FloatFieldUpdateOperationsInput | number
+    lng?: FloatFieldUpdateOperationsInput | number
   }
 
   export type RoomTypeConfigCreateManyHutInput = {
@@ -13920,6 +19363,17 @@ export namespace Prisma {
     id?: string
     tourId: string
     dayNumber: number
+  }
+
+  export type AccessRouteCreateManyHutInput = {
+    id?: string
+    accessPointId: string
+    distance: number
+    ascent: number
+    descent: number
+    estimatedDuration: number
+    difficulty: $Enums.Difficulty
+    hasCableCar?: boolean
   }
 
   export type RoomTypeConfigUpdateWithoutHutInput = {
@@ -14051,6 +19505,39 @@ export namespace Prisma {
     dayNumber?: IntFieldUpdateOperationsInput | number
   }
 
+  export type AccessRouteUpdateWithoutHutInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    distance?: FloatFieldUpdateOperationsInput | number
+    ascent?: IntFieldUpdateOperationsInput | number
+    descent?: IntFieldUpdateOperationsInput | number
+    estimatedDuration?: FloatFieldUpdateOperationsInput | number
+    difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    hasCableCar?: BoolFieldUpdateOperationsInput | boolean
+    accessPoint?: AccessPointUpdateOneRequiredWithoutRoutesNestedInput
+  }
+
+  export type AccessRouteUncheckedUpdateWithoutHutInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    accessPointId?: StringFieldUpdateOperationsInput | string
+    distance?: FloatFieldUpdateOperationsInput | number
+    ascent?: IntFieldUpdateOperationsInput | number
+    descent?: IntFieldUpdateOperationsInput | number
+    estimatedDuration?: FloatFieldUpdateOperationsInput | number
+    difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    hasCableCar?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type AccessRouteUncheckedUpdateManyWithoutHutInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    accessPointId?: StringFieldUpdateOperationsInput | string
+    distance?: FloatFieldUpdateOperationsInput | number
+    ascent?: IntFieldUpdateOperationsInput | number
+    descent?: IntFieldUpdateOperationsInput | number
+    estimatedDuration?: FloatFieldUpdateOperationsInput | number
+    difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    hasCableCar?: BoolFieldUpdateOperationsInput | boolean
+  }
+
   export type TourHutCreateManyTourInput = {
     id?: string
     hutId: string
@@ -14073,6 +19560,50 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     hutId?: StringFieldUpdateOperationsInput | string
     dayNumber?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type AccessRouteCreateManyAccessPointInput = {
+    id?: string
+    hutId: string
+    distance: number
+    ascent: number
+    descent: number
+    estimatedDuration: number
+    difficulty: $Enums.Difficulty
+    hasCableCar?: boolean
+  }
+
+  export type AccessRouteUpdateWithoutAccessPointInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    distance?: FloatFieldUpdateOperationsInput | number
+    ascent?: IntFieldUpdateOperationsInput | number
+    descent?: IntFieldUpdateOperationsInput | number
+    estimatedDuration?: FloatFieldUpdateOperationsInput | number
+    difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    hasCableCar?: BoolFieldUpdateOperationsInput | boolean
+    hut?: HutUpdateOneRequiredWithoutAccessRoutesNestedInput
+  }
+
+  export type AccessRouteUncheckedUpdateWithoutAccessPointInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    hutId?: StringFieldUpdateOperationsInput | string
+    distance?: FloatFieldUpdateOperationsInput | number
+    ascent?: IntFieldUpdateOperationsInput | number
+    descent?: IntFieldUpdateOperationsInput | number
+    estimatedDuration?: FloatFieldUpdateOperationsInput | number
+    difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    hasCableCar?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type AccessRouteUncheckedUpdateManyWithoutAccessPointInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    hutId?: StringFieldUpdateOperationsInput | string
+    distance?: FloatFieldUpdateOperationsInput | number
+    ascent?: IntFieldUpdateOperationsInput | number
+    descent?: IntFieldUpdateOperationsInput | number
+    estimatedDuration?: FloatFieldUpdateOperationsInput | number
+    difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    hasCableCar?: BoolFieldUpdateOperationsInput | boolean
   }
 
 
